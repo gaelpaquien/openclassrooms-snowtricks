@@ -1,0 +1,19 @@
+/* Global */
+
+
+/* Navigation */
+
+
+/* Hero */
+.hero {
+  color: white;
+  background-image: url("../img/brands/hero-header.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 93.65vh;
+  opacity: 0.8;
+}
+
+
+/* Footer */
