@@ -13,14 +13,14 @@
 
         <!-- JS -->
         <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}" defer></script>
-        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous" defer></script>
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous" defer></script>
         {% block javascripts %}{% endblock %}
         <script src="{{ asset('assets/js/index.js') }}" defer></script>
     </head>
 
     <body>
-        {% include "_partials/_header.html.twig" %}
+        {% include "_partials/_header_nav.html.twig" %}
         {% block body %}{% endblock %}
         {% include "_partials/_footer.html.twig" %}
     </body>

@@ -1,19 +1,46 @@
 /* Global */
+html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+}
 
+a {
+  text-decoration: none;
+}
 
-/* Navigation */
-
-
-/* Hero */
-.hero {
-  color: white;
-  background-image: url("../img/brands/hero-header.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 93.65vh;
-  opacity: 0.8;
+ul {
+  list-style: none;
 }
 
 
-/* Footer */
+/* Homepage */
+.hero {
+  height: calc(100vh - 61px);
+  background-image: url("../img/brands/hero.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 1;
+}
+
+.hero-icon-btn {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+}
+
+.tricks .card{
+  width: 12rem;
+}
+
+.tricks-icon-btn {
+  position: relative;
+
+}
+.tricks-icon-btn-item {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+
+}
