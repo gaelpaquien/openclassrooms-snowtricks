@@ -5,19 +5,19 @@ services:
     image: mysql:${MYSQL_VERSION:-8.0.31}
     restart: always
     environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-app}
-      MYSQL_USER: ${MYSQL_USER:-username}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-snowtricks}
+      MYSQL_USER: ${MYSQL_USER:-user}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-password}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-password}
     volumes:
       - snowtricks-db:/var/lib/mysql
 
   app: 
-    image: sha256:ea625f971cd5d0c85ded82efcff037f593e57e897248e410ad3c9fe9c39d1681
+    image: sha256:8524a0095741a61b24c70ef1fa2ad8a29a43d1d96cbeb8ecefa6d5b6005a4855
     ports:
       - '8080:80'
     environment:
-      DATABASE_URL: mysql://${MYSQL_USER:-username}:${MYSQL_PASSWORD:-password}@database:5432/${MYSQL_DATABASE:-app}?serverVersion=${MYSQL_VERSION:-8.0.31}&charset=utf8mb4
+      DATABASE_URL: mysql://${MYSQL_USER:-user}:${MYSQL_PASSWORD:-password}@database:3306/${MYSQL_DATABASE:-snowtricks}?serverVersion=${MYSQL_VERSION:-8.0.31}&charset=utf8mb4
 
 volumes:
   snowtricks-db:

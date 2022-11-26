@@ -13,7 +13,6 @@ ul {
   list-style: none;
 }
 
-
 /* Homepage */
 .hero {
   height: calc(100vh - 61px);
@@ -30,7 +29,7 @@ ul {
   right: 10px;
 }
 
-.tricks .card{
+.tricks .card {
   width: 12rem;
 }
 
@@ -38,9 +37,9 @@ ul {
   position: relative;
 
 }
+
 .tricks-icon-btn-item {
   position: absolute;
   bottom: 5px;
   right: 10px;
-
 }
