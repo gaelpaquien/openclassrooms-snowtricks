@@ -12,20 +12,25 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
 RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \ 
     mv composer.phar /usr/local/bin/composer
 
-# Installation de node.js & npm
-#RUN apt update && apt install -yqq nodejs npm
+# Ajout d'utilisateur pour l'application symfony
+RUN groupadd -g 1000 www
+RUN useradd -u 1000 -ms /bin/bash -g www www
 
 # Copie le répertoire courant contenant l'application vers '/var/www'
 COPY . /var/www
 
+# Copie les permissions du répertoire courant contenant l'application vers '/var/www'
+COPY --chown=www:www . /var/www
+
 # Remplace le contenu du fichier de config apache par notre propre fichier de config apache
 COPY ./docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
-# Execute une suite de commande afin d'installer toutes les dépendances du projet (composer, npm...)
+# Installation des dépendances du projet avec composer
 RUN cd /var/www && \
     composer install
-    #npm install --force && \
-    #npm run build
+
+# Change d'utilisateur: www
+USER www
 
 # Définis le repertoire de travail (default: /var/www/html/)
 WORKDIR /var/www/
@@ -37,5 +42,3 @@ EXPOSE 80
 # Build: docker build . -f ./docker/Dockerfile
 # Entrer dans le conteneur: docker run -it ID bash
 # Lancer les conteneurs: cd docker -> docker-compose up -d
-
-
