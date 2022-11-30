@@ -31,11 +31,16 @@ ul {
   .header, .copyright {
     display: none;
   }
+
+  .mobile-nav {
+    display: block!important;
+  }
 }
 
-@media (max-width:768px) {
-  .header, .copyright {
-    display: none;
+@media (min-width:768px) {
+  .mobile-nav {
+    
+    display: none!important;
   }
 }
 
@@ -54,12 +59,15 @@ ul {
   }
 }
 
-.hero-btn-goToTricks, .home-btn-goToTricks {
+.hero-btn-goToTricks, 
+.home-btn-goToTricks {
   bottom: 5px;
   right: 10px;
 }
 
-.hero-btn-goToTricks, .home-btn-goToTricks, .tricks .card-btn {
+.hero-btn-goToTricks, 
+.home-btn-goToTricks, 
+.tricks .card-btn {
   background: transparent;
   border: none;
   margin: 0;
