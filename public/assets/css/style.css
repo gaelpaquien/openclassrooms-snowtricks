@@ -1,12 +1,18 @@
 /* Global */
-html {
+:root {
+  --grey: #434242;
+  --black: #222222;
+  --beige: #F3EFE0;
+  --teal: #22A39F;
+  --red: #E74C3C;
+  --blue: #3498DB;
+}
+
+html,
+body {
   height: 100%;
   width: 100%;
   font-family: 'Open Sans', 'Roboto', 'Montserrat', Arial, sans-serif;
-}
-
-body {
-  height: 100%;
 }
 
 a {
@@ -22,19 +28,56 @@ ul {
   list-style: none;
 }
 
+section {
+  font-family: 'Roboto' !important;
+}
+
 /* Partials (header, footer, nav...) */
-.header {
+header,
+footer {
+  background-color: var(--grey) !important;
+  color: var(--beige) !important;
+}
+
+header a {
+  color: var(--beige) !important;
+}
+
+header a:hover {
+  color: var(--teal) !important;
+}
+
+header,
+footer,
+nav,
+.hero {
+  font-family: 'Open Sans' !important;
+}
+
+header {
   height: 60px;
 }
 
 @media (max-width:768px) {
-  .header,
+  header,
   .copyright {
-    display: none;
+    display: none !important;
+  }
+
+  footer {
+    background-color: var(--grey) !important;
   }
 
   .mobile-nav {
     display: block !important;
+  }
+
+  .mobile-nav a {
+    color: var(--beige) !important;
+  }
+
+  .mobile-nav a:hover {
+    color: var(--teal) !important;
   }
 }
 
@@ -47,10 +90,30 @@ ul {
 /* Homepage */
 .hero {
   height: calc(100vh - 60px);
-  background-image: url("../img/brands/hero.jpg");
+  color: var(--beige);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7),
+  rgba(0, 0, 0, 0.7)), url("../img/brands/hero.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.hero h2 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-top: 10px;
+}
+
+@media (max-width:768px) {
+  .hero h2 {
+    font-size: 1.1rem;
+  }
 }
 
 @media (max-width:768px) {
@@ -61,8 +124,8 @@ ul {
 
 .hero-btn-goToTricks,
 .home-btn-goToTricks {
-  bottom: 5px;
-  right: 10px;
+  bottom: 12px;
+  right: 12px;
 }
 
 .hero-btn-goToTricks,
@@ -74,13 +137,42 @@ ul {
   padding: 0;
 }
 
+.hero-btn-goToTricks svg {
+  color: var(--beige) !important;
+}
+
+.hero-btn-goToTricks:hover svg {
+  color: var(--teal) !important;
+}
+
+.home-btn-goToTricks svg {
+  color: var(--grey) !important;
+}
+
+.home-btn-goToTricks svg:hover {
+  color: var(--teal) !important;
+}
+
+.tricks {
+  background-color: var(--beige);
+}
+
 .tricks .col {
   padding-bottom: 24px;
+}
+
+.tricks .card {
+  border: solid 1px var(--teal);
 }
 
 .tricks .card-title {
   font-size: 1rem;
   width: 70%;
+  color: var(--black);
+}
+
+.tricks .card-title a:hover {
+  color: var(--teal);
 }
 
 @media (min-width:992px) and (max-width:1200px) {
@@ -93,6 +185,15 @@ ul {
 .tricks .card svg {
   height: 15px;
   width: 15px;
+  color: var(--grey);
+}
+
+.tricks .card svg:hover {
+  color: var(--red);
+}
+
+.card-btn-update svg:hover {
+  color: var(--blue) !important;
 }
 
 @media (max-width:768px) {
@@ -104,4 +205,63 @@ ul {
     height: 20px;
     width: 20px;
   }
+}
+
+.tricks .modal-content {
+  background-color: var(--beige);
+}
+
+.tricks .modal-title,
+.tricks .modal-body {
+  color: var(--black) !important;
+}
+
+.modal .close {
+  background-color: var(--beige);
+  color: var(--grey);
+  border: none;
+}
+
+.modal .close:hover {
+  color: var(--red);
+}
+
+.modal-btn-cancel {
+  background-color: var(--grey);
+  color: var(--beige);
+  border: none;
+}
+
+.modal-btn-cancel:hover {
+  background-color: var(--grey);
+  color: var(--beige);
+}
+
+.modal-btn-confirm {
+  background-color: var(--teal);
+  color: var(--beige);
+  border: none;
+}
+
+.modal-btn-confirm:hover {
+  background-color: var(--teal);
+  color: var(--beige);
+}
+
+.modal-btn-cancel:hover
+.modal-btn-confirm:hover {
+  opacity: 0.9;
+}
+
+.btn-load-tricks {
+  background-color: var(--grey);
+  color: var(--beige);
+  border: none;
+  border-radius: 18px;
+  font-size: 1rem;
+  padding: 10px 20px;
+}
+
+.btn-load-tricks:hover {
+  background-color: var(--teal);
 }
