@@ -1,11 +1,11 @@
 /* Global */
 :root {
   --grey: #434242;
-  --black: #222222;
-  --beige: #F3EFE0;
-  --teal: #22A39F;
-  --red: #E74C3C;
-  --blue: #3498DB;
+  --black: #222;
+  --beige: #f3efe0;
+  --teal: #22a39f;
+  --red: #e74c3c;
+  --blue: #3498db;
 }
 
 html,
@@ -17,11 +17,6 @@ body {
 
 a {
   text-decoration: none;
-  color: initial;
-}
-
-a:hover {
-  color: initial;
 }
 
 ul {
@@ -29,7 +24,7 @@ ul {
 }
 
 section {
-  font-family: 'Roboto' !important;
+  font-family: 'Roboto', sans-serif !important;
 }
 
 /* Partials (header, footer, nav...) */
@@ -51,14 +46,14 @@ header,
 footer,
 nav,
 .hero {
-  font-family: 'Open Sans' !important;
+  font-family: 'Open Sans', sans-serif !important;
 }
 
 header {
   height: 60px;
 }
 
-@media (max-width:768px) {
+@media (max-width:767px) {
   header,
   .copyright {
     display: none !important;
@@ -72,11 +67,11 @@ header {
     display: block !important;
   }
 
-  .mobile-nav a {
+  .mobile-nav svg {
     color: var(--beige) !important;
   }
 
-  .mobile-nav a:hover {
+  .mobile-nav svg:hover {
     color: var(--teal) !important;
   }
 }
@@ -91,8 +86,10 @@ header {
 .hero {
   height: calc(100vh - 60px);
   color: var(--beige);
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7),
-  rgba(0, 0, 0, 0.7)), url("../img/brands/hero.jpg");
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.7),
+  rgba(0, 0, 0, 0.7)), 
+    url("../img/brands/hero.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -141,12 +138,12 @@ header {
   color: var(--beige) !important;
 }
 
-.hero-btn-goToTricks:hover svg {
-  color: var(--teal) !important;
-}
-
 .home-btn-goToTricks svg {
   color: var(--grey) !important;
+}
+
+.hero-btn-goToTricks:hover svg {
+  color: var(--teal) !important;
 }
 
 .home-btn-goToTricks svg:hover {
@@ -168,7 +165,10 @@ header {
 .tricks .card-title {
   font-size: 1rem;
   width: 70%;
-  color: var(--black);
+}
+
+.tricks .card-title a {
+  color: var(--grey);
 }
 
 .tricks .card-title a:hover {
@@ -235,6 +235,7 @@ header {
 .modal-btn-cancel:hover {
   background-color: var(--grey);
   color: var(--beige);
+  opacity: 0.8;
 }
 
 .modal-btn-confirm {
@@ -246,11 +247,7 @@ header {
 .modal-btn-confirm:hover {
   background-color: var(--teal);
   color: var(--beige);
-}
-
-.modal-btn-cancel:hover
-.modal-btn-confirm:hover {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .btn-load-tricks {
