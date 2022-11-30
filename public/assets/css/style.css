@@ -28,19 +28,19 @@ ul {
 }
 
 @media (max-width:768px) {
-  .header, .copyright {
+  .header,
+  .copyright {
     display: none;
   }
 
   .mobile-nav {
-    display: block!important;
+    display: block !important;
   }
 }
 
 @media (min-width:768px) {
   .mobile-nav {
-    
-    display: none!important;
+    display: none !important;
   }
 }
 
@@ -59,14 +59,14 @@ ul {
   }
 }
 
-.hero-btn-goToTricks, 
+.hero-btn-goToTricks,
 .home-btn-goToTricks {
   bottom: 5px;
   right: 10px;
 }
 
-.hero-btn-goToTricks, 
-.home-btn-goToTricks, 
+.hero-btn-goToTricks,
+.home-btn-goToTricks,
 .tricks .card-btn {
   background: transparent;
   border: none;
