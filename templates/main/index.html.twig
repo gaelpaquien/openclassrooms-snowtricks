@@ -3,156 +3,277 @@
 {% block title %}Accueil / SnowTricks{% endblock %}
 
 {% block body %}
-  <div class="hero">
-
-      <div class="d-flex flex-column align-items-center justify-content-center min-vh-100">
-          <h1>SnowTricks</h1>
-          <p>Partagez votre expérience et vos tricks favoris !</p>
-      </div>
-      <div class="hero-icon-btn">
-        <i class="fa-sharp fa-solid fa-arrow-down fa-2xl"></i>
-      </div>
+  <!-- Hero -->
+  <div class="hero position-relative">
+    <div class="d-flex flex-column align-items-center justify-content-center min-vh-100">
+      <h1>SnowTricks</h1>
+      <p>Partagez votre expérience et vos tricks favoris !</p>
+    </div>
+    <button onclick="scrollToTricks()" class="hero-btn-goToTricks position-absolute">
+      <i class="fa-sharp fa-solid fa-arrow-down fa-2xl"></i>
+    </button>
   </div>
 
-  <section class="tricks m-5">
-    <div class="row row-cols-1 row-cols-md-5 g-4 ">
-      <!-- Item -->
-      <div class="col">
-        <div class="card">
-          <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-          <div class="card-body d-flex flex-row justify-content-between align-items-center">
-            <h5 class="card-title">
-              <a href="#">Trick name</a>
-            </h5>
-            <i class="fa-sharp fa-solid fa-pencil pb-2"></i>
-            <i class="fa-regular fa-trash-can pb-2"></i>
+  <!-- Tricks -->
+  <section class="tricks mt-3 mb-5" id="tricks">
+    <div class="container pt-4">
+      <div class="row hidden-md-up row-cols-1 row-cols-md-3 row-cols-lg-5">
+        <!-- Item -->
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+            <div class="card-body d-flex flex-row justify-content-between align-items-center">
+              <h2 class="card-title">
+                <a href="#">Mon super super super trick</a>
+              </h2>
+              <a class="card-btn card-btn-update" href="#">
+                <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
+              </a>
+              <button type="button" class="card-btn" data-toggle="modal" data-target="#card-btn-delete">
+                <i class="fa-regular fa-trash-can pb-1"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </div>    
-      <!-- Item -->
-      <div class="col">
-        <div class="card">
-          <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-          <div class="card-body d-flex flex-row justify-content-between align-items-center">
-            <h5 class="card-title">
-              <a href="#">Trick name</a>
-            </h5>
-            <i class="fa-sharp fa-solid fa-pencil pb-2"></i>
-            <i class="fa-regular fa-trash-can pb-2"></i>
+        <!-- Item -->
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+            <div class="card-body d-flex flex-row justify-content-between align-items-center">
+              <h2 class="card-title">
+                <a href="#">Mon super super super trick</a>
+              </h2>
+              <a class="card-btn card-btn-update" href="#">
+                <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
+              </a>
+              <button type="button" class="card-btn" data-toggle="modal" data-target="#card-btn-delete">
+                <i class="fa-regular fa-trash-can pb-1"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </div>     
-      <!-- Item -->
-      <div class="col">
-        <div class="card">
-          <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-          <div class="card-body d-flex flex-row justify-content-between align-items-center">
-            <h5 class="card-title">
-              <a href="#">Trick name</a>
-            </h5>
-            <i class="fa-sharp fa-solid fa-pencil pb-2"></i>
-            <i class="fa-regular fa-trash-can pb-2"></i>
+        <!-- Item -->
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+            <div class="card-body d-flex flex-row justify-content-between align-items-center">
+              <h2 class="card-title">
+                <a href="#">Mon super super super trick</a>
+              </h2>
+              <a class="card-btn card-btn-update" href="#">
+                <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
+              </a>
+              <button type="button" class="card-btn" data-toggle="modal" data-target="#card-btn-delete">
+                <i class="fa-regular fa-trash-can pb-1"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </div>     
-      <!-- Item -->
-      <div class="col">
-        <div class="card">
-          <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-          <div class="card-body d-flex flex-row justify-content-between align-items-center">
-            <h5 class="card-title">
-              <a href="#">Trick name</a>
-            </h5>
-            <i class="fa-sharp fa-solid fa-pencil pb-2"></i>
-            <i class="fa-regular fa-trash-can pb-2"></i>
+        <!-- Item -->
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+            <div class="card-body d-flex flex-row justify-content-between align-items-center">
+              <h2 class="card-title">
+                <a href="#">Mon super super super trick</a>
+              </h2>
+              <a class="card-btn card-btn-update" href="#">
+                <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
+              </a>
+              <button type="button" class="card-btn" data-toggle="modal" data-target="#card-btn-delete">
+                <i class="fa-regular fa-trash-can pb-1"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </div>     
-      <!-- Item -->
-      <div class="col">
-        <div class="card">
-          <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-          <div class="card-body d-flex flex-row justify-content-between align-items-center">
-            <h5 class="card-title">
-              <a href="#">Trick name</a>
-            </h5>
-            <i class="fa-sharp fa-solid fa-pencil pb-2"></i>
-            <i class="fa-regular fa-trash-can pb-2"></i>
+        <!-- Item -->
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+            <div class="card-body d-flex flex-row justify-content-between align-items-center">
+              <h2 class="card-title">
+                <a href="#">Mon super super super trick</a>
+              </h2>
+              <a class="card-btn card-btn-update" href="#">
+                <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
+              </a>
+              <button type="button" class="card-btn" data-toggle="modal" data-target="#card-btn-delete">
+                <i class="fa-regular fa-trash-can pb-1"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </div>     
-      <!-- Item -->
-      <div class="col">
-        <div class="card">
-          <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-          <div class="card-body d-flex flex-row justify-content-between align-items-center">
-            <h5 class="card-title">
-              <a href="#">Trick name</a>
-            </h5>
-            <i class="fa-sharp fa-solid fa-pencil pb-2"></i>
-            <i class="fa-regular fa-trash-can pb-2"></i>
+        <!-- Item -->
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+            <div class="card-body d-flex flex-row justify-content-between align-items-center">
+              <h2 class="card-title">
+                <a href="#">Mon super super super trick</a>
+              </h2>
+              <a class="card-btn card-btn-update" href="#">
+                <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
+              </a>
+              <button type="button" class="card-btn" data-toggle="modal" data-target="#card-btn-delete">
+                <i class="fa-regular fa-trash-can pb-1"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </div>     
-      <!-- Item -->
-      <div class="col">
-        <div class="card">
-          <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-          <div class="card-body d-flex flex-row justify-content-between align-items-center">
-            <h5 class="card-title">
-              <a href="#">Trick name</a>
-            </h5>
-            <i class="fa-sharp fa-solid fa-pencil pb-2"></i>
-            <i class="fa-regular fa-trash-can pb-2"></i>
+        <!-- Item -->
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+            <div class="card-body d-flex flex-row justify-content-between align-items-center">
+              <h2 class="card-title">
+                <a href="#">Mon super super super trick</a>
+              </h2>
+              <a class="card-btn card-btn-update" href="#">
+                <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
+              </a>
+              <button type="button" class="card-btn" data-toggle="modal" data-target="#card-btn-delete">
+                <i class="fa-regular fa-trash-can pb-1"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </div>     
-      <!-- Item -->
-      <div class="col">
-        <div class="card">
-          <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-          <div class="card-body d-flex flex-row justify-content-between align-items-center">
-            <h5 class="card-title">
-              <a href="#">Trick name</a>
-            </h5>
-            <i class="fa-sharp fa-solid fa-pencil pb-2"></i>
-            <i class="fa-regular fa-trash-can pb-2"></i>
+        <!-- Item -->
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+            <div class="card-body d-flex flex-row justify-content-between align-items-center">
+              <h2 class="card-title">
+                <a href="#">Mon super super super trick</a>
+              </h2>
+              <a class="card-btn card-btn-update" href="#">
+                <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
+              </a>
+              <button type="button" class="card-btn" data-toggle="modal" data-target="#card-btn-delete">
+                <i class="fa-regular fa-trash-can pb-1"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </div>     
-      <!-- Item -->
-      <div class="col">
-        <div class="card">
-          <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-          <div class="card-body d-flex flex-row justify-content-between align-items-center">
-            <h5 class="card-title">
-              <a href="#">Trick name</a>
-            </h5>
-            <i class="fa-sharp fa-solid fa-pencil pb-2"></i>
-            <i class="fa-regular fa-trash-can pb-2"></i>
+        <!-- Item -->
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+            <div class="card-body d-flex flex-row justify-content-between align-items-center">
+              <h2 class="card-title">
+                <a href="#">Mon super super super trick</a>
+              </h2>
+              <a class="card-btn card-btn-update" href="#">
+                <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
+              </a>
+              <button type="button" class="card-btn" data-toggle="modal" data-target="#card-btn-delete">
+                <i class="fa-regular fa-trash-can pb-1"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </div> 
-      <!-- Item -->
-      <div class="col">
-        <div class="card">
-          <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-          <div class="card-body d-flex flex-row justify-content-between align-items-center">
-            <h5 class="card-title">
-              <a href="#">Trick name</a>
-            </h5>
-            <i class="fa-sharp fa-solid fa-pencil pb-2"></i>
-            <i class="fa-regular fa-trash-can pb-2"></i>
+        <!-- Item -->
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+            <div class="card-body d-flex flex-row justify-content-between align-items-center">
+              <h2 class="card-title">
+                <a href="#">Mon super super super trick</a>
+              </h2>
+              <a class="card-btn card-btn-update" href="#">
+                <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
+              </a>
+              <button type="button" class="card-btn" data-toggle="modal" data-target="#card-btn-delete">
+                <i class="fa-regular fa-trash-can pb-1"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </div>                   
-    </div>
-    <div class="text-center">
-      <button class="btn btn-primary mt-5">Voir plus...</button>
+        <!-- Item -->
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+            <div class="card-body d-flex flex-row justify-content-between align-items-center">
+              <h2 class="card-title">
+                <a href="#">Mon super super super trick</a>
+              </h2>
+              <a class="card-btn card-btn-update" href="#">
+                <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
+              </a>
+              <button type="button" class="card-btn" data-toggle="modal" data-target="#card-btn-delete">
+                <i class="fa-regular fa-trash-can pb-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Item -->
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+            <div class="card-body d-flex flex-row justify-content-between align-items-center">
+              <h2 class="card-title">
+                <a href="#">Mon super super super trick</a>
+              </h2>
+              <a class="card-btn card-btn-update" href="#">
+                <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
+              </a>
+              <button type="button" class="card-btn" data-toggle="modal" data-target="#card-btn-delete">
+                <i class="fa-regular fa-trash-can pb-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Item -->
+        <div class="col">
+          <div class="card">
+            <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+            <div class="card-body d-flex flex-row justify-content-between align-items-center">
+              <h2 class="card-title">
+                <a href="#">Mon super super super trick</a>
+              </h2>
+              <a class="card-btn card-btn-update" href="#">
+                <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
+              </a>
+              <button type="button" class="card-btn" data-toggle="modal" data-target="#card-btn-delete">
+                <i class="fa-regular fa-trash-can pb-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <!-- Button to load more tricks -->
+    <div class="d-flex justify-content-center">
+      <a href="#" class="btn btn-primary">Voir plus...</a>
+    </div>
+
+    <!-- Modal to confirmed trick removal -->
+    <div class="modal fade" id="card-btn-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Suppression du trick</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Souhaitez-vous vraiment supprimer le trick "Trick name" ?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-primary">Supprimer</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
-  <div class="tricks-icon-btn">
-    <i class="tricks-icon-btn-item fa-sharp fa-solid fa-arrow-up fa-2xl"></i>
+
+  <!-- Button to scroll to tricks section -->
+  <div class="position-relative">
+    <button onclick="scrollToTricks()" class="position-absolute home-btn-goToTricks">
+      <i class="fa-sharp fa-solid fa-arrow-up fa-2xl"></i>
+    </button>
   </div>
 {% endblock %}
