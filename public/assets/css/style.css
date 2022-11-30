@@ -188,12 +188,12 @@ header {
   color: var(--grey);
 }
 
-.tricks .card svg:hover {
-  color: var(--red);
-}
-
 .card-btn-update svg:hover {
   color: var(--blue) !important;
+}
+
+.tricks .card svg:hover {
+  color: var(--red);
 }
 
 @media (max-width:768px) {
