@@ -1,44 +1,99 @@
 /* Global */
 html {
   height: 100%;
-  font-family: Arial, sans-serif;
-  font-size: 1rem;
+  width: 100%;
+  font-family: 'Open Sans', 'Roboto', 'Montserrat', Arial, sans-serif;
+}
+
+body {
+  height: 100%;
 }
 
 a {
   text-decoration: none;
+  color: initial;
+}
+
+a:hover {
+  color: initial;
 }
 
 ul {
   list-style: none;
 }
 
+/* Partials (header, footer, nav...) */
+.header {
+  height: 60px;
+}
+
+@media (max-width:768px) {
+  .header, .copyright {
+    display: none;
+  }
+}
+
+@media (max-width:768px) {
+  .header, .copyright {
+    display: none;
+  }
+}
+
 /* Homepage */
 .hero {
-  height: calc(100vh - 61px);
+  height: calc(100vh - 60px);
   background-image: url("../img/brands/hero.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 1;
 }
 
-.hero-icon-btn {
-  position: absolute;
+@media (max-width:768px) {
+  .hero {
+    height: 100vh;
+  }
+}
+
+.hero-btn-goToTricks, .home-btn-goToTricks {
   bottom: 5px;
   right: 10px;
 }
 
-.tricks .card {
-  width: 12rem;
+.hero-btn-goToTricks, .home-btn-goToTricks, .tricks .card-btn {
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
 }
 
-.tricks-icon-btn {
-  position: relative;
+.tricks .col {
+  padding-bottom: 24px;
 }
 
-.tricks-icon-btn-item {
-  position: absolute;
-  bottom: 5px;
-  right: 10px;
+.tricks .card-title {
+  font-size: 1rem;
+  width: 70%;
+}
+
+@media (min-width:992px) and (max-width:1200px) {
+  .tricks .card-title {
+    font-size: 0.8rem;
+    width: 60%;
+  }
+}
+
+.tricks .card svg {
+  height: 15px;
+  width: 15px;
+}
+
+@media (max-width:768px) {
+  .tricks .card-title {
+    font-size: 1.2rem;
+  }
+
+  .tricks .card svg {
+    height: 20px;
+    width: 20px;
+  }
 }
