@@ -8,12 +8,17 @@
             <a class="nav-link" href="#">Accueil</a>
             <span class="d-flex align-items-center px-2 pb-1">|</span>
             <a class="nav-link" href="#">Tricks</a>
+            
+            {% if not app.user %}
             <span class="d-flex align-items-center px-2 pb-1">|</span>
-            <a class="nav-link" href="#">Inscription</a>
-            <span class="d-flex align-items-center px-2 pb-1">|</span>
-            <a class="nav-link" href="#">Connexion</a>
-            <span class="d-flex align-items-center px-2 pb-1">|</span>
-            <a class="nav-link" href="#">Déconnexion</a>
+                <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+                <span class="d-flex align-items-center px-2 pb-1">|</span>
+                <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+            {% endif %}
+            {% if app.user %}
+                <span class="d-flex align-items-center px-2 pb-1">|</span>
+                <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+            {% endif %}
         </div>
       </nav>
 </header>
