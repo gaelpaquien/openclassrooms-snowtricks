@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
 use App\Repository\CommentsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommentsRepository::class)]
 class Comments
 {
+    use CreatedAtTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -16,11 +19,17 @@ class Comments
     #[ORM\Column(length: 255)]
     private ?string $content = null;
 
-    #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
-    private ?\DateTimeImmutable $created_at = null;
-
     #[ORM\ManyToOne(inversedBy: 'comments')]
     private ?Users $author = null;
+
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Tricks $trick = null;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -39,18 +48,6 @@ class Comments
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
     public function getAuthorId(): ?Users
     {
         return $this->author;
@@ -59,6 +56,18 @@ class Comments
     public function setAuthorId(?Users $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getTrick(): ?Tricks
+    {
+        return $this->trick;
+    }
+
+    public function setTrick(?Tricks $trick): self
+    {
+        $this->trick = $trick;
 
         return $this;
     }
