@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\TricksPictureRepository;
+use App\Repository\TricksImagesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: TricksPictureRepository::class)]
-class TricksPicture
+#[ORM\Entity(repositoryClass: TricksImagesRepository::class)]
+class TricksImages
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -14,7 +14,7 @@ class TricksPicture
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    private ?string $picture = null;
+    private ?string $image = null;
 
     #[ORM\ManyToOne]
     private ?Tricks $tricks = null;
@@ -24,14 +24,14 @@ class TricksPicture
         return $this->id;
     }
 
-    public function getPicture(): ?string
+    public function getImage(): ?string
     {
-        return $this->picture;
+        return $this->image;
     }
 
-    public function setPicture(string $picture): self
+    public function setImage(string $image): self
     {
-        $this->picture = $picture;
+        $this->image = $image;
 
         return $this;
     }
