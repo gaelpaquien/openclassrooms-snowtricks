@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\TricksPicture;
+use App\Entity\TricksImages;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<TricksPicture>
+ * @extends ServiceEntityRepository<TricksImages>
  *
- * @method TricksPicture|null find($id, $lockMode = null, $lockVersion = null)
- * @method TricksPicture|null findOneBy(array $criteria, array $orderBy = null)
- * @method TricksPicture[]    findAll()
- * @method TricksPicture[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method TricksImages|null find($id, $lockMode = null, $lockVersion = null)
+ * @method TricksImages|null findOneBy(array $criteria, array $orderBy = null)
+ * @method TricksImages[]    findAll()
+ * @method TricksImages[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TricksPictureRepository extends ServiceEntityRepository
+class TricksImagesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, TricksPicture::class);
+        parent::__construct($registry, TricksImages::class);
     }
 
-    public function save(TricksPicture $entity, bool $flush = false): void
+    public function save(TricksImages $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class TricksPictureRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(TricksPicture $entity, bool $flush = false): void
+    public function remove(TricksImages $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class TricksPictureRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return TricksPicture[] Returns an array of TricksPicture objects
+//     * @return TricksImages[] Returns an array of TricksImages objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class TricksPictureRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?TricksPicture
+//    public function findOneBySomeField($value): ?TricksImages
 //    {
 //        return $this->createQueryBuilder('t')
 //            ->andWhere('t.exampleField = :val')
