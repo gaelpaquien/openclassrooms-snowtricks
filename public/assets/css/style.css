@@ -57,6 +57,20 @@ footer {
   height: 75px;
 }
 
+.nav-btn {
+  background: none;
+  border: none;
+  color: var(--beige);
+}
+
+.nav-btn:hover {
+  color: var(--teal);
+}
+
+.nav-btn:focus {
+  color: var(--beige);
+}
+
 @media (max-width:767px) {
   header,
   .copyright {
@@ -260,7 +274,8 @@ footer {
   padding: 10px 20px;
 }
 
-.btn-load-tricks:hover {
+.btn-load-tricks:hover,
+.btn-load-tricks:focus {
   background-color: var(--teal);
 }
 
@@ -301,7 +316,7 @@ footer {
 
 .register form div,
 .login form div {
-  margin: 15px 0px 15px 0px;
+  margin: 15px 0 15px 0;
 }
 
 .register .form-control:focus,

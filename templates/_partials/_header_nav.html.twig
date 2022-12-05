@@ -7,8 +7,8 @@
         <div class="flex-row navbar-nav">
             <a class="nav-link" href="{{ path('main') }}">Accueil</a>
             <span class="d-flex align-items-center px-2 pb-1">|</span>
-            <a class="nav-link" href="#">Tricks</a>
-            
+            <button class="nav-link nav-btn" onclick="scrollToTricks()">Tricks</button>
+
             {% if not app.user %}
             <span class="d-flex align-items-center px-2 pb-1">|</span>
                 <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
