@@ -208,7 +208,7 @@ footer {
   color: var(--blue) !important;
 }
 
-.tricks .card svg:hover {
+.tricks .card-btn-delete svg:hover {
   color: var(--red);
 }
 
