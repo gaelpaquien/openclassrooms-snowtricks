@@ -6,10 +6,6 @@
         </a>
         <div class="flex-row navbar-nav">
             <a class="nav-link" href="{{ path('main') }}">Accueil</a>
-            {% if app.request.get('_route') == 'main' %}
-                <span class="d-flex align-items-center px-2 pb-1">|</span>
-                <button class="nav-link nav-btn" onclick="scrollToTricks()">Tricks</button>
-            {% endif %}
 
             {% if not app.user %}
             <span class="d-flex align-items-center px-2 pb-1">|</span>
@@ -19,6 +15,8 @@
             {% endif %}
 
             {% if app.user %}
+                <span class="d-flex align-items-center px-2 pb-1">|</span>
+                <a class="nav-link" href="{{ path('tricks_create') }}">Nouveau Tricks</a>
                 <span class="d-flex align-items-center px-2 pb-1">|</span>
                 <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
             {% endif %}
