@@ -9,18 +9,18 @@
             <a href="{{ path('main') }}">
                 <i class="fa-solid fa-house-chimney fa-xl mx-5"></i>
             </a>
-            <a href="{{ path('main') }}">
+            {% if app.user %}
+            <a href="{{ path('tricks_create') }}">
                 <i class="fa-solid fa-bookmark fa-xl mx-5"></i>
             </a>
+            <a href="{{ path('app_logout') }}">
+                <i class="fa-solid fa-arrow-right-from-bracket fa-xl mx-5"></i>
+            </a>
+            {% endif %}
             {% if not app.user %}
                 <a href="{{ path('app_login') }}">
                     <i class="fa-solid fa-arrow-right-to-bracket fa-xl mx-5"></i>
                 </a> 
-            {% endif %}
-            {% if app.user %}
-                <a href="{{ path('app_logout') }}">
-                    <i class="fa-solid fa-arrow-right-from-bracket fa-xl mx-5"></i>
-                </a>
             {% endif %}
         </div>
     </nav>
