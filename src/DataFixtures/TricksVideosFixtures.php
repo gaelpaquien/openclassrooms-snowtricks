@@ -22,7 +22,7 @@ class TricksVideosFixtures extends Fixture implements DependentFixtureInterface
             $video->setVideo($faker->imageUrl(640, 480, null, true));
             $trick = $this->getReference('trick-'.rand(1, 10));
 
-            $video->setTricksId($trick);
+            $video->setTricks($trick);
 
             $manager->persist($video);
         }

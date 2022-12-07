@@ -36,12 +36,12 @@ class TricksVideos
         return $this;
     }
 
-    public function getTricksId(): ?Tricks
+    public function getTricks(): ?Tricks
     {
         return $this->tricks;
     }
 
-    public function setTricksId(?Tricks $tricks): self
+    public function setTricks(?Tricks $tricks): self
     {
         $this->tricks = $tricks;
 

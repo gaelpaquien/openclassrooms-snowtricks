@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Tricks;
+use App\Form\TricksCreateFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -11,10 +13,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class TricksController extends AbstractController
 {
     #[Route('/creation', name: 'create')]
-    public function create(): Response
+    public function create(Request $request): Response
     {
+        $tricks = new Tricks;
+        $form = $this->createForm(TricksCreateFormType::class, $tricks);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->redirectToRoute('main');
+        }
+
         return $this->render('tricks/create.html.twig', [
             'controller_name' => 'TricksCreate',
+            'createForm' => $form->createView()
         ]);
     }
 
