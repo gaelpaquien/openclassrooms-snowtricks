@@ -48,12 +48,12 @@ class Comments
         return $this;
     }
 
-    public function getAuthorId(): ?Users
+    public function getAuthor(): ?Users
     {
         return $this->author;
     }
 
-    public function setAuthorId(?Users $author): self
+    public function setAuthor(?Users $author): self
     {
         $this->author = $author;
 

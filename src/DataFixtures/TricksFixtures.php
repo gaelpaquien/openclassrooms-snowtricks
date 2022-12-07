@@ -91,7 +91,7 @@ class TricksFixtures extends Fixture implements DependentFixtureInterface
         $trick->setCategory($category);
 
         $user = $this->getReference('user-'.rand(1, 10));
-        $trick->setAuthorId($user);
+        $trick->setAuthor($user);
 
         $manager->persist($trick);
 

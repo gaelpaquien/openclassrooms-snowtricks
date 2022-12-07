@@ -21,7 +21,7 @@ class CommentsFixtures extends Fixture implements DependentFixtureInterface
             $comment->setContent($faker->text(50));
 
             $user = $this->getReference('user-'.rand(1, 10));
-            $comment->setAuthorId($user);
+            $comment->setAuthor($user);
 
             $trick = $this->getReference('trick-'.rand(1, 10));
             $comment->setTrick($trick);
