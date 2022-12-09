@@ -10,13 +10,7 @@
 
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
-
     {{ form_start(createForm) }}
-        {{ form_row(createForm.title)}}
-        {{ form_row(createForm.description)}}
-        {{ form_row(createForm.category)}}
-        {# {{ form_row(createForm.images)}}
-        {{ form_row(createForm.videos)}} #}
     {{ form_end(createForm) }}
 </div>
 {% endblock %}
