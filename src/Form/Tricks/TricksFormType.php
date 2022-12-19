@@ -6,6 +6,7 @@ use App\Entity\Tricks;
 use App\Entity\TricksCategories;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,15 +22,18 @@ class TricksFormType extends AbstractType
                 ],
                 'label' => 'Titre'
             ])
-            ->add('description', TextType::class, [
+            ->add('description', TextareaType::class, [
                 'attr' => [
                     'class' => 'form-control'
                 ],
                 'label' => 'Description'
             ])
-            ->add('categorie', EntityType::class, [
+            ->add('category', EntityType::class, [
                 'class' => TricksCategories::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ], 
             [
                 'label' => 'Catégorie'

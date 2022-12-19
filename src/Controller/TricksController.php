@@ -26,16 +26,19 @@ class TricksController extends AbstractController
         $items = ['tricks' => $tricks, 'videos' => $videos, 'images' => $images];
         
         $form = $this->createFormBuilder($items)
-            ->add('Tricks', TricksFormType::class)
-            ->add('Images', TricksImagesFormType::class)
-            ->add('Video', TricksVideosFormType::class)
-            ->add('save', SubmitType::class, ['label' => 'Do Something'])
+            ->add('Tricks', TricksFormType::class, [
+                'label' => false,
+                'required' => true
+            ])
+            ->add('Images', TricksImagesFormType::class, [
+                'label' => false,
+                'required' => false
+            ])
+            ->add('Videos', TricksVideosFormType::class, [
+                'label' => false,
+                'required' => false
+            ])
             ->getForm();
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            
-        }
  
         return $this->render('tricks/create.html.twig', [
             'controller_name' => 'TricksCreate',

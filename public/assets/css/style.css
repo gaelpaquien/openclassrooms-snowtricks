@@ -279,54 +279,46 @@ footer {
   background-color: var(--teal);
 }
 
-/* Register & Login */
+/* Forms pages (register, login, create tricks, update tricks) */
 .register,
-.login {
+.login,
+.create-tricks {
   background-color: var(--beige);
   color: var(--grey) !important;
-  height: calc(100vh - 110px);
+  height: 100vh;
 }
 
 .register .row,
-.login .row {
+.login .row,
+.create-tricks .row {
   margin-bottom: 35px;
 }
 
 .register form,
-.login form {
+.login form,
+.create-tricks form {
   width: 80%;
   margin: auto;
   border: 1px solid var(--grey);
   padding: 10px 30px;
 }
 
-@media (max-width:1200px) {
-  .register,
-  .login {
-    height: calc(100vh - 125px);
-  }
-}
-
-@media (max-width:767px) {
-  .register,
-  .login {
-    height: calc(100vh - 75px);
-  }
-}
-
 .register form div,
-.login form div {
+.login form div,
+.create-tricks form div {
   margin: 15px 0 15px 0;
 }
 
 .register .form-control:focus,
-.login .form-control:focus {
+.login .form-control:focus,
+.create-tricks .form-control:focus {
   border-color: var(--teal);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(34, 163, 159, 0.6);
 }
 
 .register form button,
-.login form button {
+.login form button,
+.create-tricks form button {
   background-color: var(--grey);
   color: var(--beige);
   border: none;
@@ -338,18 +330,83 @@ footer {
 }
 
 .register form button:hover,
-.login form button:hover {
+.login form button:hover,
+.create-tricks form button:hover {
   opacity: 0.8;
   background-color: var(--teal);
   color: var(--beige);
 }
 
 .register form a,
-.login form a {
+.login form a,
+.create-tricks form a {
   color: var(--grey);
 }
 
 .register form a:hover,
-.login form a:hover {
+.login form a:hover,
+.create-tricks form a {
   color: var(--teal);
+}
+
+.update-tricks {
+  background-color: var(--beige);
+  color: var(--grey) !important;
+}
+
+.update-tricks .tricks-img-main {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.update-tricks .tricks-img-main img {
+  width: 100%;
+  height: 400px;
+}
+
+.update-tricks .tricks-img-main span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--grey);
+  font-size: 3rem;
+}
+
+.update-tricks .tricks-img-main .links {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: var(--grey);
+}
+
+.update-tricks .tricks-img-main .links a {
+  color: var(--beige);
+  padding: 8px;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.update-tricks .tricks-img-main .links a:hover,
+.update-tricks .medias-links a:hover {
+  color: var(--teal);
+}
+
+.update-tricks .medias .card-img-top {
+  height: 100px;
+}
+
+.update-tricks .medias .medias-links {
+  margin-top: 10px;
+  width: 50%;
+  margin-left: auto;
+  background-color: var(--grey);
+}
+
+.update-tricks .medias-links a {
+  color: var(--beige);  
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0px 10px 0px 10px; 
 }
