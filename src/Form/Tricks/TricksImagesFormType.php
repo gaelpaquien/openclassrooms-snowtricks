@@ -15,7 +15,9 @@ class TricksImagesFormType extends AbstractType
         $builder
         ->add('image', FileType::class, [
             'attr' => [
-                'class' => 'form-control'
+                'class' => 'form-control',
+                'multiple' => true,
+                'accept' => 'image/png, image/jpeg'
             ],
             'label' => 'Image(s)'
         ])

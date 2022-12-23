@@ -388,9 +388,14 @@ footer {
   font-size: 1rem;
 }
 
-.update-tricks .tricks-img-main .links a:hover,
-.update-tricks .medias-links a:hover {
+.update-tricks .tricks-img-main .links a > .fa-pencil:hover,
+.update-tricks .medias-links a > .fa-pencil:hover {
   color: var(--teal);
+}
+
+.update-tricks .tricks-img-main .links a > .fa-trash-can:hover,
+.update-tricks .medias-links a > .fa-trash-can:hover {
+  color: var(--red);
 }
 
 .update-tricks .medias .card-img-top {
