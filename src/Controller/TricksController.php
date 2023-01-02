@@ -9,7 +9,6 @@ use App\Form\Tricks\TricksFormType;
 use App\Form\Tricks\TricksVideosFormType;
 use App\Form\Tricks\TricksImagesFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,7 +23,7 @@ class TricksController extends AbstractController
         $videos = new TricksVideos;
         $images = new TricksImages;
         $items = ['tricks' => $tricks, 'videos' => $videos, 'images' => $images];
-        
+
         $form = $this->createFormBuilder($items)
             ->add('Tricks', TricksFormType::class, [
                 'label' => false,
@@ -42,7 +41,7 @@ class TricksController extends AbstractController
  
         return $this->render('tricks/create.html.twig', [
             'controller_name' => 'TricksCreate',
-            'createForm' => $form->createView()
+            'createTricksForm' => $form->createView()
         ]);
     }
 

@@ -4,8 +4,10 @@ namespace App\Form\Tricks;
 
 use App\Entity\Tricks;
 use App\Entity\TricksCategories;
+use App\Entity\TricksImages;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,7 +36,7 @@ class TricksFormType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ]
-            ], 
+            ],
             [
                 'label' => 'Catégorie'
             ])
