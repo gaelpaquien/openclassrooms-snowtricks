@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h1 class="text-center my-2">Me connecter</h1>
+                    <h1 class="text-center my-2">Connexion</h1>
                     <form method="post">
                         {% if error %}
                             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -37,8 +37,8 @@
                         #}
                         <div class="d-flex flex-column justify-content-center align-items-center">
                             <button type="submit" class="mb-3">Me connecter</button>
-                            <a href="{{ path('app_register')}}" class="mb-2">M'inscrire</a>
-                            <a href="/">Mot de passe oublié ?</a>
+                            <a href="{{ path('app_register') }}" class="mb-2">M'inscrire</a>
+                            <a href="{{ path('app_forgot_password') }}">Mot de passe oublié ?</a>
                         </div>
                     </form>
                 </div>
