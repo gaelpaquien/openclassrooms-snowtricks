@@ -469,7 +469,7 @@ footer {
 
 .update-tricks .tricks-content textarea {
   width: 100%;
-  height: 200px; 
+  height: 200px;
 }
 
 .update-tricks .tricks-content .tricks-content-btn {
@@ -505,14 +505,14 @@ footer {
 }
 
 .update-tricks .mobile-medias-links {
-  background-color: var(--grey);  
+  background-color: var(--grey);
 }
 
 @media (max-width:992px) {
   .update-tricks .tricks-content .infos,
   .details-tricks .tricks-content .infos span {
     width: 100%;
-    font-size: 0.8rem!important;
+    font-size: 0.8rem !important;
     text-align: center;
   }
 }
@@ -520,21 +520,23 @@ footer {
 @media (min-width:768px) {
   .update-tricks .mobile-medias,
   .details-tricks .mobile-medias {
-    display: none!important;
+    display: none !important;
   }
 }
 
 @media (max-width:767px) {
   .update-tricks .medias,
   .details-tricks .medias {
-    display: none!important;
+    display: none !important;
   }
+
   .update-tricks .tricks-content .btn {
-    justify-content: center!important;
+    justify-content: center !important;
   }
+
   .update-tricks .tricks-content .infos,
   .details-tricks .tricks-content .infos span {
-    font-size: 0.7rem!important;
+    font-size: 0.7rem !important;
     text-align: center;
   }
 }
