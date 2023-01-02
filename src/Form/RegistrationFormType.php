@@ -34,7 +34,7 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ],
-                'label' => 'Photo de profil',
+                'label' => 'Photo de profil (facultatif)',
                 'required' => false,
             ])
             ->add('plainPassword', PasswordType::class, [
