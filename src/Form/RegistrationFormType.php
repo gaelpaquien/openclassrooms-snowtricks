@@ -30,13 +30,13 @@ class RegistrationFormType extends AbstractType
                 ],
                 'label' => 'Email',
             ])
-            ->add('profile_picture', FileType::class, [
+/*             ->add('profile_picture', FileType::class, [
                 'attr' => [
                     'class' => 'form-control'
                 ],
                 'label' => 'Photo de profil (facultatif)',
                 'required' => false,
-            ])
+            ]) */
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller

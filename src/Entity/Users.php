@@ -36,7 +36,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column(length: 255, options: ['default' => '01-Default.jpg'])]
-    private ?string $profile_picture = null;
+    private ?string $profile_picture = '01-Default.jpg';
 
     #[ORM\Column(type: 'boolean')]
     private ?bool $is_verified = false;
