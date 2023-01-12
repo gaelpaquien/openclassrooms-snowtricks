@@ -35,6 +35,28 @@ section {
   margin: 0;
 }
 
+/* Error pages */
+.error-page {
+  background-color: var(--beige);
+  color: var(--grey) !important;
+  height: 100vh;
+}
+
+.error-page .btn {
+  background-color: var(--grey);
+  color: var(--beige);
+  border: none;
+  border-radius: 18px;
+  font-size: 1rem;
+  padding: 10px 20px;
+  width: 150px;
+}
+
+.error-page .btn:hover {
+  background-color: var(--teal);
+  color: var(--beige);
+}
+
 /* Partials (header, footer, nav...) */
 header,
 footer {
