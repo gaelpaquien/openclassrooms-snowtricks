@@ -11,7 +11,6 @@ class JWTService
         if ($validity > 0) {
             $now = new DateTimeImmutable();
             $exp = $now->getTimestamp() + $validity;
-    
             $payload['iat'] = $now->getTimestamp();
             $payload['exp'] = $exp;
         }
