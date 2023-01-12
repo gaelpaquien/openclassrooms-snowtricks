@@ -27,6 +27,14 @@ section {
   font-family: 'Roboto', sans-serif !important;
 }
 
+.alert,
+.alert-danger,
+.alert-success,
+.alert-warning {
+  border-radius: 0;
+  margin: 0;
+}
+
 /* Partials (header, footer, nav...) */
 header,
 footer {
