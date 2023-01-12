@@ -46,8 +46,8 @@ class SecurityController extends AbstractController
     public function forgotPassword(
         Request $request, 
         UsersRepository $usersRepository, 
-        TokenGeneratorInterface $tokenGeneratorInterface,
-        EntityManagerInterface $entityManagerInterface,
+        TokenGeneratorInterface $tokenGenerator,
+        EntityManagerInterface $entityManager,
         SendMailService $mail): Response
     {
         $form = $this->createForm(ResetPasswordRequestFormType::class);
@@ -63,12 +63,12 @@ class SecurityController extends AbstractController
             // If user exists
             if ($user) {
                 // Generate token
-                $token = $tokenGeneratorInterface->generateToken();
+                $token = $tokenGenerator->generateToken();
 
                 // Set token to user and save it
                 $user->setResetToken($token);
-                $entityManagerInterface->persist($user);
-                $entityManagerInterface->flush();
+                $entityManager->persist($user);
+                $entityManager->flush();
 
                 // Generate url to reset password
                 $url = $this->generateUrl('app_reset_password', [
@@ -107,7 +107,7 @@ class SecurityController extends AbstractController
         string $token,
         Request $request,
         UsersRepository $usersRepository,
-        EntityManagerInterface $entityManagerInterface,
+        EntityManagerInterface $entityManager,
         UserPasswordHasherInterface $passwordHasher): Response
     {
         // Check if token is valid
@@ -129,8 +129,8 @@ class SecurityController extends AbstractController
                 $user->setPassword($passwordHasher->hashPassword($user, $form->get('password')->getData()));
 
                 // Save user
-                $entityManagerInterface->persist($user);
-                $entityManagerInterface->flush();
+                $entityManager->persist($user);
+                $entityManager->flush();
 
                 $this->addFlash('success', 'Votre mot de passe a bien été modifié');
                 return $this->redirectToRoute('app_login');
