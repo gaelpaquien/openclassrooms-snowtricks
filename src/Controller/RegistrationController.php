@@ -66,6 +66,8 @@ class RegistrationController extends AbstractController
                 ]
             );
 
+            $this->addFlash('success', 'Votre compte a été enregistré et vous avez un reçu un email d\'activation');
+
             return $this->redirectToRoute('main');
         }
 
@@ -92,24 +94,24 @@ class RegistrationController extends AbstractController
         }
 
         // If token is not valid, expired or modified
-        $this->addFlash('danger', 'Le lien d\'activation est invalide ou a expiré.');
+        $this->addFlash('danger', 'Le lien d\'activation est invalide ou a expiré');
 
-        return $this->redirectToRoute('app_login');
+        return $this->redirectToRoute('main');
     }
 
-    #[Route('/renvoi-activation', name: 'app_activation_redirection')]
+    #[Route('/renvoi-activation', name: 'app_activation_resend')]
     public function resendActivation(JWTService $jwt, SendMailService $mail, UsersRepository $usersRepository): Response
     {
         $user = $this->getUser();
 
         if (!$user) {
             $this->addFlash('danger', 'Vous devez être connecté pour accéder à cette page');
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('main');
         }
 
         if ($user->getIsVerified()) {
             $this->addFlash('warning', 'Ce compte est déjà activé');
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('main');
         }
 
         // Generate a JWT token
@@ -136,5 +138,8 @@ class RegistrationController extends AbstractController
                 'token' => $token
             ]
         );
+
+        $this->addFlash('success', 'Email d\'activation du compte envoyé');
+        return $this->redirectToRoute('main');
     }
 }
