@@ -31,6 +31,8 @@ class UsersFixtures extends Fixture
             $this->passwordEncoder->hashPassword($admin, 'admin')
         );
         $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setIsVerified(true);
+        $admin->setResetToken('');
 
         $manager->persist($admin);
 
@@ -44,7 +46,10 @@ class UsersFixtures extends Fixture
             $user->setPassword(
                 $this->passwordEncoder->hashPassword($admin, 'password')
             );
-            
+            $user->setRoles(['ROLE_USER']);
+            $user->setIsVerified(true);
+            $user->setResetToken('');
+
             $manager->persist($user);
 
             // Add reference of a user
