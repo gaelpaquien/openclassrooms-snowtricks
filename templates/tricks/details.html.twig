@@ -1,21 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tricks Title / SnowTricks{% endblock %}
+{% block title %}{{ tricks.title }} / SnowTricks{% endblock %}
 
 {% block body %}
 <section class="details-tricks pb-5">
     <!-- Main image -->
     <div class="tricks-img-main">
         <img class="img-fluid" src="{{ asset('assets/img/tricks/01-Default.png') }}" alt="">
-        <span>Tricks Title</span>
-        <div class="links">
-            <a href="#" class="update">
-                <i class="fa-sharp fa-solid fa-pencil"></i>
-            </a>
-            <a href="#" class="delete">
-                <i class="fa-regular fa-trash-can"></i>
-            </a>
-        </div>
+        <span>{{ tricks.title }}</span>
+        {% if app.user and app.user.id == tricks.author.id %}
+            <div class="links">
+                <a href="{{ path('tricks_update', {slug: tricks.slug}) }}" class="update">
+                    <i class="fa-sharp fa-solid fa-pencil"></i>
+                </a>
+                <a href="{{ path('tricks_delete', {slug: tricks.slug}) }}" class="delete">
+                    <i class="fa-regular fa-trash-can"></i>
+                </a>
+            </div>
+        {% endif %}
     </div>
 
     <!-- Medias -->
@@ -26,38 +28,6 @@
                 <div class="col">
                     <div class="card">
                         <img height="250" class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-                    </div>
-                </div>
-            </div>
-            <!-- Item -->
-            <div class="d-flex flex-column mb-4">
-                <div class="col">
-                    <div class="card">
-                        <img height="250" class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-                    </div>
-                </div>
-            </div>
-            <!-- Item -->
-            <div class="d-flex flex-column mb-4">
-                <div class="col">
-                    <div class="card">
-                        <img height="250" class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-                    </div>
-                </div>
-            </div>
-            <!-- Item -->
-            <div class="d-flex flex-column mb-4">
-                <div class="col">
-                    <div class="card">
-                        <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
-                    </div>
-                </div>
-            </div>
-            <!-- Item -->
-            <div class="d-flex flex-column mb-4">
-                <div class="col">
-                    <div class="card">
-                        <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
                     </div>
                 </div>
             </div>
@@ -95,26 +65,6 @@
                     <hr>
                     <!-- Item -->
                     <div class="my-4">
-                        <img height="250" class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-                    </div>
-                    <hr>
-                    <!-- Item -->
-                    <div class="my-4">
-                        <img height="250" class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-                    </div>
-                    <hr>
-                    <!-- Item -->
-                    <div class="my-4">
-                        <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
-                    </div>
-                    <hr>
-                    <!-- Item -->
-                    <div class="my-4">
-                        <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
-                    </div>
-                    <hr>
-                    <!-- Item -->
-                    <div class="my-4">
                         <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
                     </div>
                     <hr>
@@ -128,11 +78,13 @@
 
     <!-- Content -->
     <div class="tricks-content container mt-4">
-        <span class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat totam laboriosam excepturi sunt, nulla maiores velit culpa itaque blanditiis! Aperiam sequi perspiciatis quasi, quos ut magni error nostrum eos cumque? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae porro ipsam itaque reiciendis ipsa doloribus. Voluptatum fugit perferendis pariatur corrupti, odit aperiam fugiat vero beatae obcaecati nesciunt sunt sequi aliquam! Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni mollitia impedit velit suscipit odit provident debitis? Officia nesciunt delectus quidem amet eaque, quia ullam odio, expedita modi vero labore obcaecati! Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora corporis eaque accusamus architecto ipsa amet consequatur, sit repellendus quos, aperiam cum necessitatibus, vitae possimus ratione modi perspiciatis provident sapiente sunt? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque vero temporibus earum repellendus suscipit vel assumenda nisi quod delectus hic doloribus quisquam fugit totam, eveniet voluptate esse enim cum asperiores.</span>
-        <div class="infos d-flex flex-row justify-content-center mt-4">
-            <span class="mx-2">Catégorie</span>
-            <span class="mx-2">Créer le XX/XX/XXXX par John Doe</span>
-            <span class="mx-2">Modifier le XX/XX/XXXX par John Doe</span>
+        <span class="description fw-bolder">{{ tricks.description }}</span>
+        <div class="infos d-flex flex-row justify-content-center mt-5">
+            <span class="mx-4">Catégorie : {{ tricks.category.name }}</span>
+            <span class="mx-2">Créer le {{ tricks.createdAt|date('d/m/Y') }} par {{ tricks.author.username }}</span>
+            {% if tricks.createdAt != tricks.updatedAt %}
+                <span class="mx-2">Modifier le {{ tricks.updatedAt|date('d/m/Y') }} par {{ tricks.author.username }}</span>
+            {% endif %}
         </div>
         <hr>
         <div class="post-comment d-flex flex-row justify-content-center my-4">
@@ -141,21 +93,16 @@
         </div>
         <hr>
         <div class="comments ">
-            <!-- Item -->
-            <div class="d-flex flex-row justify-content-center mt-4">
-                <img src="{{ asset('assets/img/users/01-Default.svg') }}" alt="">
-                <span class="px-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed animi et incidunt, laboriosam, atque numquam in laborum hic, sunt aliquam doloribus? Consequatur eligendi rem atque sint ad, voluptatibus repudiandae fuga.</span>
-            </div>
-            <!-- Item -->
-            <div class="d-flex flex-row justify-content-center mt-4">
-                <img src="{{ asset('assets/img/users/01-Default.svg') }}" alt="">
-                <span class="px-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed animi et incidunt, laboriosam, atque numquam in laborum hic, sunt aliquam doloribus? Consequatur eligendi rem atque sint ad, voluptatibus repudiandae fuga.</span>
-            </div>
-            <!-- Item -->
-            <div class="d-flex flex-row justify-content-center mt-4">
-                <img src="{{ asset('assets/img/users/01-Default.svg') }}" alt="">
-                <span class="px-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed animi et incidunt, laboriosam, atque numquam in laborum hic, sunt aliquam doloribus? Consequatur eligendi rem atque sint ad, voluptatibus repudiandae fuga.</span>
-            </div>
+            {% for comment in comments %}
+                <div class="d-flex flex-row justify-content-start mt-4">
+                    <img src="{{ asset('assets/img/users/01-Default.svg') }}" alt="">
+                    <div class="d-flex flex-column">
+                        <span class="px-2 fw-bolder">{{ comment.content }}</span>
+                        <span class="px-2 text-muted">Publier le {{ comment.createdAt|date('d/m/Y') }} par {{ comment.author.username }}</span>
+                    </div>
+
+                </div>
+            {% endfor %}
         </div>
         <!-- Button to load more comments -->
         <div class="d-flex justify-content-center mt-4">

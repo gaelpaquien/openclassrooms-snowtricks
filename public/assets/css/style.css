@@ -346,6 +346,7 @@ footer {
 .register form div,
 .login form div,
 .create-tricks form div,
+.update-tricks form div,
 .forgot-password form div,
 .reset-password form div {
   margin: 15px 0 15px 0;
@@ -354,6 +355,7 @@ footer {
 .register .form-control:focus,
 .login .form-control:focus,
 .create-tricks .form-control:focus,
+.update-tricks .form-control:focus,
 .forgot-password .form-control:focus,
 .reset-password .form-control:focus {
   border-color: var(--teal);
@@ -518,6 +520,7 @@ footer {
   border: none;
   font-size: 1rem;
   padding: 5px;
+  margin-right: 0 !important;
 }
 
 .update-tricks .tricks-content .delete:hover,

@@ -1,248 +1,131 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Édition de Tricks Title / SnowTricks{% endblock %}
+{% block title %}Édition de {{ tricks.title }} / SnowTricks{% endblock %}
 
 {% block body %}
-<section class="update-tricks pb-5">
-    <!-- Main image -->
-    <div class="tricks-img-main">
-        <img class="img-fluid" src="{{ asset('assets/img/tricks/01-Default.png') }}" alt="">
-        <span>Tricks Title</span>
-        <div class="links">
-            <a href="#" class="update">
-                <i class="fa-sharp fa-solid fa-pencil"></i>
-            </a>
-            <a href="#" class="delete">
-                <i class="fa-regular fa-trash-can"></i>
-            </a>
+    <section class="update-tricks pb-5">
+        <!-- Main image -->
+        <div class="tricks-img-main">
+            <img class="img-fluid" src="{{ asset('assets/img/tricks/01-Default.png') }}" alt="">
+            <span>{{ tricks.title }}</span>
+            <div class="links">
+                <a href="#" class="update">
+                    <i class="fa-sharp fa-solid fa-pencil"></i>
+                </a>
+                <a href="#" class="delete">
+                    <i class="fa-regular fa-trash-can"></i>
+                </a>
+            </div>
         </div>
-    </div>
 
-    <!-- Medias -->
-    <div class="container medias pt-4">
-        <div class="row hidden-md-up row-cols-md-3 row-cols-lg-6">
-            <!-- Item -->
-            <div class="d-flex flex-column mb-4">
-                <div class="col">
-                    <div class="card">
-                        <img height="250" class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+        <!-- Medias -->
+        <div class="container medias pt-4">
+            <div class="row hidden-md-up row-cols-md-3 row-cols-lg-6">
+                <!-- Item -->
+                <div class="d-flex flex-column mb-4">
+                    <div class="col">
+                        <div class="card">
+                            <img height="250" class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+                        </div>
+                    </div>
+                    <div class="medias-links d-flex flex-row justify-content-between align-items-center">
+                        <a href="#">
+                            <i class="fa-sharp fa-solid fa-pencil"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="medias-links d-flex flex-row justify-content-between align-items-center">
-                    <a href="#">
-                        <i class="fa-sharp fa-solid fa-pencil"></i>
-                    </a>
-                    <a href="#">
-                        <i class="fa-regular fa-trash-can"></i>
-                    </a>
-                </div>
-            </div>
-            <!-- Item -->
-            <div class="d-flex flex-column mb-4">
-                <div class="col">
-                    <div class="card">
-                        <img height="250" class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+                <!-- Item -->
+                <div class="d-flex flex-column mb-4">
+                    <div class="col">
+                        <div class="card">
+                            <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
+                        </div>
                     </div>
-                </div>
-                <div class="medias-links d-flex flex-row justify-content-between align-items-center">
-                    <a href="#">
-                        <i class="fa-sharp fa-solid fa-pencil"></i>
-                    </a>
-                    <a href="#">
-                        <i class="fa-regular fa-trash-can"></i>
-                    </a>
-                </div>
-            </div>
-            <!-- Item -->
-            <div class="d-flex flex-column mb-4">
-                <div class="col">
-                    <div class="card">
-                        <img height="250" class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+                    <div class="medias-links d-flex flex-row justify-content-between align-items-center">
+                        <a href="#">
+                            <i class="fa-sharp fa-solid fa-pencil"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </a>
                     </div>
-                </div>
-                <div class="medias-links d-flex flex-row justify-content-between align-items-center">
-                    <a href="#">
-                        <i class="fa-sharp fa-solid fa-pencil"></i>
-                    </a>
-                    <a href="#">
-                        <i class="fa-regular fa-trash-can"></i>
-                    </a>
-                </div>
-            </div>
-            <!-- Item -->
-            <div class="d-flex flex-column mb-4">
-                <div class="col">
-                    <div class="card">
-                        <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
-                    </div>
-                </div>
-                <div class="medias-links d-flex flex-row justify-content-between align-items-center">
-                    <a href="#">
-                        <i class="fa-sharp fa-solid fa-pencil"></i>
-                    </a>
-                    <a href="#">
-                        <i class="fa-regular fa-trash-can"></i>
-                    </a>
-                </div>
-            </div>
-            <!-- Item -->
-            <div class="d-flex flex-column mb-4">
-                <div class="col">
-                    <div class="card">
-                        <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
-                    </div>
-                </div>
-                <div class="medias-links d-flex flex-row justify-content-between align-items-center">
-                    <a href="#">
-                        <i class="fa-sharp fa-solid fa-pencil"></i>
-                    </a>
-                    <a href="#">
-                        <i class="fa-regular fa-trash-can"></i>
-                    </a>
-                </div>
-            </div>
-            <!-- Item -->
-            <div class="d-flex flex-column mb-4">
-                <div class="col">
-                    <div class="card">
-                        <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
-                    </div>
-                </div>
-                <div class="medias-links d-flex flex-row justify-content-between align-items-center">
-                    <a href="#">
-                        <i class="fa-sharp fa-solid fa-pencil"></i>
-                    </a>
-                    <a href="#">
-                        <i class="fa-regular fa-trash-can"></i>
-                    </a>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Mobile Medias (Button trigger modal) -->
-    <div class="mobile-medias d-flex justify-content-center pt-4">
-        <button type="button" class="btn" data-toggle="modal" data-target="#mobileMediasModal">Afficher les médias</button>
-    </div>
+        <!-- Mobile Medias (Button trigger modal) -->
+        <div class="mobile-medias d-flex justify-content-center pt-4">
+            <button type="button" class="btn" data-toggle="modal" data-target="#mobileMediasModal">Afficher les médias</button>
+        </div>
 
-    <!-- Mobile Medias Modal -->
-    <div class="modal fade" id="mobileMediasModal" tabindex="-1" role="dialog" aria-labelledby="mobileMediasModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="mobileMediasModalLabel">Gestion des médias</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- Item -->
-                    <div class="my-4">
-                        <img height="250" class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-                        <div class="mobile-medias-links d-flex flex-row justify-content-center align-items-center mt-2">
-                            <a href="#">
-                                <i class="fa-sharp fa-solid fa-pencil px-1"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa-regular fa-trash-can px-1"></i>
-                            </a>
-                        </div>
+        <!-- Mobile Medias Modal -->
+        <div class="modal fade" id="mobileMediasModal" tabindex="-1" role="dialog" aria-labelledby="mobileMediasModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="mobileMediasModalLabel">Gestion des médias</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <hr>
-                    <!-- Item -->
-                    <div class="my-4">
-                        <img height="250" class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-                        <div class="mobile-medias-links d-flex flex-row justify-content-center align-items-center mt-2">
-                            <a href="#">
-                                <i class="fa-sharp fa-solid fa-pencil px-1"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa-regular fa-trash-can px-1"></i>
-                            </a>
+                    <div class="modal-body">
+                        <!-- Item -->
+                        <div class="my-4">
+                            <img height="250" class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+                            <div class="mobile-medias-links d-flex flex-row justify-content-center align-items-center mt-2">
+                                <a href="#">
+                                    <i class="fa-sharp fa-solid fa-pencil px-1"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa-regular fa-trash-can px-1"></i>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <hr>
-                    <!-- Item -->
-                    <div class="my-4">
-                        <img height="250" class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
-                        <div class="mobile-medias-links d-flex flex-row justify-content-center align-items-center mt-2">
-                            <a href="#">
-                                <i class="fa-sharp fa-solid fa-pencil px-1"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa-regular fa-trash-can px-1"></i>
-                            </a>
+                        <hr>
+                        <!-- Item -->
+                        <div class="my-4">
+                            <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
+                            <div class="mobile-medias-links d-flex flex-row justify-content-center align-items-center mt-2">
+                                <a href="#">
+                                    <i class="fa-sharp fa-solid fa-pencil px-1"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fa-regular fa-trash-can px-1"></i>
+                                </a>
+                            </div>
                         </div>
+                        <hr>
                     </div>
-                    <hr>
-                    <!-- Item -->
-                    <div class="my-4">
-                        <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
-                        <div class="mobile-medias-links d-flex flex-row justify-content-center align-items-center mt-2">
-                            <a href="#">
-                                <i class="fa-sharp fa-solid fa-pencil px-1"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa-regular fa-trash-can px-1"></i>
-                            </a>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="medias-modal-btn btn btn-secondary" data-dismiss="modal">Retour</button>
                     </div>
-                    <hr>
-                    <!-- Item -->
-                    <div class="my-4">
-                        <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
-                        <div class="mobile-medias-links d-flex flex-row justify-content-center align-items-center mt-2">
-                            <a href="#">
-                                <i class="fa-sharp fa-solid fa-pencil px-1"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa-regular fa-trash-can px-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <hr>
-                    <!-- Item -->
-                    <div class="my-4">
-                        <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
-                        <div class="mobile-medias-links d-flex flex-row justify-content-center align-items-center mt-2">
-                            <a href="#">
-                                <i class="fa-sharp fa-solid fa-pencil px-1"></i>
-                            </a>
-                            <a href="#">
-                                <i class="fa-regular fa-trash-can px-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="medias-modal-btn btn btn-secondary" data-dismiss="modal">Retour</button>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Content -->
-    <div class="tricks-content container mt-4">
-        <div class="infos d-flex flex-row justify-content-center">
-            <span>Créer le XX/XX/XXXX par John Doe</span>
-            <span class="px-3">|</span>
-            <span>Modifié le XX/XX/XXXX par John Doe</span>
+        <!-- Content -->
+        <div class="tricks-content container mt-4">
+            <div class="infos d-flex flex-row justify-content-center mb-4">
+                <span>Créer le {{ tricks.createdAt|date('d/m/Y') }} par {{ tricks.author.username }}</span>
+                <span class="px-3">|</span>
+                {% if tricks.createdAt != tricks.updatedAt %}
+                    <span >Modifier le {{ tricks.updatedAt|date('d/m/Y') }} par {{ tricks.author.username }}</span>
+                {% else %}
+                    <span >Ce trick n'a jamais été modifié</span>
+                {% endif %}
+            </div>
+            {{ form_start(updateTricksForm) }}
+                {{ form_row(updateTricksForm.title) }}
+                {{ form_row(updateTricksForm.description) }}
+                {{ form_row(updateTricksForm.category) }}
+                <div class="tricks-content-btn d-flex justify-content-end mt-4">
+                    <button type="submit" class="btn update">Modifier</button>
+                    <a href="{{ path('tricks_delete', {slug: tricks.slug}) }}" class="btn delete mx-3">Supprimer</a>
+                </div>
+            {{ form_end(updateTricksForm) }}
         </div>
-
-        <textarea class="mt-3">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</textarea>
-
-        <select class="mt-3">
-            <option value="">Catégorie 1</option>
-            <option value="">Catégorie 2</option>
-            <option value="">Catégorie 3</option>
-            <option value="">Catégorie 4</option>
-        </select>
-
-        <div class="tricks-content-btn d-flex justify-content-end mt-3 mr-0">
-            <a href="#" class="btn delete mx-3">Supprimer</a>
-            <a href="#" class="btn update">Modifier</a>
-        </div>
-    </div>
-</section>
+    </section>
 {% endblock %}
