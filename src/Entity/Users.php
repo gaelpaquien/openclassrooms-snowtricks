@@ -46,10 +46,10 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $created_at = null;
 
-    #[ORM\OneToMany(mappedBy: 'author_id', targetEntity: Tricks::class)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Tricks::class)]
     private Collection $tricks;
 
-    #[ORM\OneToMany(mappedBy: 'author_id', targetEntity: Comments::class)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comments::class)]
     private Collection $comments;
 
     public function __construct()
