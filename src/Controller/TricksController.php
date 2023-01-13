@@ -8,6 +8,7 @@ use App\Entity\TricksVideos;
 use App\Form\Tricks\TricksFormType;
 use App\Form\Tricks\TricksVideosFormType;
 use App\Form\Tricks\TricksImagesFormType;
+use App\Repository\CommentsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,23 +46,34 @@ class TricksController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}/{id}', name: 'details')]
-    public function details(Tricks $tricks): Response
+    #[Route('/{slug}', name: 'details')]
+    public function details(Tricks $tricks, CommentsRepository $commentsRepository): Response
     {
+        $comments = $commentsRepository->findBy(['trick' => $tricks->getId()], ['created_at' => 'DESC']);
+
         return $this->render('tricks/details.html.twig', [
-            'controller_name' => 'TricksDetails',
+            'tricks' => $tricks,
+            'comments' => $comments
         ]);
     }
 
-    #[Route('/{slug}/{id}/edition', name: 'update')]
-    public function update(Tricks $tricks): Response
+    #[Route('/{slug}/edition', name: 'update')]
+    public function update(Tricks $tricks, Request $request): Response
     {
+        $form = $this->createForm(TricksFormType::class, $tricks);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+        }
+
         return $this->render('tricks/update.html.twig', [
-            'controller_name' => 'TricksUpdate',
+            'tricks' => $tricks,
+            'updateTricksForm' => $form->createView()
         ]);
     }
 
-    #[Route('/{slug}/{id}/suppression', name: 'delete')]
+    #[Route('/{slug}/suppression', name: 'delete')]
     public function delete(Tricks $tricks): void
     {}
 }
