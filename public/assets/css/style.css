@@ -57,6 +57,19 @@ section {
   color: var(--beige);
 }
 
+.pagination {
+  border-color: center;
+}
+
+.pagination .page-link {
+  color: var(--grey) !important;
+}
+
+.pagination .active>.page-link {
+  background-color: var(--teal) !important;
+  border-color: var(--grey) !important;
+}
+
 /* Partials (header, footer, nav...) */
 header,
 footer {
@@ -295,8 +308,7 @@ footer {
   opacity: 0.8;
 }
 
-.btn-load-tricks,
-.btn-load-comments {
+.btn-load-tricks {
   background-color: var(--grey);
   color: var(--beige);
   border: none;
@@ -306,9 +318,7 @@ footer {
 }
 
 .btn-load-tricks:hover,
-.btn-load-tricks:focus,
-.btn-load-comments:hover,
-.btn-load-comments:focus {
+.btn-load-tricks:focus {
   background-color: var(--teal);
   color: var(--beige);
 }

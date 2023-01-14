@@ -93,20 +93,20 @@
         </div>
         <hr>
         <div class="comments ">
-            {% for comment in comments %}
+            {% for comment in comments.data %}
                 <div class="d-flex flex-row justify-content-start mt-4">
                     <img src="{{ asset('assets/img/users/01-Default.svg') }}" alt="">
                     <div class="d-flex flex-column">
                         <span class="px-2 fw-bolder">{{ comment.content }}</span>
                         <span class="px-2 text-muted">Publier le {{ comment.createdAt|date('d/m/Y') }} par {{ comment.author.username }}</span>
                     </div>
-
                 </div>
             {% endfor %}
-        </div>
-        <!-- Button to load more comments -->
-        <div class="d-flex justify-content-center mt-4">
-            <a href="#" class="btn btn-load-comments">Voir plus de commentaires...</a>
+            {% set path = 'tricks_details' %}
+            {% set slug = tricks.slug %}
+            {% set pages = comments.pages %}
+            {% set currentPage = comments.page %}
+            {% include "_partials/_pagination.html.twig" %}
         </div>
     </div>
 </section>
