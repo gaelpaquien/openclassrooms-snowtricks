@@ -3,7 +3,7 @@
         <ul class="pagination d-flex flex-row justify-content-center mt-5">
             {% if currentPage > 1 %}
                 <li class="page-item">
-                    <a href="{{ path(path, {slug: slug, p: currentPage - 1}) }}" class="page-link">&lt; Précédent</a>
+                    <a href="{{ path(path, {slug: slug, p: currentPage - 1}) }}#{{ anchor }}" class="page-link">&lt; Précédent</a>
                 </li>
             {% else %}
                 <li class="page-item disabled">
@@ -14,13 +14,13 @@
 
             {% for page in 1..pages %}
                 <li class="page-item d-flex {% if page == currentPage %}active{% endif %}">
-                    <a href="{{ path(path, {slug: slug, p: page}) }}" class="page-link">{{ page }}</a>
+                    <a href="{{ path(path, {slug: slug, p: page}) }}#{{ anchor }}" class="page-link">{{ page }}</a>
                 </li>
             {% endfor %}
 
             {% if currentPage < pages %}
                 <li class="page-item">
-                    <a href="{{ path(path, {slug: slug, p: currentPage + 1}) }}" class="page-link">&gt; Suivant</a>
+                    <a href="{{ path(path, {slug: slug, p: currentPage + 1}) }}#{{ anchor }}" class="page-link">&gt; Suivant</a>
                 </li>
             {% else %}
                 <li class="page-item disabled">
