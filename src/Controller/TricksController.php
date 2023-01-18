@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Comments;
 use App\Entity\Tricks;
 use App\Entity\TricksImages;
 use App\Entity\TricksVideos;
+use App\Form\CreateCommentFormType;
 use App\Form\Tricks\TricksFormType;
 use App\Form\Tricks\TricksVideosFormType;
 use App\Form\Tricks\TricksImagesFormType;
@@ -48,10 +50,17 @@ class TricksController extends AbstractController
 
     #[Route('/{slug}', name: 'details')]
     public function details(
-        Tricks $tricks, 
+        Tricks $tricks,
         CommentsRepository $commentsRepository,
         Request $request): Response
     {
+        $form = $this->createForm(CreateCommentFormType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+        }
+
         // Get the current page
         $page = $request->query->getInt('p', 1);
 
@@ -60,7 +69,8 @@ class TricksController extends AbstractController
 
         return $this->render('tricks/details.html.twig', [
             'tricks' => $tricks,
-            'comments' => $comments
+            'comments' => $comments,
+            'createCommentForm' => $form->createView()
         ]);
     }
 
