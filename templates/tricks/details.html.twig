@@ -92,7 +92,7 @@
             <button class="mx-2">Publier un commentaire</button>
         </div>
         <hr>
-        <div class="comments ">
+        <div class="comments" id="comments">
             {% for comment in comments.data %}
                 <div class="d-flex flex-row justify-content-start mt-4">
                     <img src="{{ asset('assets/img/users/01-Default.svg') }}" alt="">
@@ -103,6 +103,7 @@
                 </div>
             {% endfor %}
             {% set path = 'tricks_details' %}
+            {% set anchor = 'comments' %}
             {% set slug = tricks.slug %}
             {% set pages = comments.pages %}
             {% set currentPage = comments.page %}
