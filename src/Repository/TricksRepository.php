@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Tricks;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,6 +38,34 @@ class TricksRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findTricksWithLimit(int $limit): array
+    {
+        $limit = abs($limit);
+
+        $result = [];
+
+        $query = $this->getEntityManager()->createQueryBuilder()
+            ->select('t')
+            ->from('App\Entity\Tricks', 't')
+            ->getQuery()
+            ->setMaxResults($limit);
+
+        $paginator = new Paginator($query);
+
+        $data = $paginator->getQuery()->getResult();
+
+        if (empty($data)) {
+            return $result;
+        }
+
+        $maxLoad = ceil($paginator->count() / $limit);
+
+        $result['data'] = $data;
+        $result['limit'] = $limit;
+        $result['maxLoad'] = $maxLoad;
+        return $result;
     }
 
 //    /**

@@ -77,6 +77,14 @@ class TricksFixtures extends Fixture implements DependentFixtureInterface
             3,
             $manager
         );
+        for ($i = 1; $i <= 35; $i++) {
+            $this->createTricks(
+                'Trick de test '.$i,
+                'Description du trick de test '.$i,
+                rand(1, 4),
+                $manager
+            );
+        }
         $manager->flush();
     }
 

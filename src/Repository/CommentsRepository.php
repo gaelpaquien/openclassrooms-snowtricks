@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Comments;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,6 +38,40 @@ class CommentsRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findCommentsPaginated(int $trickId, int $page, int $limit = 10): array
+    {
+        $limit = abs($limit);
+
+        $result = [];
+
+        $query = $this->getEntityManager()->createQueryBuilder()
+            ->select('c')
+            ->from('App\Entity\Comments', 'c')
+            ->join('c.trick', 't')
+            ->where("t.id = $trickId")
+            ->getQuery()
+            ->setMaxResults($limit)
+            ->setFirstResult(($page * $limit) - $limit);
+
+        $paginator = new Paginator($query);
+
+        $data = $paginator->getQuery()->getResult();
+
+        // Check if there are any tricks
+        if (empty($data)) {
+            return $result;
+        }
+
+        // Count the total number of pages
+        $pages = ceil($paginator->count() / $limit);
+
+        $result['data'] = $data;
+        $result['pages'] = $pages;
+        $result['page'] = $page;
+        $result['limit'] = $limit;
+        return $result;
     }
 
 //    /**
