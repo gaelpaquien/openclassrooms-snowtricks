@@ -65,7 +65,7 @@ section {
   color: var(--grey) !important;
 }
 
-.pagination .active>.page-link {
+.pagination .active > .page-link {
   background-color: var(--teal) !important;
   border-color: var(--grey) !important;
 }
@@ -605,22 +605,27 @@ footer {
 }
 
 .details-tricks .tricks-content .infos span,
-.details-tricks .tricks-content .post-comment button {
+.details-tricks .tricks-content .create-comment-btn {
   background-color: var(--grey);
   color: var(--beige);
   border: none;
   font-size: 1rem;
   padding: 5px;
   border-radius: 8px;
+  height: 30px;
 }
 
-.details-tricks .tricks-content .post-comment button:hover,
-.details-tricks .tricks-content .post-comment button:focus {
+.details-tricks .tricks-content .create-comment-btn:hover,
+.details-tricks .tricks-content .create-comment-btn:focus {
   background-color: var(--teal);
 }
 
-.details-tricks .tricks-content .post-comment input {
-  width: 40%;
+.details-tricks .post-comment input {
+  width: 350px !important;
+}
+
+.details-tricks .post-comment input:focus-visible {
+  border-color: var(--teal) !important;
 }
 
 .details-tricks .tricks-content .comments img {

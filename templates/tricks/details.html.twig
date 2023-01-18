@@ -86,11 +86,17 @@
                 <span class="mx-2">Modifier le {{ tricks.updatedAt|date('d/m/Y') }} par {{ tricks.author.username }}</span>
             {% endif %}
         </div>
-        <hr>
-        <div class="post-comment d-flex flex-row justify-content-center my-4">
-            <input class="mx-2" type="text">
-            <button class="mx-2">Publier un commentaire</button>
-        </div>
+        {% if app.user %}
+            <hr>
+            <div class="post-comment my-4">
+                {{ form_start(createCommentForm) }}
+                <div class="d-flex flex-row justify-content-center ">
+                    {{ form_row(createCommentForm.comment) }}
+                    <button type="submit" class="btn create-comment-btn mx-4">Publier le commentaire</button>
+                </div>
+                {{ form_end(createCommentForm) }}
+            </div>
+        {% endif %}
         <hr>
         <div class="comments" id="comments">
             {% for comment in comments.data %}
