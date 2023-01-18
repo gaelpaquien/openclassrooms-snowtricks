@@ -19,7 +19,7 @@
     <div class="container pt-4">
       <div class="row hidden-md-up row-cols-1 row-cols-md-3 row-cols-lg-5">
         <!-- Item -->
-        {% for trick in tricks %}
+        {% for trick in tricks.data %}
           <div class="col">
             <div class="card">
               <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
@@ -44,11 +44,12 @@
         {% endfor %}
       </div>
     </div>
-
-    <!-- Button to load more tricks -->
-    <div class="d-flex justify-content-center pt-3 pb-5">
-      <a href="#" class="btn btn-load-tricks">Voir plus de Tricks...</a>
-    </div>
+    {% if tricks.maxLoad != 1 %}
+        <!-- Button to load more tricks -->
+        <div class="d-flex justify-content-center pt-3 pb-5">
+          <a href="{{ path('main', {l: tricks.limit + 15}) }}#tricks" class="btn btn-load-tricks">Voir plus de Tricks...</a>
+        </div>
+    {% endif %}
 
     {# <!-- Modal to confirmed trick removal -->
     <div class="modal fade" id="card-btn-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

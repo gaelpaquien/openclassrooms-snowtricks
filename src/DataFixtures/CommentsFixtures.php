@@ -15,7 +15,7 @@ class CommentsFixtures extends Fixture implements DependentFixtureInterface
         // Use of faker to generate data
         $faker = Faker\Factory::create('fr_FR');
 
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 1000; $i++) {
             $comment = new Comments();
 
             $comment->setContent($faker->text(50));
@@ -23,7 +23,7 @@ class CommentsFixtures extends Fixture implements DependentFixtureInterface
             $user = $this->getReference('user-'.rand(1, 10));
             $comment->setAuthor($user);
 
-            $trick = $this->getReference('trick-'.rand(1, 10));
+            $trick = $this->getReference('trick-'.rand(1, 45));
             $comment->setTrick($trick);
 
             $manager->persist($comment);

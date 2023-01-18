@@ -47,9 +47,16 @@ class TricksController extends AbstractController
     }
 
     #[Route('/{slug}', name: 'details')]
-    public function details(Tricks $tricks, CommentsRepository $commentsRepository): Response
+    public function details(
+        Tricks $tricks, 
+        CommentsRepository $commentsRepository,
+        Request $request): Response
     {
-        $comments = $commentsRepository->findBy(['trick' => $tricks->getId()], ['created_at' => 'DESC']);
+        // Get the current page
+        $page = $request->query->getInt('p', 1);
+
+        // Get the comments with pagination
+        $comments = $commentsRepository->findCommentsPaginated($tricks->getId(), $page, 10);
 
         return $this->render('tricks/details.html.twig', [
             'tricks' => $tricks,
