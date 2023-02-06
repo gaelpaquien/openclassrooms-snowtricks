@@ -104,7 +104,10 @@
                     <img src="{{ asset('assets/img/users/01-Default.svg') }}" alt="">
                     <div class="d-flex flex-column">
                         <span class="px-2 fw-bolder">{{ comment.content }}</span>
-                        <span class="px-2 text-muted">Publier le {{ comment.createdAt|date('d/m/Y') }} par {{ comment.author.username }}</span>
+                        <span class="px-2 text-muted">
+                            Publier le {{ comment.createdAt|date('d/m/Y') }} par {{ comment.author.username }} 
+                            | <a href="#">Supprimer le commentaire</a>
+                        </span>
                     </div>
                 </div>
             {% endfor %}
