@@ -21,8 +21,6 @@ class MainController extends AbstractController
 
         $tricks = $tricksRepository->findTricksWithLimit($limit);
 
-        //dd($tricks);
-
         return $this->render('main/index.html.twig', [
             'tricks' => $tricks
         ]);

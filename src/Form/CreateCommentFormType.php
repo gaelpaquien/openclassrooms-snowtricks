@@ -12,7 +12,7 @@ class CreateCommentFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('comment', TextType::class, [
+            ->add('content', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'class' => 'create-comment-input',

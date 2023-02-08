@@ -51,6 +51,7 @@ class CommentsRepository extends ServiceEntityRepository
             ->from('App\Entity\Comments', 'c')
             ->join('c.trick', 't')
             ->where("t.id = $trickId")
+            ->orderBy('c.created_at', 'DESC')
             ->getQuery()
             ->setMaxResults($limit)
             ->setFirstResult(($page * $limit) - $limit);

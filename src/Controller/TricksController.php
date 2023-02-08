@@ -11,6 +11,7 @@ use App\Form\Tricks\TricksFormType;
 use App\Form\Tricks\TricksVideosFormType;
 use App\Form\Tricks\TricksImagesFormType;
 use App\Repository\CommentsRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,13 +53,23 @@ class TricksController extends AbstractController
     public function details(
         Tricks $tricks,
         CommentsRepository $commentsRepository,
-        Request $request): Response
+        Request $request,
+        EntityManagerInterface $em): Response
     {
-        $form = $this->createForm(CreateCommentFormType::class);
+        $comment = new Comments;
+
+        $form = $this->createForm(CreateCommentFormType::class, $comment);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $comment = $form->getData();
+            $comment->setTrick($tricks);
+            $comment->setAuthor($this->getUser());
+            $em->persist($comment);
+            $em->flush();
+            $this->addFlash('success', 'Commentaire ajouté avec succès');
+            return $this->redirectToRoute('tricks_details', ['slug' => $tricks->getSlug()]);
         }
 
         // Get the current page
@@ -93,4 +104,19 @@ class TricksController extends AbstractController
     #[Route('/{slug}/suppression', name: 'delete')]
     public function delete(Tricks $tricks): void
     {}
+
+    #[Route('/{slug}/commentaire/{id}/suppression', name: 'delete_comment')]
+    public function deleteComment(Comments $comments, EntityManagerInterface $em): Response
+    {
+        // Check if user is author of the comment
+        if ($comments->getAuthor() !== $this->getUser()) {
+            $this->addFlash('danger', 'Vous ne pouvez pas supprimer ce commentaire');
+            return $this->redirectToRoute('tricks_details', ['slug' => $comments->getTrick()->getSlug()]);
+        }
+
+        // Delete comment
+        $em->remove($comments);
+        $em->flush();
+        return $this->redirectToRoute('tricks_details', ['slug' => $comments->getTrick()->getSlug()]);
+    }
 }
