@@ -11,6 +11,8 @@ use App\Form\Tricks\TricksFormType;
 use App\Form\Tricks\TricksVideosFormType;
 use App\Form\Tricks\TricksImagesFormType;
 use App\Repository\CommentsRepository;
+use App\Repository\TricksImagesRepository;
+use App\Repository\TricksVideosRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TricksController extends AbstractController
 {
     #[Route('/creation', name: 'create')]
-    public function create(Request $request): Response
+    public function create(Request $request, EntityManagerInterface $em): Response
     {
         $tricks = new Tricks;
         $videos = new TricksVideos;
@@ -42,6 +44,37 @@ class TricksController extends AbstractController
                 'required' => false
             ])
             ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $tricks = $data['Tricks'];
+            $videos = $data['Videos'];
+            $images = $data['Images'];
+
+            $tricks->setAuthor($this->getUser());
+            $tricks->setSlug('test1-test3751');
+            $tricks->setCreatedAt(new \DateTimeImmutable());
+            $tricks->setUpdatedAt(new \DateTimeImmutable());
+            $em->persist($tricks);
+
+            if ($images) {
+                $images->setTricks($tricks);
+                $images->setCreatedAt(new \DateTimeImmutable());
+                $images->setUpdatedAt(new \DateTimeImmutable());
+                $em->persist($images);
+            }
+
+            if ($videos) {
+                $videos->setTricks($tricks);
+                $em->persist($videos);
+            }
+
+            //$em->flush();
+            $this->addFlash('success', "Le trick '{$tricks->getTitle()}' a été crée avec succès");
+            return $this->redirectToRoute('main');
+        }
  
         return $this->render('tricks/create.html.twig', [
             'controller_name' => 'TricksCreate',
@@ -102,7 +135,11 @@ class TricksController extends AbstractController
     }
 
     #[Route('/{slug}/suppression', name: 'delete')]
-    public function delete(Tricks $tricks, EntityManagerInterface $em): Response
+    public function delete(
+        Tricks $tricks, 
+        EntityManagerInterface $em, 
+        TricksVideosRepository $tricksVideosRepository,
+        TricksImagesRepository $tricksImagesRepository): Response
     {
         // Check if user is author of the trick
         if ($tricks->getAuthor() !== $this->getUser()) {
@@ -116,12 +153,25 @@ class TricksController extends AbstractController
             $em->remove($comment);
         }
 
+        // Delete videos of the trick
+        $videos = $tricksVideosRepository->findByTricks($tricks->getId());
+        foreach ($videos as $video) {
+            $em->remove($video);
+        }
+
+        // Delete images of the trick
+        $images = $tricksImagesRepository->findByTricks($tricks->getId());
+        foreach ($images as $image) {
+            $em->remove($image);
+        }
+
         // Delete trick
         $em->remove($tricks);
 
         // Save changes
         $em->flush();
 
+        $this->addFlash('success', "Le trick '{$tricks->getTitle()}' a été supprimé avec succès");
         return $this->redirectToRoute('main');
     }
 

@@ -39,6 +39,16 @@ class TricksImagesRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByTricks(int $id): array
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.tricks = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return TricksImages[] Returns an array of TricksImages objects
 //     */
