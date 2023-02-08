@@ -102,8 +102,28 @@ class TricksController extends AbstractController
     }
 
     #[Route('/{slug}/suppression', name: 'delete')]
-    public function delete(Tricks $tricks): void
-    {}
+    public function delete(Tricks $tricks, EntityManagerInterface $em): Response
+    {
+        // Check if user is author of the trick
+        if ($tricks->getAuthor() !== $this->getUser()) {
+            $this->addFlash('danger', 'Vous ne pouvez pas supprimer ce trick');
+            return $this->redirectToRoute('tricks_details', ['slug' => $tricks->getSlug()]);
+        }
+
+        // Delete comments of the trick
+        $comments = $tricks->getComments();
+        foreach ($comments as $comment) {
+            $em->remove($comment);
+        }
+
+        // Delete trick
+        $em->remove($tricks);
+
+        // Save changes
+        $em->flush();
+
+        return $this->redirectToRoute('main');
+    }
 
     #[Route('/{slug}/commentaire/{id}/suppression', name: 'delete_comment')]
     public function deleteComment(Comments $comments, EntityManagerInterface $em): Response
