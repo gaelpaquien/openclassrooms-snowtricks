@@ -49,6 +49,7 @@ class TricksRepository extends ServiceEntityRepository
         $query = $this->getEntityManager()->createQueryBuilder()
             ->select('t')
             ->from('App\Entity\Tricks', 't')
+            ->orderBy('t.created_at', 'DESC')
             ->getQuery()
             ->setMaxResults($limit);
 
