@@ -91,7 +91,7 @@
             <div class="post-comment my-4">
                 {{ form_start(createCommentForm) }}
                 <div class="d-flex flex-row justify-content-center ">
-                    {{ form_row(createCommentForm.comment) }}
+                    {{ form_row(createCommentForm.content) }}
                     <button type="submit" class="btn create-comment-btn mx-4">Publier le commentaire</button>
                 </div>
                 {{ form_end(createCommentForm) }}
@@ -105,8 +105,10 @@
                     <div class="d-flex flex-column">
                         <span class="px-2 fw-bolder">{{ comment.content }}</span>
                         <span class="px-2 text-muted">
-                            Publier le {{ comment.createdAt|date('d/m/Y') }} par {{ comment.author.username }} 
-                            | <a href="#">Supprimer le commentaire</a>
+                            Publier le {{ comment.createdAt|date('d/m/Y') }} par {{ comment.author.username }}
+                            {% if app.user and app.user.id == comment.author.id %}
+                                <a href="{{ path('tricks_delete_comment', {slug: tricks.slug, id: comment.id}) }}">Supprimer le commentaire</a>
+                            {% endif %}
                         </span>
                     </div>
                 </div>
