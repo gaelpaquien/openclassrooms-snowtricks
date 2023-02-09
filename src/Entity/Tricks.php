@@ -37,12 +37,6 @@ class Tricks
     #[ORM\JoinColumn(nullable: false)]
     private ?Users $author = null;
 
-    /**
-     * @var Collection<int, TricksImage>|TricksImage[]
-     */
-    #[ORM\OneToMany(targetEntity: TricksImages::class, mappedBy: 'tricks')]
-    private Collection $images;
-
     #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Comments::class)]
     private Collection $comments;
 
@@ -51,7 +45,6 @@ class Tricks
         $this->created_at = new \DateTimeImmutable();
         $this->updated_at = new \DateTimeImmutable();
         $this->comments = new ArrayCollection();
-        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
