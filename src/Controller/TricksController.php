@@ -13,6 +13,7 @@ use App\Form\Tricks\TricksImagesFormType;
 use App\Repository\CommentsRepository;
 use App\Repository\TricksImagesRepository;
 use App\Repository\TricksVideosRepository;
+use App\Service\TextService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,8 +24,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class TricksController extends AbstractController
 {
     #[Route('/creation', name: 'create')]
-    public function create(Request $request, EntityManagerInterface $em): Response
+    public function create(
+        Request $request, 
+        EntityManagerInterface $em,
+        TextService $text): Response
     {
+        // Check if user is logged
+        if (!$this->getUser()) {
+            $this->addFlash('danger', 'Vous devez être connecté pour accéder à cette page');
+            return $this->redirectToRoute('main');
+        }
+
         $tricks = new Tricks;
         $videos = new TricksVideos;
         $images = new TricksImages;
@@ -48,30 +58,40 @@ class TricksController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Get all data
             $data = $form->getData();
             $tricks = $data['Tricks'];
             $videos = $data['Videos'];
             $images = $data['Images'];
 
+            // Check if trick already exist
+            $trickExist = $em->getRepository(Tricks::class)->findOneBy(['title' => $tricks->getTitle()]);
+            if ($trickExist) {
+                $this->addFlash('danger', "Le trick '{$tricks->getTitle()}' existe déjà");
+                return $this->redirectToRoute('tricks_create');
+            }
+
+            // Add trick data
             $tricks->setAuthor($this->getUser());
-            $tricks->setSlug('test1-test3751');
+            $tricks->setSlug($text->slugify($tricks->getTitle()));
             $tricks->setCreatedAt(new \DateTimeImmutable());
             $tricks->setUpdatedAt(new \DateTimeImmutable());
             $em->persist($tricks);
 
+            // Add images data
             if ($images) {
                 $images->setTricks($tricks);
-                $images->setCreatedAt(new \DateTimeImmutable());
-                $images->setUpdatedAt(new \DateTimeImmutable());
                 $em->persist($images);
             }
 
+            // Add videos data
             if ($videos) {
                 $videos->setTricks($tricks);
                 $em->persist($videos);
             }
 
-            //$em->flush();
+            // Save changes and redirect to homepage
+            $em->flush();
             $this->addFlash('success', "Le trick '{$tricks->getTitle()}' a été crée avec succès");
             return $this->redirectToRoute('main');
         }
@@ -138,8 +158,8 @@ class TricksController extends AbstractController
     public function delete(
         Tricks $tricks, 
         EntityManagerInterface $em, 
-        TricksVideosRepository $tricksVideosRepository,
-        TricksImagesRepository $tricksImagesRepository): Response
+        TricksVideosRepository $tricksVideos,
+        TricksImagesRepository $tricksImages): Response
     {
         // Check if user is author of the trick
         if ($tricks->getAuthor() !== $this->getUser()) {
@@ -154,13 +174,13 @@ class TricksController extends AbstractController
         }
 
         // Delete videos of the trick
-        $videos = $tricksVideosRepository->findByTricks($tricks->getId());
+        $videos = $tricksVideos->findByTricks($tricks->getId());
         foreach ($videos as $video) {
             $em->remove($video);
         }
 
         // Delete images of the trick
-        $images = $tricksImagesRepository->findByTricks($tricks->getId());
+        $images = $tricksImages->findByTricks($tricks->getId());
         foreach ($images as $image) {
             $em->remove($image);
         }
@@ -187,6 +207,7 @@ class TricksController extends AbstractController
         // Delete comment
         $em->remove($comments);
         $em->flush();
+        $this->addFlash('success', 'Le commentaire a été supprimé avec succès');
         return $this->redirectToRoute('tricks_details', ['slug' => $comments->getTrick()->getSlug()]);
     }
 }
