@@ -139,13 +139,36 @@ class TricksController extends AbstractController
     }
 
     #[Route('/{slug}/edition', name: 'update')]
-    public function update(Tricks $tricks, Request $request): Response
+    public function update(
+        Tricks $tricks, 
+        Request $request,
+        EntityManagerInterface $em): Response
     {
+        // Check if user is author of the trick
+        if ($tricks->getAuthor() !== $this->getUser()) {
+            $this->addFlash('danger', 'Vous ne pouvez pas accéder à cette page');
+            return $this->redirectToRoute('main');
+        }
+
         $form = $this->createForm(TricksFormType::class, $tricks);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Check if trick already exist with the new title
+            $trickExist = $em->getRepository(Tricks::class)->findOneBy(['title' => $tricks->getTitle()]);
+            if ($trickExist && $trickExist->getId() !== $tricks->getId()) {
+                $this->addFlash('danger', "Le trick '{$tricks->getTitle()}' existe déjà");
+                return $this->redirectToRoute('tricks_update', ['slug' => $tricks->getSlug()]);
+            }
+
+            $tricks = $form->getData();
+            $tricks->setUpdatedAt(new \DateTimeImmutable());
+            $em->persist($tricks);
+            $em->flush();
+            $this->addFlash('success', "Le trick '{$tricks->getTitle()}' a été modifié avec succès");
+            return $this->redirectToRoute('tricks_details', ['slug' => $tricks->getSlug()]);
         }
 
         return $this->render('tricks/update.html.twig', [
