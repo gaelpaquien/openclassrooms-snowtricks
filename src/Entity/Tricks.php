@@ -40,11 +40,15 @@ class Tricks
     #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Comments::class)]
     private Collection $comments;
 
+    #[ORM\OneToMany(mappedBy: 'tricks', targetEntity: TricksImages::class)]
+    private Collection $images;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
         $this->updated_at = new \DateTimeImmutable();
         $this->comments = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -141,4 +145,20 @@ class Tricks
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, TricksImages>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function setImages(array $images): self
+    {
+        $this->images = $images;
+
+        return $this;
+    }
+
 }
