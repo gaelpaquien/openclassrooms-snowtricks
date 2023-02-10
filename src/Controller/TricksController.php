@@ -40,16 +40,18 @@ class TricksController extends AbstractController
         $images = new TricksImages;
         $items = ['tricks' => $tricks, 'videos' => $videos, 'images' => $images];
 
-        $form = $this->createFormBuilder($items)
-            ->add('Tricks', TricksFormType::class, [
+        $form = $this->createFormBuilder()
+            ->add('tricks', TricksFormType::class, [
                 'label' => false,
                 'required' => true
             ])
-            ->add('Images', TricksImagesFormType::class, [
+            /*
+            ->add('images', TricksImagesFormType::class, [
                 'label' => false,
                 'required' => false
             ])
-            ->add('Videos', TricksVideosFormType::class, [
+            */
+            ->add('videos', TricksVideosFormType::class, [
                 'label' => false,
                 'required' => false
             ])
@@ -60,9 +62,10 @@ class TricksController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // Get all data
             $data = $form->getData();
-            $tricks = $data['Tricks'];
-            $videos = $data['Videos'];
-            $images = $data['Images'];
+            $tricks = $data['tricks'];
+            $videos = $data['videos'];
+            $images = $data['images'];
+            dd($data);
 
             // Check if trick already exist
             $trickExist = $em->getRepository(Tricks::class)->findOneBy(['title' => $tricks->getTitle()]);

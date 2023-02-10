@@ -5,11 +5,11 @@
 {% block body %}
     <section class="create-tricks d-flex align-items-center py-4">
         {{ form_start(createTricksForm) }}
-        {{ form_row(createTricksForm.Tricks.title) }}
-        {{ form_row(createTricksForm.Tricks.description) }}
-        {{ form_row(createTricksForm.Tricks.category) }}
-        {{ form_row(createTricksForm.Images.image) }}
-        {{ form_row(createTricksForm.Videos.video) }}
+        {{ form_row(createTricksForm.tricks.title) }}
+        {{ form_row(createTricksForm.tricks.description) }}
+        {{ form_row(createTricksForm.tricks.category) }}
+        {{ form_row(createTricksForm.tricks.images) }}
+        {{ form_row(createTricksForm.videos.video) }}
         <div class="d-flex flex-column justify-content-center align-items-center">
             <button type="submit" class="mb-3">Créer le tricks</button>
         </div>

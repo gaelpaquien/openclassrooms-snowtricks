@@ -40,6 +40,15 @@ class TricksFormType extends AbstractType
             [
                 'label' => 'Catégorie'
             ])
+            ->add('images', CollectionType::class, [
+                'entry_type' => TricksImagesFormType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'required' => false,
+                'prototype' => true,
+                'by_reference' => false,
+                'label' => false
+            ])
         ;
     }
 
