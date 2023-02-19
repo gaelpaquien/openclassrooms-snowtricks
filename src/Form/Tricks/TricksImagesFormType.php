@@ -19,8 +19,7 @@ class TricksImagesFormType extends AbstractType
                 'multiple' => true,
                 'accept' => 'image/png, image/jpeg',
             ],
-            'label' => 'Image(s)',
-            'mapped' => false,
+            'label' => 'Image(s)'
         ])
         ;
     }
