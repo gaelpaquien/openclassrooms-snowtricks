@@ -40,17 +40,15 @@ class TricksController extends AbstractController
         $images = new TricksImages;
         $items = ['tricks' => $tricks, 'videos' => $videos, 'images' => $images];
 
-        $form = $this->createFormBuilder()
+        $form = $this->createFormBuilder($items)
             ->add('tricks', TricksFormType::class, [
                 'label' => false,
                 'required' => true
             ])
-            /*
             ->add('images', TricksImagesFormType::class, [
                 'label' => false,
                 'required' => false
             ])
-            */
             ->add('videos', TricksVideosFormType::class, [
                 'label' => false,
                 'required' => false
@@ -65,7 +63,6 @@ class TricksController extends AbstractController
             $tricks = $data['tricks'];
             $videos = $data['videos'];
             $images = $data['images'];
-            dd($data);
 
             // Check if trick already exist
             $trickExist = $em->getRepository(Tricks::class)->findOneBy(['title' => $tricks->getTitle()]);
@@ -81,7 +78,7 @@ class TricksController extends AbstractController
             $tricks->setUpdatedAt(new \DateTimeImmutable());
             $em->persist($tricks);
 
-            // Add images data
+            /* // Add images data
             if ($images) {
                 $images->setTricks($tricks);
                 $em->persist($images);
@@ -91,7 +88,7 @@ class TricksController extends AbstractController
             if ($videos) {
                 $videos->setTricks($tricks);
                 $em->persist($videos);
-            }
+            } */
 
             // Save changes and redirect to homepage
             $em->flush();
