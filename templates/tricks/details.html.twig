@@ -8,7 +8,7 @@
     <div class="tricks-img-main">
         <img class="img-fluid" src="{{ asset('assets/img/tricks/01-Default.png') }}" alt="">
         <span>{{ tricks.title }}</span>
-        {% if app.user and app.user.id == tricks.author.id %}
+        {% if (app.user and app.user.id == tricks.author.id) or (app.user and isAdmin == true) %}
             <div class="links">
                 <a href="{{ path('tricks_update', {slug: tricks.slug}) }}" class="update">
                     <i class="fa-sharp fa-solid fa-pencil"></i>
@@ -107,8 +107,8 @@
                             <span class="px-2 fw-bolder">{{ comment.content }}</span>
                             <span class="px-2 text-muted">
                                 Publier le {{ comment.createdAt|date('d/m/Y') }} par {{ comment.author.username }}
-                                {% if app.user and app.user.id == comment.author.id %}
-                                    <a href="{{ path('tricks_delete_comment', {slug: tricks.slug, id: comment.id}) }}">Supprimer le commentaire</a>
+                                {% if (app.user and app.user.id == comment.author.id) or (app.user and isAdmin == true) %}
+                                    <a href="{{ path('tricks_delete_comment', {slug: tricks.slug, id: comment.id}) }}"> | Supprimer le commentaire</a>
                                 {% endif %}
                             </span>
                         </div>
