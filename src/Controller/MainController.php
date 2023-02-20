@@ -13,6 +13,8 @@ class MainController extends AbstractController
     #[Route('/', name: 'main')]
     public function index(TricksRepository $tricksRepository, Request $request): Response
     {
+        $isAdmin = $this->isGranted('ROLE_ADMIN');
+
         $limit = $request->query->getInt('l', 15);
 
         if ($limit < 15) {
@@ -22,7 +24,8 @@ class MainController extends AbstractController
         $tricks = $tricksRepository->findTricksWithLimit($limit);
 
         return $this->render('main/index.html.twig', [
-            'tricks' => $tricks
+            'tricks' => $tricks,
+            'isAdmin' => $isAdmin
         ]);
     }
 }

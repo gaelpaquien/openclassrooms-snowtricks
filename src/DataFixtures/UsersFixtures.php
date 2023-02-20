@@ -44,9 +44,9 @@ class UsersFixtures extends Fixture
             $user->setUsername($faker->userName);
             $user->setProfilePicture($faker->imageUrl(640, 480, null, true));
             $user->setPassword(
-                $this->passwordEncoder->hashPassword($admin, 'password')
+                $this->passwordEncoder->hashPassword($user, 'password')
             );
-            $user->setRoles(['ROLE_USER']);
+            $user->setRoles([]);
             $user->setIsVerified(true);
             $user->setResetToken('');
 

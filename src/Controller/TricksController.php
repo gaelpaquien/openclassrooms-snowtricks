@@ -109,6 +109,8 @@ class TricksController extends AbstractController
         Request $request,
         EntityManagerInterface $em): Response
     {
+        $isAdmin = $this->isGranted('ROLE_ADMIN');
+
         $comment = new Comments;
 
         $form = $this->createForm(CreateCommentFormType::class, $comment);
@@ -122,7 +124,10 @@ class TricksController extends AbstractController
             $em->persist($comment);
             $em->flush();
             $this->addFlash('success', 'Commentaire ajouté avec succès');
-            return $this->redirectToRoute('tricks_details', ['slug' => $tricks->getSlug()]);
+            return $this->redirectToRoute('tricks_details', [
+                'slug' => $tricks->getSlug(),
+                'isAdmin' => $isAdmin
+            ]);
         }
 
         // Get the current page
@@ -134,7 +139,8 @@ class TricksController extends AbstractController
         return $this->render('tricks/details.html.twig', [
             'tricks' => $tricks,
             'comments' => $comments,
-            'createCommentForm' => $form->createView()
+            'createCommentForm' => $form->createView(),
+            'isAdmin' => $isAdmin
         ]);
     }
 
@@ -144,8 +150,10 @@ class TricksController extends AbstractController
         Request $request,
         EntityManagerInterface $em): Response
     {
-        // Check if user is author of the trick
-        if ($tricks->getAuthor() !== $this->getUser()) {
+        $isAdmin = $this->isGranted('ROLE_ADMIN');
+
+        // Check if user is author of the trick or if user is admin
+        if ($tricks->getAuthor() !== $this->getUser() && !$isAdmin) {
             $this->addFlash('danger', 'Vous ne pouvez pas accéder à cette page');
             return $this->redirectToRoute('main');
         }
@@ -168,12 +176,15 @@ class TricksController extends AbstractController
             $em->persist($tricks);
             $em->flush();
             $this->addFlash('success', "Le trick '{$tricks->getTitle()}' a été modifié avec succès");
-            return $this->redirectToRoute('tricks_details', ['slug' => $tricks->getSlug()]);
+            return $this->redirectToRoute('tricks_details', [
+                'slug' => $tricks->getSlug(),
+                'isAdmin' => $isAdmin]);
         }
 
         return $this->render('tricks/update.html.twig', [
             'tricks' => $tricks,
-            'updateTricksForm' => $form->createView()
+            'updateTricksForm' => $form->createView(),
+            'isAdmin' => $isAdmin
         ]);
     }
 
@@ -184,10 +195,14 @@ class TricksController extends AbstractController
         TricksVideosRepository $tricksVideos,
         TricksImagesRepository $tricksImages): Response
     {
-        // Check if user is author of the trick
-        if ($tricks->getAuthor() !== $this->getUser()) {
+        $isAdmin = $this->isGranted('ROLE_ADMIN');
+
+        // Check if user is author of the trick and if user is admin
+        if ($tricks->getAuthor() !== $this->getUser() && !$isAdmin) {
             $this->addFlash('danger', 'Vous ne pouvez pas supprimer ce trick');
-            return $this->redirectToRoute('tricks_details', ['slug' => $tricks->getSlug()]);
+            return $this->redirectToRoute('tricks_details', [
+                'slug' => $tricks->getSlug(), 
+                'isAdmin' => $isAdmin]);
         }
 
         // Delete comments of the trick
@@ -215,22 +230,30 @@ class TricksController extends AbstractController
         $em->flush();
 
         $this->addFlash('success', "Le trick '{$tricks->getTitle()}' a été supprimé avec succès");
-        return $this->redirectToRoute('main');
+        return $this->redirectToRoute('main', ['isAdmin' => $isAdmin]);
     }
 
     #[Route('/{slug}/commentaire/{id}/suppression', name: 'delete_comment')]
     public function deleteComment(Comments $comments, EntityManagerInterface $em): Response
     {
-        // Check if user is author of the comment
-        if ($comments->getAuthor() !== $this->getUser()) {
+        $isAdmin = $this->isGranted('ROLE_ADMIN');
+
+        // Check if user is author of the comment and if user is admin
+        if ($comments->getAuthor() !== $this->getUser() && !$isAdmin) {
             $this->addFlash('danger', 'Vous ne pouvez pas supprimer ce commentaire');
-            return $this->redirectToRoute('tricks_details', ['slug' => $comments->getTrick()->getSlug()]);
+            return $this->redirectToRoute('tricks_details', [
+                'slug' => $comments->getTrick()->getSlug(),
+                'isAdmin' => $isAdmin
+            ]);
         }
 
         // Delete comment
         $em->remove($comments);
         $em->flush();
         $this->addFlash('success', 'Le commentaire a été supprimé avec succès');
-        return $this->redirectToRoute('tricks_details', ['slug' => $comments->getTrick()->getSlug()]);
+        return $this->redirectToRoute('tricks_details', [
+            'slug' => $comments->getTrick()->getSlug(),
+            'isAdmin' => $isAdmin
+        ]);
     }
 }
