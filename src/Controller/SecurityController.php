@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Form\Security\ResetPasswordFormType;
 use App\Form\Security\ResetPasswordRequestFormType;
-use App\Repository\UsersRepository;
+use App\Repository\UserRepository;
 use App\Service\SendMailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,7 +45,7 @@ class SecurityController extends AbstractController
     #[Route(path: '/mot-de-passe-oublie', name: 'app_forgot_password')]
     public function forgotPassword(
         Request $request, 
-        UsersRepository $usersRepository, 
+        UserRepository $userRepository, 
         TokenGeneratorInterface $tokenGenerator,
         EntityManagerInterface $entityManager,
         SendMailService $mail): Response
@@ -56,7 +56,7 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Find user by username
-            $user = $usersRepository->findOneBy([
+            $user = $userRepository->findOneBy([
                 'username' => $form->get('username')->getData()
             ]);
 
@@ -106,12 +106,12 @@ class SecurityController extends AbstractController
     public function resetPassword(
         string $token,
         Request $request,
-        UsersRepository $usersRepository,
+        UserRepository $userRepository,
         EntityManagerInterface $entityManager,
         UserPasswordHasherInterface $passwordHasher): Response
     {
         // Check if token is valid
-        $user = $usersRepository->findOneBy([
+        $user = $userRepository->findOneBy([
             'resetToken' => $token
         ]);
 

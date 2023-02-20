@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Users;
+use App\Entity\User;
 use App\Form\RegistrationFormType;
-use App\Repository\UsersRepository;
+use App\Repository\UserRepository;
 use App\Service\JWTService;
 use App\Service\SendMailService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,7 +25,7 @@ class RegistrationController extends AbstractController
         JWTService $jwt,
     ): Response
     {
-        $user = new Users();
+        $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -77,12 +77,12 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/activation/{token}', name: 'app_activation')]
-    public function activation($token, JWTService $jwt, UsersRepository $usersRepository, EntityManagerInterface $em): Response
+    public function activation($token, JWTService $jwt, UserRepository $userRepository, EntityManagerInterface $em): Response
     {
         // Check if token is valid, is not expired and is not modified
         if ($jwt->isValid($token) && !$jwt->isExpired($token) && $jwt->checkSignature($token, $this->getParameter('app.jwtsecret'))) {
             $payload = $jwt->getPayload($token);
-            $user = $usersRepository->find($payload['user_id']);
+            $user = $userRepository->find($payload['user_id']);
 
             if ($user && !$user->getIsVerified()) {
                 $user->setIsVerified(true);
@@ -100,7 +100,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/renvoi-activation', name: 'app_activation_resend')]
-    public function resendActivation(JWTService $jwt, SendMailService $mail, UsersRepository $usersRepository): Response
+    public function resendActivation(JWTService $jwt, SendMailService $mail, UserRepository $userRepository): Response
     {
         $user = $this->getUser();
 
