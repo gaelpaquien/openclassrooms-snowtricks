@@ -27,7 +27,7 @@
                 <h3 class="card-title">
                   <a href="{{ path('tricks_details', {slug: trick.slug}) }}">{{ trick.title }}</a>
                 </h3>
-                {% if app.user and app.user.id == trick.author.id %}
+                {% if (app.user and app.user.id == trick.author.id) or (app.user and isAdmin == true) %}
                   <a class="card-btn card-btn-update" href="{{ path('tricks_update', {slug: trick.slug}) }}">
                     <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
                   </a>
