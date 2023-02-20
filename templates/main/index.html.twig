@@ -16,22 +16,22 @@
 
   <!-- Tricks -->
   <section class="tricks pt-3 position-relative" id="tricks">
-    <div class="container pt-4">
+    <div class="container pt-4 pb-5">
       <div class="row hidden-md-up row-cols-1 row-cols-md-3 row-cols-lg-5">
         <!-- Item -->
         {% for trick in tricks.data %}
           <div class="col">
             <div class="card">
-              <img class="card-img-top" src="{{ asset('assets/img/tricks/01-Default.png') }}">
+              <img class="card-img-top" src="{{ asset('assets/img/tricks/default.png') }}">
               <div class="card-body d-flex flex-row justify-content-between align-items-center">
                 <h3 class="card-title">
-                  <a href="{{ path('tricks_details', {slug: trick.slug}) }}">{{ trick.title }}</a>
+                  <a href="{{ path('trick_details', {slug: trick.slug}) }}">{{ trick.title }}</a>
                 </h3>
                 {% if (app.user and app.user.id == trick.author.id) or (app.user and isAdmin == true) %}
-                  <a class="card-btn card-btn-update" href="{{ path('tricks_update', {slug: trick.slug}) }}">
+                  <a class="card-btn card-btn-update" href="{{ path('trick_update', {slug: trick.slug}) }}">
                     <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
                   </a>
-                  <a class="card-btn card-btn-delete" href="{{ path('tricks_delete', {slug: trick.slug}) }}">
+                  <a class="card-btn card-btn-delete" href="{{ path('trick_delete', {slug: trick.slug}) }}">
                     <i class="fa-regular fa-trash-can pb-1"></i>
                   </a>
                 {% endif %}
@@ -46,7 +46,7 @@
     </div>
     {% if tricks.maxLoad != 1 %}
         <!-- Button to load more tricks -->
-        <div class="d-flex justify-content-center pt-3 pb-5">
+        <div class="d-flex justify-content-center pb-5">
           <a href="{{ path('main', {l: tricks.limit + 15}) }}#tricks" class="btn btn-load-tricks">Voir plus de Tricks...</a>
         </div>
     {% endif %}
@@ -67,7 +67,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="modal-btn-cancel btn" data-dismiss="modal">Annuler</button>
-            <a href="{{ path('tricks_delete', {slug: ?, id: ?}) }}">
+            <a href="{{ path('trick_delete', {slug: ?, id: ?}) }}">
               <button type="button" class="modal-btn-confirm btn">Confirmer</button>
             </a>
           </div>
@@ -76,8 +76,11 @@
     </div> #}
 
     <!-- Button to scroll to tricks section -->
-    <button onclick="scrollToTricks()" class="position-absolute home-btn-goToTricks">
-      <i class="fa-sharp fa-solid fa-arrow-up fa-2xl"></i>
-    </button>
+    {% if tricks.limit > 15 %}
+      <button onclick="scrollToTricks()" class="position-absolute home-btn-goToTricks">
+        <i class="fa-sharp fa-solid fa-arrow-up fa-2xl"></i>
+      </button>
+    {% endif %}
+
   </section>
 {% endblock %}

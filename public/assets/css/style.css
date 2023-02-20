@@ -195,6 +195,10 @@ footer {
   color: var(--teal) !important;
 }
 
+.pagination .page-link:focus {
+  box-shadow: none;
+}
+
 @media (max-width:768px) {
   .hero {
     height: 100vh;
@@ -549,6 +553,15 @@ footer {
 
 .update-tricks .mobile-medias-links {
   background-color: var(--grey);
+}
+
+.delete-comment {
+  color: var(--grey);
+  font-weight: 500;
+}
+
+.delete-comment:hover {
+  color: var(--teal);
 }
 
 @media (max-width:992px) {

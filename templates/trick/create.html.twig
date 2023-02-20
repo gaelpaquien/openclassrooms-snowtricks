@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un Trick / SnowTricks{% endblock %}
+
+{% block body %}
+    <section class="create-tricks d-flex align-items-center py-4">
+        {{ form_start(createTrickForm) }}
+        {{ form_row(createTrickForm.title) }}
+        {{ form_row(createTrickForm.description) }}
+        {{ form_row(createTrickForm.category) }}
+        {{ form_row(createTrickForm.images) }}
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <button type="submit" class="mb-3">Créer le Trick</button>
+        </div>
+        {{ form_end(createTrickForm) }}
+    </section>
+{% endblock %}
