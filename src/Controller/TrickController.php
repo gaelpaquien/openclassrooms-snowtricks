@@ -172,7 +172,8 @@ class TrickController extends AbstractController
             $this->addFlash('danger', 'Vous ne pouvez pas supprimer ce trick');
             return $this->redirectToRoute('trick_details', [
                 'slug' => $trick->getSlug(), 
-                'isAdmin' => $isAdmin]);
+                'isAdmin' => $isAdmin
+            ]);
         }
 
         // Delete comments of the trick
