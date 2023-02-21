@@ -35,6 +35,12 @@ section {
   margin: 0;
 }
 
+.vertical-line{
+  display: inline-block;
+  border-left: 1px solid #ccc;
+  margin: 0 10px;
+}
+
 /* Error pages */
 .error-page {
   background-color: var(--beige);
@@ -308,28 +314,28 @@ footer {
   color: var(--red);
 }
 
-.modal-btn-cancel, 
+.modal-btn-cancel,
 .confirm-modal-cancel {
   background-color: var(--grey);
   color: var(--beige);
   border: none;
 }
 
-.modal-btn-cancel:hover, 
+.modal-btn-cancel:hover,
 .confirm-modal-cancel:hover {
   background-color: var(--grey);
   color: var(--beige);
   opacity: 0.8;
 }
 
-.modal-btn-confirm, 
+.modal-btn-confirm,
 .confirm-modal-validate {
   background-color: var(--teal);
   color: var(--beige);
   border: none;
 }
 
-.modal-btn-confirm:hover, 
+.modal-btn-confirm:hover,
 .confirm-modal-validate:hover {
   background-color: var(--teal);
   color: var(--beige);
@@ -649,7 +655,11 @@ footer {
   font-size: 1rem;
   padding: 5px;
   border-radius: 8px;
-  height: 30px;
+  height: auto;
+}
+
+.details-tricks .tricks-content .infos span {
+  height: auto;
 }
 
 .details-tricks .tricks-content .create-comment-btn:hover,
@@ -663,6 +673,16 @@ footer {
 
 .details-tricks .post-comment input:focus-visible {
   border-color: var(--teal) !important;
+}
+
+@media (max-width:767px) {
+  .create-comment-btn {
+    font-size: 0.8rem !important;
+  }
+
+  .details-tricks .post-comment input {
+    width: auto !important;
+  }
 }
 
 .details-tricks .tricks-content .comments img {
