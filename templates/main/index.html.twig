@@ -31,13 +31,10 @@
                   <a class="card-btn card-btn-update" href="{{ path('trick_update', {slug: trick.slug}) }}">
                     <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
                   </a>
-                  <a class="card-btn card-btn-delete" href="{{ path('trick_delete', {slug: trick.slug}) }}">
-                    <i class="fa-regular fa-trash-can pb-1"></i>
-                  </a>
+                    <a class="card-btn card-btn-delete" {# href="{{ path('trick_delete', {slug: trick.slug}) }}" #}>
+                      <i class="fa-regular fa-trash-can pb-1"></i>
+                    </a>
                 {% endif %}
-                {#<button type="button" class="card-btn" data-toggle="modal" data-target="#card-btn-delete">
-                  <i class="fa-regular fa-trash-can pb-1"></i>
-                </button> #}
               </div>
             </div>
           </div>
@@ -52,6 +49,9 @@
     {% endif %}
 
     <!-- Modal to confirmed trick removal -->
+    {#<button type="button" class="card-btn" data-toggle="modal" data-target="#card-btn-delete">
+      <i class="fa-regular fa-trash-can pb-1"></i>
+    </button> #}
     {# <div class="modal fade" id="card-btn-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
