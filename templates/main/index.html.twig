@@ -31,9 +31,11 @@
                   <a class="card-btn card-btn-update" href="{{ path('trick_update', {slug: trick.slug}) }}">
                     <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
                   </a>
-                    <a class="card-btn card-btn-delete" {# href="{{ path('trick_delete', {slug: trick.slug}) }}" #}>
-                      <i class="fa-regular fa-trash-can pb-1"></i>
-                    </a>
+                  <a class="card-btn card-btn-delete" 
+                    data-url="{{ path('trick_delete', {slug: trick.slug}) }}" 
+                    data-confirm-message="Êtes-vous sûr de vouloir supprimer le trick '{{ trick.title }}' ?">
+                    <i class="fa-regular fa-trash-can pb-1"></i>
+                  </a>
                 {% endif %}
               </div>
             </div>
@@ -41,39 +43,24 @@
         {% endfor %}
       </div>
     </div>
+
+    <!-- Modal to confirm tick deleted -->
+    <div id="confirm-modal">
+      <div class="modal-content">
+        <p id="confirm-message"></p>
+        <div class="d-flex flex-row justify-content-center">
+          <a id="confirm-yes" class="btn confirm-modal-validate mx-2" href="#">Confirmer</a>
+          <button id="confirm-no" class="btn confirm-modal-cancel mx-2">Annuler</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Button to load more tricks -->
     {% if tricks.maxLoad != 1 %}
-        <!-- Button to load more tricks -->
         <div class="d-flex justify-content-center pb-5">
           <a href="{{ path('main', {l: tricks.limit + 15}) }}#tricks" class="btn btn-load-tricks">Voir plus de Tricks...</a>
         </div>
     {% endif %}
-
-    <!-- Modal to confirmed trick removal -->
-    {#<button type="button" class="card-btn" data-toggle="modal" data-target="#card-btn-delete">
-      <i class="fa-regular fa-trash-can pb-1"></i>
-    </button> #}
-    {# <div class="modal fade" id="card-btn-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="exampleModalLabel">Confirmer la suppression du trick</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <i class="fa-regular fa-circle-xmark fa-2xl"></i>
-            </button>
-          </div>
-          <div class="modal-body">
-            Voulez-vous confirmer la suppression du trick <strong>Trick name</strong> ?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="modal-btn-cancel btn" data-dismiss="modal">Annuler</button>
-            <a href="{{ path('trick_delete', {slug: ?, id: ?}) }}">
-              <button type="button" class="modal-btn-confirm btn">Confirmer</button>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div> #}
 
     <!-- Button to scroll to tricks section -->
     {% if tricks.limit > 15 %}
