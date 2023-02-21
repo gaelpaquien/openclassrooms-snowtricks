@@ -308,25 +308,29 @@ footer {
   color: var(--red);
 }
 
-.modal-btn-cancel, .confirm-modal-cancel {
+.modal-btn-cancel, 
+.confirm-modal-cancel {
   background-color: var(--grey);
   color: var(--beige);
   border: none;
 }
 
-.modal-btn-cancel:hover, .confirm-modal-cancel:hover {
+.modal-btn-cancel:hover, 
+.confirm-modal-cancel:hover {
   background-color: var(--grey);
   color: var(--beige);
   opacity: 0.8;
 }
 
-.modal-btn-confirm, .confirm-modal-validate {
+.modal-btn-confirm, 
+.confirm-modal-validate {
   background-color: var(--teal);
   color: var(--beige);
   border: none;
 }
 
-.modal-btn-confirm:hover, .confirm-modal-validate:hover {
+.modal-btn-confirm:hover, 
+.confirm-modal-validate:hover {
   background-color: var(--teal);
   color: var(--beige);
   opacity: 0.8;
