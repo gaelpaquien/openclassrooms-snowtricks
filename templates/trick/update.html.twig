@@ -110,7 +110,7 @@
         <div class="tricks-content container mt-4">
             <div class="infos d-flex flex-row justify-content-center mb-4">
                 <span>Créer le {{ trick.createdAt|date('d/m/Y') }} par {{ trick.author.username }}</span>
-                <span class="px-3">|</span>
+                <span class="vertical-line"></span>
                 {% if trick.createdAt != trick.updatedAt %}
                     <span >Modifier le {{ trick.updatedAt|date('d/m/Y') }} par {{ trick.author.username }}</span>
                 {% else %}
