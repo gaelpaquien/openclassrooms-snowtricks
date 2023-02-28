@@ -40,8 +40,8 @@ class Trick
     #[ORM\OneToMany(mappedBy: 'trick', targetEntity: Comment::class)]
     private Collection $comment;
 
-    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: TrickImage::class)]
-    private Collection $image;
+    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: TrickImage::class, orphanRemoval: true, cascade: ['persist'])]
+    private $image;
 
     public function __construct()
     {
@@ -154,9 +154,24 @@ class Trick
         return $this->image;
     }
 
-    public function setImage(array $image): self
+    public function addImage(TrickImage $image): self
     {
-        $this->image = $image;
+        if (!$this->image->contains($image)) {
+            $this->image->add($image);
+            $image->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(TrickImage $image): self
+    {
+        if ($this->image->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getTrick() === $this) {
+                $image->setTrick(null);
+            }
+        }
 
         return $this;
     }

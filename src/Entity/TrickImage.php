@@ -14,7 +14,7 @@ class TrickImage
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    private ?string $image = null;
+    private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'image')]
     #[ORM\JoinColumn(nullable: false)]
@@ -25,14 +25,14 @@ class TrickImage
         return $this->id;
     }
 
-    public function getImage(): ?string
+    public function getName(): ?string
     {
-        return $this->image;
+        return $this->name;
     }
 
-    public function setImage(string $image): self
+    public function setName(string $name): self
     {
-        $this->image = $image;
+        $this->name = $name;
 
         return $this;
     }

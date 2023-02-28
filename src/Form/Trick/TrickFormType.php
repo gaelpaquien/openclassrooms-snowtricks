@@ -37,7 +37,7 @@ class TrickFormType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('images', FileType::class, [
+            ->add('image', FileType::class, [
                 'label' => 'Image(s)',
                 'multiple' => true,
                 'mapped' => false,
