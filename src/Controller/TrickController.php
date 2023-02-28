@@ -268,7 +268,7 @@ class TrickController extends AbstractController
         Request $request, 
         ImageService $imageService): JsonResponse
     {
-/*         // Check if user is admin
+        // Check if user is admin
         $isAdmin = $this->isGranted('ROLE_ADMIN');
 
         // Check if user is author of the trick and if user is admin
@@ -279,17 +279,6 @@ class TrickController extends AbstractController
                 'isAdmin' => $isAdmin
             ]);
         }
-
-        // Delete image
-        $em->remove($image);
-
-        // Save and redirect
-        $em->flush();
-        $this->addFlash('success', 'L\'image a été supprimée avec succès');
-        return $this->redirectToRoute('trick_details', [
-            'slug' => $image->getTrick()->getSlug(),
-            'isAdmin' => $isAdmin
-        ]); */
 
         // Get data from request
         $data = json_decode($request->getContent(), true);
