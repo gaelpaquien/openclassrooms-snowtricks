@@ -4,14 +4,17 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Trick;
+use App\Entity\TrickImage;
 use App\Form\CreateCommentFormType;
 use App\Form\Trick\TrickFormType;
 use App\Repository\CommentRepository;
 use App\Repository\TrickImageRepository;
 use App\Repository\TrickVideoRepository;
+use App\Service\ImageService;
 use App\Service\TextService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,7 +26,8 @@ class TrickController extends AbstractController
     public function create(
         Request $request, 
         EntityManagerInterface $em,
-        TextService $text): Response
+        TextService $text,
+        ImageService $imageService): Response
     {
         // Check if user is logged
         if (!$this->getUser()) {
@@ -37,6 +41,19 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Get images
+            $images = $form->get('image')->getData();
+            foreach ($images as $image) {
+                // Destination folder
+                $folder = 'tricks';
+                // Save image in folder
+                $file = $imageService->add($image, $folder, 300, 300);
+
+                $image = new TrickImage();
+                $image->setName($file);
+                $trick->addImage($image);
+            }
+
             // Check if trick title already exist
             $trickExist = $em->getRepository(Trick::class)->findOneBy(['title' => $trick->getTitle()]);
             if ($trickExist) {
@@ -115,7 +132,8 @@ class TrickController extends AbstractController
     public function update(
         Trick $trick, 
         Request $request,
-        EntityManagerInterface $em): Response
+        EntityManagerInterface $em,
+        ImageService $imageService): Response
     {
         $isAdmin = $this->isGranted('ROLE_ADMIN');
 
@@ -130,6 +148,19 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Get images
+            $images = $form->get('image')->getData();
+            foreach ($images as $image) {
+                // Destination folder
+                $folder = 'tricks';
+                // Save image in folder
+                $file = $imageService->add($image, $folder, 300, 300);
+
+                $image = new TrickImage();
+                $image->setName($file);
+                $trick->addImage($image);
+            }
+
             // Check if trick already exist with the new title
             $trickExist = $em->getRepository(Trick::class)->findOneBy(['title' => $trick->getTitle()]);
             if ($trickExist && $trickExist->getId() !== $trick->getId()) {
@@ -152,7 +183,7 @@ class TrickController extends AbstractController
 
         return $this->render('trick/update.html.twig', [
             'trick' => $trick,
-            'updateTrickForm' => $form->createView(),
+            'trickForm' => $form->createView(),
             'isAdmin' => $isAdmin
         ]);
     }
@@ -228,5 +259,53 @@ class TrickController extends AbstractController
             'slug' => $comment->getTrick()->getSlug(),
             'isAdmin' => $isAdmin
         ]);
+    }
+
+    #[Route('/{slug}/image/{id}/suppression', name: 'image_delete', methods: ['DELETE'])]
+    public function deleteImage(
+        TrickImage $image, 
+        EntityManagerInterface $em, 
+        Request $request, 
+        ImageService $imageService): JsonResponse
+    {
+/*         // Check if user is admin
+        $isAdmin = $this->isGranted('ROLE_ADMIN');
+
+        // Check if user is author of the trick and if user is admin
+        if ($image->getTrick()->getAuthor() !== $this->getUser() && !$isAdmin) {
+            $this->addFlash('danger', 'Vous ne pouvez pas supprimer cette image');
+            return $this->redirectToRoute('trick_details', [
+                'slug' => $image->getTrick()->getSlug(),
+                'isAdmin' => $isAdmin
+            ]);
+        }
+
+        // Delete image
+        $em->remove($image);
+
+        // Save and redirect
+        $em->flush();
+        $this->addFlash('success', 'L\'image a été supprimée avec succès');
+        return $this->redirectToRoute('trick_details', [
+            'slug' => $image->getTrick()->getSlug(),
+            'isAdmin' => $isAdmin
+        ]); */
+
+        // Get data from request
+        $data = json_decode($request->getContent(), true);
+
+        // Check if token is valid
+        if ($this->isCsrfTokenValid('delete' . $image->getId(), $data['_token'])) {
+            // Check if image exist
+            if($imageService->delete($image->getName(), 'tricks', 300, 300)) {
+                // Delete image
+                $em->remove($image);
+                $em->flush();
+                return new JsonResponse(['success' => true], 200);
+            }
+            return new JsonResponse(['error' => 'Erreur lors de la suppression'], 400);
+        }
+
+        return new JsonResponse(['error' => 'Token invalide'], 400);
     }
 }

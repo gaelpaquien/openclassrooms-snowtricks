@@ -6,7 +6,7 @@
 <section class="details-tricks pb-5">
     <!-- Main image -->
     <div class="tricks-img-main">
-        <img class="img-fluid" src="{{ asset('assets/img/tricks/default.png') }}" alt="">
+        <img class="img-fluid" src="{{ asset('assets/uploads/tricks/default.png') }}" alt="Image de {{ trick.title }}">
         <span>{{ trick.title }}</span>
         {% if (app.user and app.user.id == trick.author.id) or (app.user and isAdmin == true) %}
             <div class="links">
@@ -23,22 +23,15 @@
     <!-- Medias -->
     <div class="container medias pt-4">
         <div class="row hidden-md-up row-cols-md-3 row-cols-lg-6">
-            <!-- Item -->
-            <div class="d-flex flex-column mb-4">
-                <div class="col">
-                    <div class="card">
-                        <img height="250" class="card-img-top" src="{{ asset('assets/img/tricks/default.png') }}">
+            {% for image in trick.image %}
+                <div class="d-flex flex-column mb-4">
+                    <div class="col">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ asset('assets/uploads/tricks/mini/300x300-' ~ image.name) }}" alt="Image de {{ trick.title }}">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- Item -->
-            <div class="d-flex flex-column mb-4">
-                <div class="col">
-                    <div class="card">
-                        <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 
@@ -60,7 +53,7 @@
                 <div class="modal-body">
                     <!-- Item -->
                     <div class="my-4">
-                        <img height="250" class="card-img-top" src="{{ asset('assets/img/tricks/default.png') }}">
+                        <img height="250" class="card-img-top" src="{{ asset('assets/uploads/tricks/default.png') }}">
                     </div>
                     <hr>
                     <!-- Item -->
@@ -102,7 +95,7 @@
             {% if comments %}
                 {% for comment in comments.data %}
                     <div class="d-flex flex-row justify-content-start mt-4">
-                        <img src="{{ asset('assets/img/users/default.svg') }}" alt="">
+                        <img src="{{ asset('assets/uploads/users/default.svg') }}" alt="">
                         <div class="d-flex flex-column">
                             <span class="px-2 fw-bolder">{{ comment.content }}</span>
                             <span class="px-2 text-muted">
