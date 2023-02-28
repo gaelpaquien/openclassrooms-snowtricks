@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Trait\CreatedAtTrait;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
@@ -17,6 +18,13 @@ class Comment
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le commentaire ne peut pas être vide')]
+    #[Assert\Length(
+        min: 3,
+        max: 255,
+        minMessage: 'Le commentaire doit contenir au moins {{ limit }} caractères',
+        maxMessage: 'Le commentaire doit contenir au maximum {{ limit }} caractères'
+    )]
     private ?string $content = null;
 
     #[ORM\ManyToOne(inversedBy: 'comment')]

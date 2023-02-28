@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\All;
+use Symfony\Component\Validator\Constraints\Image;
 
 class TrickFormType extends AbstractType
 {
@@ -42,6 +44,18 @@ class TrickFormType extends AbstractType
                 'multiple' => true,
                 'mapped' => false,
                 'required' => false,
+                'constraints' => [
+                    new All(
+                        new Image([
+                            'maxSize' => '1024k',
+                            'maxSizeMessage' => 'The maxmimum allowed file size is {{ limit }} {{ suffix }}.',
+                            'mimeTypes' => [
+                                'image/*',
+                            ],
+                            'mimeTypesMessage' => 'Please upload a valid image document',
+                        ])
+                    )
+                ],
                 'attr' => [
                     'class' => 'form-control'
                 ]
