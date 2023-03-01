@@ -221,6 +221,12 @@ footer {
   }
 }
 
+form ul {
+  margin: 0px;
+  padding: 0px;
+  color: var(--red);
+}
+
 .tricks {
   background-color: var(--beige);
 }
