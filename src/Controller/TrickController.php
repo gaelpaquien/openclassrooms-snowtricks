@@ -190,8 +190,8 @@ class TrickController extends AbstractController
 
     #[Route('/{slug}/suppression', name: 'delete')]
     public function delete(
-        Trick $trick, 
-        EntityManagerInterface $em, 
+        Trick $trick,
+        EntityManagerInterface $em,
         TrickVideoRepository $trickVideo,
         TrickImageRepository $trickImage): Response
     {
