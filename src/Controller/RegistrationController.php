@@ -18,8 +18,8 @@ class RegistrationController extends AbstractController
 {
     #[Route('/inscription', name: 'app_register')]
     public function register(
-        Request $request, 
-        UserPasswordHasherInterface $userPasswordHasher, 
+        Request $request,
+        UserPasswordHasherInterface $userPasswordHasher,
         EntityManagerInterface $entityManager,
         SendMailService $mail,
         JWTService $jwt,

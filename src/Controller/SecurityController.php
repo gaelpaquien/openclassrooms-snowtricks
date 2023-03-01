@@ -44,8 +44,8 @@ class SecurityController extends AbstractController
 
     #[Route(path: '/mot-de-passe-oublie', name: 'app_forgot_password')]
     public function forgotPassword(
-        Request $request, 
-        UserRepository $userRepository, 
+        Request $request,
+        UserRepository $userRepository,
         TokenGeneratorInterface $tokenGenerator,
         EntityManagerInterface $entityManager,
         SendMailService $mail): Response

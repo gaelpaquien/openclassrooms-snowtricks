@@ -130,7 +130,7 @@ class TrickController extends AbstractController
 
     #[Route('/{slug}/edition', name: 'update')]
     public function update(
-        Trick $trick, 
+        Trick $trick,
         Request $request,
         EntityManagerInterface $em,
         ImageService $imageService): Response
@@ -286,7 +286,7 @@ class TrickController extends AbstractController
         // Check if token is valid
         if ($this->isCsrfTokenValid('delete' . $image->getId(), $data['_token'])) {
             // Check if image exist
-            if($imageService->delete($image->getName(), 'tricks', 300, 300)) {
+            if ($imageService->delete($image->getName(), 'tricks', 300, 300)) {
                 // Delete image
                 $em->remove($image);
                 $em->flush();
