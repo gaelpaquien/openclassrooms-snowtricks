@@ -86,6 +86,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
                 $manager
             );
         }
+
         $manager->flush();
     }
 
