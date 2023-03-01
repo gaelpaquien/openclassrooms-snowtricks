@@ -27,7 +27,7 @@ class ImageService
         }
 
         // Check the image format
-        switch($imageData['mime']) {
+        switch ($imageData['mime']) {
             case 'image/png':
                 $imageSource = imagecreatefrompng($image);
                 break;
