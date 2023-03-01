@@ -24,7 +24,7 @@ class TrickController extends AbstractController
 {
     #[Route('/creation', name: 'create')]
     public function create(
-        Request $request, 
+        Request $request,
         EntityManagerInterface $em,
         TextService $text,
         ImageService $imageService): Response
@@ -73,7 +73,7 @@ class TrickController extends AbstractController
             $this->addFlash('success', "Le trick '{$trick->getTitle()}' a été crée avec succès");
             return $this->redirectToRoute('main');
         }
- 
+
         return $this->render('trick/create.html.twig', [
             'controller_name' => 'TrickCreate',
             'createTrickForm' => $form->createView()
@@ -202,7 +202,7 @@ class TrickController extends AbstractController
         if ($trick->getAuthor() !== $this->getUser() && !$isAdmin) {
             $this->addFlash('danger', 'Vous ne pouvez pas supprimer ce trick');
             return $this->redirectToRoute('trick_details', [
-                'slug' => $trick->getSlug(), 
+                'slug' => $trick->getSlug(),
                 'isAdmin' => $isAdmin
             ]);
         }
@@ -263,9 +263,9 @@ class TrickController extends AbstractController
 
     #[Route('/{slug}/image/{id}/suppression', name: 'image_delete', methods: ['DELETE'])]
     public function deleteImage(
-        TrickImage $image, 
-        EntityManagerInterface $em, 
-        Request $request, 
+        TrickImage $image,
+        EntityManagerInterface $em,
+        Request $request,
         ImageService $imageService): JsonResponse
     {
         // Check if user is admin
