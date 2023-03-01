@@ -90,7 +90,6 @@ class RegistrationController extends AbstractController
                 $this->addFlash('success', 'Votre compte est désormais activé');
                 return $this->redirectToRoute('main');
             }
-
         }
 
         // If token is not valid, expired or modified
