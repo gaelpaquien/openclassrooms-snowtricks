@@ -41,13 +41,12 @@ class ImageService
                 throw new \Exception('Format d\'image non supporté');
         }
 
-
         // Get dimensions of image
         $imageWidth = $imageData[0];
         $imageHeight = $imageData[1];
 
         // Check orientation of image
-        switch($imageWidth <=> $imageHeight) {
+        switch ($imageWidth <=> $imageHeight) {
             case -1: // portrait
                 $squareSize = $imageWidth;
                 $srcX = 0;
@@ -88,9 +87,9 @@ class ImageService
 
     public function delete(string $file, ?string $folder = '', ?int $width = 250, ?int $height = 250)
     {
-        if($file !== 'default.webp') {
+        if ($file !== 'default.webp') {
             $success = false;
-            $path = $this->params->get('images_directory') . $folder; 
+            $path = $this->params->get('images_directory') . $folder;
 
             $mini = $path . '/mini/' . $width . 'x' . $height . '-' . $file;
             if (file_exists($mini)) {

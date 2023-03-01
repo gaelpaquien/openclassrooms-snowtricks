@@ -4,7 +4,7 @@ namespace App\Service;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 
-class SendMailService 
+class SendMailService
 {
     private $mailer;
 

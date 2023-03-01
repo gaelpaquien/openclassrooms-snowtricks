@@ -33,7 +33,7 @@ class UserFixtures extends Fixture
         $manager->persist($admin);
 
         // User
-        for($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             $user = new User();
             $user->setEmail($faker->email);
             $user->setUsername($faker->userName);
