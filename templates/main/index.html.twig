@@ -26,11 +26,11 @@
         {% for trick in tricks.data %}
           <div class="col">
             <div class="card">
-              {% if trick.image %}
+              {% if trick.image.first() %}
                 <img class="card-img-top" src="{{ asset('assets/uploads/tricks/mini/300x300-' ~ trick.image[0].name) }}" alt="Image de {{ trick.title }}">
               {% else %}
                 <img class="card-img-top" src="{{ asset('assets/uploads/tricks/default.png') }}" alt="Image de {{ trick.title }}">
-              {% endif %}
+              {% endif %} 
               <div class="card-body d-flex flex-row justify-content-between align-items-center">
                 <h3 class="card-title">
                   <a href="{{ path('trick_details', {slug: trick.slug}) }}">{{ trick.title }}</a>
