@@ -42,7 +42,6 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             // Check if trick title already exist
             $trickExist = $em->getRepository(Trick::class)->findOneBy(['title' => $trick->getTitle()]);
             if ($trickExist) {
@@ -64,14 +63,12 @@ class TrickController extends AbstractController
             }
 
             // Videos
-            $videos = $form->get('video')->getData();
-            dd($videos);
-/*             foreach ($videos as $video) {
-                $url = $video;
+            $video = $form->get('video')->getData();
+            if ($video) {
                 $video = new TrickVideo();
-                $video->setUrl($url);
+                $video->setUrl($form->get('video')->getData());
                 $trick->addVideo($video);
-            } */
+            }
 
             // Add trick data
             $trick->setAuthor($this->getUser());

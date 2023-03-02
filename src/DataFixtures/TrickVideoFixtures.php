@@ -18,7 +18,7 @@ class TrickVideoFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 1; $i <= 10; $i++) {
             $video = new TrickVideo;
 
-            $video->setVideo($faker->imageUrl(640, 480, null, true));
+            $video->setUrl($faker->imageUrl(640, 480, null, true));
             $trick = $this->getReference('trick-'.rand(1, 10));
 
             $video->setTrick($trick);
