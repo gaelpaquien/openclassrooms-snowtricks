@@ -20,7 +20,7 @@ class TrickImageFixtures extends Fixture implements DependentFixtureInterface
 
             $image->setName($faker->imageUrl(640, 480, null, true));
 
-            $trick = $this->getReference('trick-'.rand(1, 10));
+            $trick = $this->getReference('trick-' . $i);
             $image->setTrick($trick);
 
             $manager->persist($image);
