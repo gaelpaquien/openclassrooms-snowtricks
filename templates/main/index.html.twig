@@ -2,10 +2,6 @@
 
 {% block title %}Accueil / SnowTricks{% endblock %}
 
-{% block javascripts %}
-  <script src="{{ asset('assets/js/index.js') }}"></script>
-{% endblock %}
-
 {% block body %}
   <!-- Hero -->
   <div class="hero position-relative">
@@ -39,7 +35,7 @@
                   <a class="card-btn card-btn-update" href="{{ path('trick_update', {slug: trick.slug}) }}">
                     <i class="fa-sharp fa-solid fa-pencil pb-1"></i>
                   </a>
-                  <a class="card-btn card-btn-delete" 
+                  <a class="card-btn card-btn-delete delete-trick-modal" 
                     data-url="{{ path('trick_delete', {slug: trick.slug}) }}" 
                     data-confirm-message="Êtes-vous sûr de vouloir supprimer le trick '{{ trick.title }}' ?">
                     <i class="fa-regular fa-trash-can pb-1"></i>
@@ -53,15 +49,7 @@
     </div>
 
     <!-- Modal to confirm tick deleted -->
-    <div id="confirm-modal">
-      <div class="modal-content">
-        <p id="confirm-message"></p>
-        <div class="d-flex flex-row justify-content-center">
-          <a id="confirm-yes" class="btn confirm-modal-validate mx-2" href="#">Confirmer</a>
-          <button id="confirm-no" class="btn confirm-modal-cancel mx-2">Annuler</button>
-        </div>
-      </div>
-    </div>
+    {% include "trick/_modal_delete.html.twig" %}
 
     <!-- Button to load more tricks -->
     {% if tricks.maxLoad != 1 %}
@@ -78,4 +66,9 @@
     {% endif %}
 
   </section>
+{% endblock %}
+
+{% block javascripts %}
+  <script src="{{ asset('assets/js/index.js') }}" defer></script>
+  <script src="{{ asset('assets/js/modal.js') }}" defer></script>
 {% endblock %}
