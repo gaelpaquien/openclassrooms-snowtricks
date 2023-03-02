@@ -222,8 +222,8 @@ footer {
 }
 
 form ul {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   color: var(--red);
 }
 
@@ -407,7 +407,7 @@ form ul {
 .forgot-password form div,
 .reset-password form div {
   margin: 15px 0 15px 0;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .register .form-control:focus,
