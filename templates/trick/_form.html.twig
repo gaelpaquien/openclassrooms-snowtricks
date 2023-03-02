@@ -18,6 +18,10 @@
 
     <div class="tricks-content-btn d-flex justify-content-end mt-4">
         <button type="submit" class="btn update">{{ button_label|default('Modifier') }}</button>
-        <a href="{{ path('trick_delete', {slug: trick.slug}) }}" class="btn delete mx-3">Supprimer</a>
+        <a class="btn delete mx-3 delete-trick-modal"
+            data-url="{{ path('trick_delete', {slug: trick.slug}) }}" 
+            data-confirm-message="Êtes-vous sûr de vouloir supprimer le trick '{{ trick.title }}' ?">
+            Supprimer
+        </a>
     </div>
 {{ form_end(trickForm) }}
