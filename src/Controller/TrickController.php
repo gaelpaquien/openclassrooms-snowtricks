@@ -5,8 +5,9 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Trick;
 use App\Entity\TrickImage;
+use App\Entity\TrickVideo;
 use App\Form\CreateCommentFormType;
-use App\Form\Trick\TrickFormType;
+use App\Form\TrickFormType;
 use App\Repository\CommentRepository;
 use App\Repository\TrickImageRepository;
 use App\Repository\TrickVideoRepository;
@@ -41,7 +42,15 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Get images
+
+            // Check if trick title already exist
+            $trickExist = $em->getRepository(Trick::class)->findOneBy(['title' => $trick->getTitle()]);
+            if ($trickExist) {
+                $this->addFlash('danger', "Le trick '{$trick->getTitle()}' existe déjà");
+                return $this->redirectToRoute('trick_create');
+            }
+
+            // Images
             $images = $form->get('image')->getData();
             foreach ($images as $image) {
                 // Destination folder
@@ -54,12 +63,15 @@ class TrickController extends AbstractController
                 $trick->addImage($image);
             }
 
-            // Check if trick title already exist
-            $trickExist = $em->getRepository(Trick::class)->findOneBy(['title' => $trick->getTitle()]);
-            if ($trickExist) {
-                $this->addFlash('danger', "Le trick '{$trick->getTitle()}' existe déjà");
-                return $this->redirectToRoute('trick_create');
-            }
+            // Videos
+            $videos = $form->get('video')->getData();
+            dd($videos);
+/*             foreach ($videos as $video) {
+                $url = $video;
+                $video = new TrickVideo();
+                $video->setUrl($url);
+                $trick->addVideo($video);
+            } */
 
             // Add trick data
             $trick->setAuthor($this->getUser());

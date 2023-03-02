@@ -58,12 +58,16 @@ class Trick
     #[ORM\OneToMany(mappedBy: 'trick', targetEntity: TrickImage::class, orphanRemoval: true, cascade: ['persist'])]
     private $image;
 
+    #[ORM\OneToMany(mappedBy: 'trick', targetEntity: TrickVideo::class, orphanRemoval: true, cascade: ['persist'])]
+    private $video;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
         $this->updated_at = new \DateTimeImmutable();
         $this->comment = new ArrayCollection();
         $this->image = new ArrayCollection();
+        $this->video = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -185,6 +189,36 @@ class Trick
             // set the owning side to null (unless already changed)
             if ($image->getTrick() === $this) {
                 $image->setTrick(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TrickVideo>
+     */
+    public function getVideo(): Collection
+    {
+        return $this->video;
+    }
+
+    public function addVideo(TrickVideo $video): self
+    {
+        if (!$this->video->contains($video)) {
+            $this->video->add($video);
+            $video->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(TrickVideo $video): self
+    {
+        if ($this->video->removeElement($video)) {
+            // set the owning side to null (unless already changed)
+            if ($video->getTrick() === $this) {
+                $video->setTrick(null);
             }
         }
 

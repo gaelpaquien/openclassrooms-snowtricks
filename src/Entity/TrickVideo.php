@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TrickVideoRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TrickVideoRepository::class)]
 class TrickVideo
@@ -14,24 +15,27 @@ class TrickVideo
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    private ?string $video = null;
+    private ?string $url = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(targetEntity: Trick::class, inversedBy: 'video')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Trick $trick = null;
+
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getVideo(): ?string
+    public function getUrl(): ?string
     {
-        return $this->video;
+        return $this->url;
     }
 
-    public function setVideo(string $video): self
+    public function setUrl(string $url): self
     {
-        $this->video = $video;
+        $this->url = $url;
 
         return $this;
     }
