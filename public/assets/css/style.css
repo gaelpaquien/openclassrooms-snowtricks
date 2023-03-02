@@ -407,6 +407,7 @@ form ul {
 .forgot-password form div,
 .reset-password form div {
   margin: 15px 0 15px 0;
+  margin-bottom: 0px;
 }
 
 .register .form-control:focus,
@@ -477,6 +478,8 @@ form ul {
 .details-tricks .tricks-img-main img {
   width: 100%;
   height: 400px;
+  object-fit: cover;
+  opacity: 0.5;
 }
 
 .update-tricks .tricks-img-main span,

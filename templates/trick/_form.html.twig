@@ -1,19 +1,12 @@
 {{ form_start(trickForm) }}
+    {# editting page only #}
+    {% if app.request.attributes.get('_route') == 'trick_update' %}
+        {% include "trick/_form_media.html.twig" %}
+    {% endif %}
+
     {{ form_row(trickForm.title) }}
     {{ form_row(trickForm.description) }}
     {{ form_row(trickForm.category) }}
-
-    {# Displays the images if it is the editing page #}
-    {% if app.request.attributes.get('_route') == 'trick_update' %}
-        <h2>Images</h2>
-        {% for image in trick.image %}
-            <div>
-                <img src="{{ asset('assets/uploads/tricks/mini/300x300-' ~ image.name) }}" alt="Image de {{ trick.title }}">
-                <a href="{{ path('trick_image_delete', {slug: trick.slug, id: image.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">Supprimer</a>
-            </div>
-        {% endfor %}
-    {% endif %}
-
     {{ form_row(trickForm.image) }}
 
     <div class="tricks-content-btn d-flex justify-content-end mt-4">

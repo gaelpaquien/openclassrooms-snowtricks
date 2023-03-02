@@ -6,123 +6,33 @@
     <section class="update-tricks pb-5">
         <!-- Main image -->
         <div class="tricks-img-main">
-            <img class="img-fluid" src="{{ asset('assets/uploads/tricks/default.png') }}" alt="">
+            {% if trick.image.first() %}
+                <img class="card-img-top" src="{{ asset('assets/uploads/tricks/' ~ trick.image[0].name) }}" alt="Image de {{ trick.title }}">
+            {% else %}
+                <img class="card-img-top" src="{{ asset('assets/uploads/tricks/default.png') }}" alt="Image de {{ trick.title }}">
+            {% endif %} 
             <span>{{ trick.title }}</span>
-            <div class="links">
+{#             <div class="links">
                 <a href="#" class="update">
                     <i class="fa-sharp fa-solid fa-pencil"></i>
                 </a>
                 <a href="#" class="delete">
                     <i class="fa-regular fa-trash-can"></i>
                 </a>
-            </div>
-        </div>
-
-        <!-- Medias -->
-        <div class="container medias pt-4">
-            <div class="row hidden-md-up row-cols-md-3 row-cols-lg-6">
-                <!-- Images -->
-                <div class="d-flex flex-column mb-4">
-                    <div class="col">
-                        <div class="card">
-                            <img height="250" class="card-img-top" src="{{ asset('assets/uploads/tricks/default.png') }}">
-                        </div>
-                    </div>
-                    <div class="medias-links d-flex flex-row justify-content-between align-items-center">
-                        <a href="#">
-                            <i class="fa-regular fa-trash-can"></i>
-                        </a>
-                    </div>
-                </div>
-{#                 <!-- Videos -->
-                <div class="d-flex flex-column mb-4">
-                    <div class="col">
-                        <div class="card">
-                            <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
-                        </div>
-                    </div>
-                    <div class="medias-links d-flex flex-row justify-content-between align-items-center">
-                        <a href="#">
-                            <i class="fa-sharp fa-solid fa-pencil"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fa-regular fa-trash-can"></i>
-                        </a>
-                    </div>
-                </div> #}
-            </div>
-        </div>
-
-        <!-- Mobile Medias (Button trigger modal) -->
-        <div class="mobile-medias d-flex justify-content-center pt-4">
-            <button type="button" class="btn" data-toggle="modal" data-target="#mobileMediasModal">Afficher les médias</button>
-        </div>
-
-        <!-- Mobile Medias Modal -->
-        <div class="modal fade" id="mobileMediasModal" tabindex="-1" role="dialog" aria-labelledby="mobileMediasModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="mobileMediasModalLabel">Gestion des médias</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Item -->
-                        <div class="my-4">
-                            <img height="250" class="card-img-top" src="{{ asset('assets/uploads/tricks/default.png') }}">
-                            <div class="mobile-medias-links d-flex flex-row justify-content-center align-items-center mt-2">
-                                <a href="#">
-                                    <i class="fa-sharp fa-solid fa-pencil px-1"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="fa-regular fa-trash-can px-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <hr>
-                        <!-- Item -->
-                        <div class="my-4">
-                            <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
-                            <div class="mobile-medias-links d-flex flex-row justify-content-center align-items-center mt-2">
-                                <a href="#">
-                                    <i class="fa-sharp fa-solid fa-pencil px-1"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="fa-regular fa-trash-can px-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="medias-modal-btn btn btn-secondary" data-dismiss="modal">Retour</button>
-                    </div>
-                </div>
-            </div>
+            </div> #}
         </div>
 
         <!-- Content -->
         <div class="tricks-content container mt-4">
-            <div class="infos d-flex flex-row justify-content-center mb-4">
-                <span>Créer le {{ trick.createdAt|date('d/m/Y') }} par {{ trick.author.username }}</span>
-                <span class="vertical-line"></span>
-                {% if trick.createdAt != trick.updatedAt %}
-                    <span >Modifier le {{ trick.updatedAt|date('d/m/Y') }} par {{ trick.author.username }}</span>
-                {% else %}
-                    <span >Ce trick n'a jamais été modifié</span>
-                {% endif %}
-            </div>
             {% include "trick/_form.html.twig" %}
         </div>
 
-        <!-- Modal to confirm tick deleted -->
+        <!-- Modal to confirm trick deleted -->
         {% include "trick/_modal_delete.html.twig" %}
     </section>
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/js/images.js') }}" defer></script>
+    <script src="{{ asset('assets/js/medias.js') }}" defer></script>
     <script src="{{ asset('assets/js/modal.js') }}" defer></script>
 {% endblock %}
