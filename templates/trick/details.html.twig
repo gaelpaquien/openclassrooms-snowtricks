@@ -104,9 +104,9 @@
                 {{ form_end(createCommentForm) }}
             </div>
         {% endif %}
-        <hr>
         <div class="comments" id="comments">
             {% if comments %}
+            <hr>
                 {% for comment in comments.data %}
                     <div class="d-flex flex-row justify-content-start mt-4">
                         <img src="{{ asset('assets/uploads/users/default.svg') }}" alt="">

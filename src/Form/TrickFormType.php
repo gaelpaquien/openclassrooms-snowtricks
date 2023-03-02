@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form\Trick;
+namespace App\Form;
 
 use App\Entity\Trick;
 use App\Entity\TrickCategory;
@@ -48,14 +48,22 @@ class TrickFormType extends AbstractType
                     new All(
                         new Image([
                             'maxSize' => '1024k',
-                            'maxSizeMessage' => 'The maxmimum allowed file size is {{ limit }} {{ suffix }}.',
+                            'maxSizeMessage' => 'Le fichier ne doit pas dépasser {{ limit }} {{ suffix }}.',
                             'mimeTypes' => [
                                 'image/*',
                             ],
-                            'mimeTypesMessage' => 'Please upload a valid image document',
+                            'mimeTypesMessage' => 'Format de fichier invalide',
                         ])
                     )
                 ],
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
+            ->add('video', TextType::class, [
+                'label' => 'Vidéo(s)',
+                'mapped' => false,
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control'
                 ]
