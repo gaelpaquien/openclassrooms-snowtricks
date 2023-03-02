@@ -1,0 +1,94 @@
+<!-- Medias -->
+<div class="container medias pt-4">
+    <div class="row hidden-md-up row-cols-md-3 row-cols-lg-6">
+        {% for image in trick.image %}
+            <!-- Images -->
+            <div class="image-block d-flex flex-column mb-4">
+                <div class="col">
+                    <div class="card">
+                        <img height="400" class="card-img-top" src="{{ asset('assets/uploads/tricks/mini/300x300-' ~ image.name) }}" alt="Image de {{ trick.title }}">
+                    </div>
+                </div>
+                <div class="medias-links d-flex flex-row justify-content-between align-items-center">
+                    <a href="#">
+                        <i class="fa-sharp fa-solid fa-pencil"></i>
+                    </a>
+                    <a href="{{ path('trick_image_delete', {slug: trick.slug, id: image.id}) }}" 
+                        data-delete
+                        data-confirm-message="Êtes-vous sûr de vouloir supprimer cette image ?"
+                        data-token="{{ csrf_token('delete' ~ image.id) }}">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+{#         <!-- Videos -->
+        <div class="d-flex flex-column mb-4">
+            <div class="col">
+                <div class="card">
+                    <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
+                </div>
+            </div>
+            <div class="medias-links d-flex flex-row justify-content-between align-items-center">
+                <a href="#">
+                    <i class="fa-sharp fa-solid fa-pencil"></i>
+                </a>
+                <a href="#">
+                    <i class="fa-regular fa-trash-can"></i>
+                </a>
+            </div>
+        </div> #}
+    </div>
+</div>
+
+<!-- Mobile Medias (Button trigger modal) -->
+{% if trick.image.count() >= 1 %}
+    <div class="mobile-medias d-flex justify-content-center pt-4">
+        <button type="button" class="btn" data-toggle="modal" data-target="#mobileMediasModal">Afficher les médias</button>
+    </div>
+{% endif %}
+
+<!-- Mobile Medias Modal -->
+<div class="modal fade" id="mobileMediasModal" tabindex="-1" role="dialog" aria-labelledby="mobileMediasModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mobileMediasModalLabel">Gestion des médias</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <!-- Images -->
+                    {% for image in trick.image %}
+                        <div class="my-4">
+                            <img height="250" class="card-img-top" src="{{ asset('assets/uploads/tricks/mini/300x300-' ~ image.name) }}" alt="Image de {{ trick.title }}">
+                        </div>
+                    {% endfor %}
+                    <hr>
+{#                     <!-- Videos -->
+                    <div class="my-4">
+                        <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
+                    </div>
+                    <hr> #}
+                </div>
+                <hr>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="medias-modal-btn btn btn-secondary" data-dismiss="modal">Retour</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Trick infos -->
+<div class="infos d-flex flex-row justify-content-center mb-4">
+    <span>Créer le {{ trick.createdAt|date('d/m/Y') }} par {{ trick.author.username }}</span>
+    <span class="vertical-line"></span>
+    {% if trick.createdAt != trick.updatedAt %}
+        <span >Modifier le {{ trick.updatedAt|date('d/m/Y') }} par {{ trick.author.username }}</span>
+    {% else %}
+        <span >Ce trick n'a jamais été modifié</span>
+    {% endif %}
+</div>

@@ -6,8 +6,11 @@ for (let link of links) {
         // Prevent the default behavior
         e.preventDefault();
 
+        // Get the closest image block
+        let imageBlock = link.closest(".image-block");
+
         // Confirm the deletion
-        if (confirm("Voulez-vous supprimer cette image ?")) {
+        if (confirm(`${link.getAttribute("data-confirm-message")} ?`)) {
             // Send an AJAX request
             fetch(this.getAttribute("href"), {
                 method: "DELETE",
@@ -19,12 +22,16 @@ for (let link of links) {
             }).then(
                 // If the request is successful
                 response => response.json().then(data => {
-                    if (data.success)
-                        this.parentElement.remove();
-                    else
+                    if (data.success) {
+                        imageBlock.remove();
+                        location.reload();
+                    }
+
+                    else 
                         alert(data.error);
                 })
             ).catch(e => alert(e));
         }
     });
 }
+
