@@ -13,12 +13,17 @@
                 <a href="{{ path('trick_update', {slug: trick.slug}) }}" class="update">
                     <i class="fa-sharp fa-solid fa-pencil"></i>
                 </a>
-                <a href="{{ path('trick_delete', {slug: trick.slug}) }}" class="delete">
+                <a class="delete delete-trick-modal"
+                    data-url="{{ path('trick_delete', {slug: trick.slug}) }}" 
+                    data-confirm-message="Êtes-vous sûr de vouloir supprimer le trick '{{ trick.title }}' ?">
                     <i class="fa-regular fa-trash-can"></i>
                 </a>
             </div>
         {% endif %}
     </div>
+
+    <!-- Modal to confirm tick deleted -->
+    {% include "trick/_modal_delete.html.twig" %}
 
     <!-- Medias -->
     <div class="container medias pt-4">
@@ -119,4 +124,8 @@
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/modal.js') }}" defer></script>
 {% endblock %}
