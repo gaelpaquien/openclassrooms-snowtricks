@@ -11,6 +11,7 @@ use App\Form\TrickFormType;
 use App\Repository\CommentRepository;
 use App\Repository\TrickImageRepository;
 use App\Repository\TrickVideoRepository;
+use App\Service\CheckURL;
 use App\Service\ImageService;
 use App\Service\TextService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,7 +29,8 @@ class TrickController extends AbstractController
         Request $request,
         EntityManagerInterface $em,
         TextService $text,
-        ImageService $imageService): Response
+        ImageService $imageService,
+        CheckURL $checkUrl): Response
     {
         // Check if user is logged
         if (!$this->getUser()) {
@@ -62,11 +64,32 @@ class TrickController extends AbstractController
                 $trick->addImage($image);
             }
 
-            // Videos
+            // Video
             $video = $form->get('video')->getData();
             if ($video) {
+                $urlInfos = $checkUrl->getUrlInfos($video);
+                switch ($urlInfos['platform']) {
+                    case 'youtube':
+                        $url = 'https://www.youtube.com/embed/' . $urlInfos['id'];
+                        break;
+                    case 'vimeo':
+                        $url = 'https://player.vimeo.com/video/' . $urlInfos['id'];
+                        break;
+                    case 'dailymotion':
+                        $url = 'https://www.dailymotion.com/embed/video/' . $urlInfos['id'];
+                        break;
+                    default:
+                        $this->addFlash('danger', 'L\'url de la vidéo n\'est pas valide');
+                        return $this->redirectToRoute('trick_create');
+                }
+
+                if (!$checkUrl->isEmbedUrlValid($url)) {
+                    $this->addFlash('danger', 'L\'url de la vidéo n\'est pas valide');
+                    return $this->redirectToRoute('trick_create');
+                }
+
                 $video = new TrickVideo();
-                $video->setUrl($form->get('video')->getData());
+                $video->setUrl($url);
                 $trick->addVideo($video);
             }
 
@@ -142,7 +165,8 @@ class TrickController extends AbstractController
         Trick $trick,
         Request $request,
         EntityManagerInterface $em,
-        ImageService $imageService): Response
+        ImageService $imageService,
+        CheckURL $checkUrl): Response
     {
         $isAdmin = $this->isGranted('ROLE_ADMIN');
 
@@ -157,6 +181,13 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Check if trick already exist with the new title
+            $trickExist = $em->getRepository(Trick::class)->findOneBy(['title' => $trick->getTitle()]);
+            if ($trickExist && $trickExist->getId() !== $trick->getId()) {
+                $this->addFlash('danger', "Le trick '{$trick->getTitle()}' existe déjà");
+                return $this->redirectToRoute('trick_update', ['slug' => $trick->getSlug()]);
+            }
+
             // Get images
             $images = $form->get('image')->getData();
             foreach ($images as $image) {
@@ -170,11 +201,33 @@ class TrickController extends AbstractController
                 $trick->addImage($image);
             }
 
-            // Check if trick already exist with the new title
-            $trickExist = $em->getRepository(Trick::class)->findOneBy(['title' => $trick->getTitle()]);
-            if ($trickExist && $trickExist->getId() !== $trick->getId()) {
-                $this->addFlash('danger', "Le trick '{$trick->getTitle()}' existe déjà");
-                return $this->redirectToRoute('trick_update', ['slug' => $trick->getSlug()]);
+            // Video
+            $video = $form->get('video')->getData();
+            if ($video) {
+                $urlInfos = $checkUrl->getUrlInfos($video);
+                switch ($urlInfos['platform']) {
+                    case 'youtube':
+                        $url = 'https://www.youtube.com/embed/' . $urlInfos['id'];
+                        break;
+                    case 'vimeo':
+                        $url = 'https://player.vimeo.com/video/' . $urlInfos['id'];
+                        break;
+                    case 'dailymotion':
+                        $url = 'https://www.dailymotion.com/embed/video/' . $urlInfos['id'];
+                        break;
+                    default:
+                        $this->addFlash('danger', 'L\'url de la vidéo n\'est pas valide');
+                        return $this->redirectToRoute('trick_create');
+                }
+
+                if (!$checkUrl->isEmbedUrlValid($url)) {
+                    $this->addFlash('danger', 'L\'url de la vidéo n\'est pas valide');
+                    return $this->redirectToRoute('trick_create');
+                }
+
+                $video = new TrickVideo();
+                $video->setUrl($url);
+                $trick->addVideo($video);
             }
 
             // Update trick data
