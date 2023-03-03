@@ -41,11 +41,20 @@
                     </div>
                 </div>
             {% endfor %}
+            {% for video in trick.video %}
+                <div class="d-flex flex-column mb-4">
+                    <div class="col">
+                        <div class="card">
+                            <iframe height="250" class="card-img-top" src="{{ video.url }}" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 
     <!-- Mobile Medias (Button trigger modal) -->
-    {% if trick.image.count() >= 1 %}
+    {% if trick.image.count() >= 1 or trick.video.count() >= 1 %}
         <div class="mobile-medias d-flex justify-content-center pt-4">
             <button type="button" class="btn" data-toggle="modal" data-target="#mobileMediasModal">Afficher les médias</button>
         </div>
@@ -70,11 +79,14 @@
                         </div>
                     {% endfor %}
                     <hr>
-{#                     <!-- Videos -->
-                    <div class="my-4">
-                        <iframe height="250" class="card-img-top" src="https://www.youtube.com/embed/V9xuy-rVj9w"></iframe>
-                    </div>
-                    <hr> #}
+                    <!-- Videos -->
+                    {% for video in trick.video %}
+                        <div class="my-4">
+                            <iframe height="250" class="card-img-top" src="{{ video.url }}" allowfullscreen></iframe>
+                        </div> 
+                    {% endfor %}
+
+                    <hr>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="medias-modal-btn btn btn-secondary" data-dismiss="modal">Retour</button>
