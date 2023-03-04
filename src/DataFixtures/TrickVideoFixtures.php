@@ -6,15 +6,11 @@ use App\Entity\TrickVideo;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Faker;
 
 class TrickVideoFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        // Use of faker to generate data
-        $faker = Faker\Factory::create('fr_FR');
-
         for ($i = 1; $i <= 45; $i++) {
             $video = new TrickVideo;
 
