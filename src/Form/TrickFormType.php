@@ -40,7 +40,8 @@ class TrickFormType extends AbstractType
                 ]
             ])
             ->add('image', FileType::class, [
-                'label' => 'Image(s)',
+                'label' => 'Image(s) (facultatif)',
+                'help' => "Formats acceptés : jpg, jpeg, png, webp. Taille max : 1Mo",
                 'multiple' => true,
                 'mapped' => false,
                 'required' => false,
@@ -61,7 +62,8 @@ class TrickFormType extends AbstractType
                 ]
             ])
             ->add('video', TextType::class, [
-                'label' => 'Vidéo(s)',
+                'label' => 'Vidéo(s) (facultatif)',
+                'help' => "Lien de la vidéo (Youtube, Dailymotion, Vimeo)",
                 'mapped' => false,
                 'required' => false,
                 'attr' => [

@@ -14,7 +14,7 @@ class ImageService
         $this->params = $params;
     }
 
-    public function add(UploadedFile $image, ?string $folder = '', ?int $width = 250, ?int $height = 250)
+    public function add(UploadedFile $image, ?string $folder = '', ?int $width = 250, ?int $height = 250, ?bool $circle = false)
     {
         // Rename file
         $file = md5(uniqid(rand(), true)) . '.webp';

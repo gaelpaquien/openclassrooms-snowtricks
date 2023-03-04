@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
+use App\Service\ImageService;
 use App\Service\JWTService;
 use App\Service\SendMailService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,6 +24,7 @@ class RegistrationController extends AbstractController
         EntityManagerInterface $entityManager,
         SendMailService $mail,
         JWTService $jwt,
+        ImageService $imageService,
     ): Response
     {
         $user = new User();
@@ -37,6 +39,17 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+
+            // Profile picture
+            $image = $form->get('profile_picture')->getData();
+            if ($image) {
+                // Destination folder
+                $folder = 'users';
+                // Save image in folder
+                $file = $imageService->add($image, $folder, 90, 90);
+
+                $user->setProfilePicture($file);
+            }
 
             $entityManager->persist($user);
             $entityManager->flush();
