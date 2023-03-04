@@ -24,7 +24,7 @@ class Trick
     #[ORM\Column(length: 255, unique: true)]
     #[Assert\NotBlank(message: 'Le titre du trick ne peut pas être vide')]
     #[Assert\Length(
-        min: 5,
+        min: 3,
         max: 200,
         minMessage: 'Le titre du trick doit contenir au moins {{ limit }} caractères',
         maxMessage: 'Le titre du trick doit contenir au maximum {{ limit }} caractères'
