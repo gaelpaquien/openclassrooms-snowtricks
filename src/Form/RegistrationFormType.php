@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Image;
 
 class RegistrationFormType extends AbstractType
 {
@@ -30,13 +31,25 @@ class RegistrationFormType extends AbstractType
                 ],
                 'label' => 'Email',
             ])
-/*             ->add('profile_picture', FileType::class, [
+            ->add('profile_picture', FileType::class, [
+                'mapped' => false,
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control'
                 ],
                 'label' => 'Photo de profil (facultatif)',
-                'required' => false,
-            ]) */
+                'help' => 'Formats acceptés : jpg, jpeg, png, gif. Taille maximale : 1Mo',
+                'constraints' => [
+                    new Image([
+                        'maxSize' => '1024k',
+                        'maxSizeMessage' => 'Le fichier ne doit pas dépasser {{ limit }} {{ suffix }}.',
+                        'mimeTypes' => [
+                            'image/*',
+                        ],
+                        'mimeTypesMessage' => 'Format de fichier invalide',
+                    ])
+                ],
+            ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller

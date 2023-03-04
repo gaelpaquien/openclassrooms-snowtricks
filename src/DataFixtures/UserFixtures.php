@@ -25,7 +25,7 @@ class UserFixtures extends Fixture
         $admin = new User();
         $admin->setEmail('admin@email.com');
         $admin->setUsername('admin');
-        $admin->setProfilePicture($faker->imageUrl(640, 480, null, true));
+        $admin->setProfilePicture('default.jpg');
         $admin->setPassword($this->passwordEncoder->hashPassword($admin, 'password'));
         $admin->setRoles(['ROLE_ADMIN']);
         $admin->setIsVerified(true);
@@ -37,7 +37,7 @@ class UserFixtures extends Fixture
             $user = new User();
             $user->setEmail($faker->email);
             $user->setUsername($faker->userName);
-            $user->setProfilePicture($faker->imageUrl(640, 480, null, true));
+            $user->setProfilePicture('default.jpg');
             $user->setPassword($this->passwordEncoder->hashPassword($user, 'password'));
             $user->setRoles([]);
             $user->setIsVerified(true);

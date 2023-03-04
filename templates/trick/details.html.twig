@@ -45,7 +45,6 @@
                 <div class="d-flex flex-column mb-4">
                     <div class="col">
                         <div class="card">
-                            <iframe height="250" class="card-img-top" src="{{ video.url }}" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
@@ -121,7 +120,11 @@
             <hr>
                 {% for comment in comments.data %}
                     <div class="d-flex flex-row justify-content-start mt-4">
-                        <img src="{{ asset('assets/uploads/users/default.svg') }}" alt="">
+                        {% if comment.author.profilePicture == 'default.jpg' %}
+                            <img src="{{ asset('assets/uploads/users/default.jpg') }}" alt="Photo de profil de {{ comment.author.username }}" class="img-circle">
+                        {% else %}
+                            <img src="{{ asset('assets/uploads/users/mini/90x90-' ~ comment.author.profilePicture) }}" alt="Photo de profil de {{ comment.author.username }}" class="img-circle">
+                        {% endif %}
                         <div class="d-flex flex-column">
                             <span class="px-2 fw-bolder">{{ comment.content }}</span>
                             <span class="px-2 text-muted">
