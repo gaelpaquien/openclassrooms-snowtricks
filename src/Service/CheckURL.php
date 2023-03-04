@@ -3,7 +3,6 @@
 namespace App\Service;
 
 class CheckURL {
-
     public function isEmbedUrlValid($url) {
         $valid = false;
 
@@ -25,8 +24,8 @@ class CheckURL {
         return $valid;
     }
 
-    function getUrlInfos($url) {
-        $videoInfo = array();
+    public function getUrlInfos($url) {
+        $videoInfo = [];
         $videoInfo['platform'] = null;
         $videoInfo['id'] = null;
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Service;
 
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
