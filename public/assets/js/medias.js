@@ -7,7 +7,7 @@ for (let link of links) {
         e.preventDefault();
 
         // Get the closest image block
-        let imageBlock = link.closest(".image-block");
+        let mediaBlock = link.closest(".media-block");
 
         // Confirm the deletion
         if (confirm(`${link.getAttribute("data-confirm-message")} ?`)) {
@@ -23,7 +23,7 @@ for (let link of links) {
                 // If the request is successful
                 response => response.json().then(data => {
                     if (data.success) {
-                        imageBlock.remove();
+                        mediaBlock.remove();
                         location.reload();
                     }
 

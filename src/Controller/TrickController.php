@@ -217,12 +217,12 @@ class TrickController extends AbstractController
                         break;
                     default:
                         $this->addFlash('danger', 'L\'url de la vidéo n\'est pas valide');
-                        return $this->redirectToRoute('trick_create');
+                        return $this->redirectToRoute('trick_update', ['slug' => $trick->getSlug()]);
                 }
 
                 if (!$checkUrl->isEmbedUrlValid($url)) {
                     $this->addFlash('danger', 'L\'url de la vidéo n\'est pas valide');
-                    return $this->redirectToRoute('trick_create');
+                    return $this->redirectToRoute('trick_update', ['slug' => $trick->getSlug()]);
                 }
 
                 $video = new TrickVideo();
@@ -237,7 +237,7 @@ class TrickController extends AbstractController
             // Save and redirect
             $em->flush();
             $this->addFlash('success', "Le trick '{$trick->getTitle()}' a été modifié avec succès");
-            return $this->redirectToRoute('trick_details', [
+            return $this->redirectToRoute('trick_update', [
                 'slug' => $trick->getSlug(),
                 'isAdmin' => $isAdmin
             ]);
@@ -255,7 +255,8 @@ class TrickController extends AbstractController
         Trick $trick,
         EntityManagerInterface $em,
         TrickVideoRepository $trickVideo,
-        TrickImageRepository $trickImage): Response
+        TrickImageRepository $trickImage,
+        ImageService $imageService): Response
     {
         // Check if user is admin
         $isAdmin = $this->isGranted('ROLE_ADMIN');
@@ -284,7 +285,12 @@ class TrickController extends AbstractController
         // Delete images of the trick
         $images = $trickImage->findByTrick($trick->getId());
         foreach ($images as $image) {
-            $em->remove($image);
+            // Check if image exist
+            if ($imageService->delete($image->getName(), 'tricks', 300, 300)) {
+                // Delete image
+                $em->remove($image);
+                $em->flush();
+            }
         }
 
         // Delete trick
@@ -355,6 +361,38 @@ class TrickController extends AbstractController
                 return new JsonResponse(['success' => true], 200);
             }
             return new JsonResponse(['error' => 'Erreur lors de la suppression'], 400);
+        }
+
+        return new JsonResponse(['error' => 'Token invalide'], 400);
+    }
+
+    #[Route('/{slug}/video/{id}/suppression', name: 'video_delete', methods: ['DELETE'])]
+    public function deleteVideo(
+        TrickVideo $video,
+        EntityManagerInterface $em,
+        Request $request): JsonResponse
+    {
+        // Check if user is admin
+        $isAdmin = $this->isGranted('ROLE_ADMIN');
+
+        // Check if user is author of the trick and if user is admin
+        if ($video->getTrick()->getAuthor() !== $this->getUser() && !$isAdmin) {
+            $this->addFlash('danger', 'Vous ne pouvez pas supprimer cette vidéo');
+            return $this->redirectToRoute('trick_details', [
+                'slug' => $video->getTrick()->getSlug(),
+                'isAdmin' => $isAdmin
+            ]);
+        }
+
+        // Get data from request
+        $data = json_decode($request->getContent(), true);
+
+        // Check if token is valid
+        if ($this->isCsrfTokenValid('delete' . $video->getId(), $data['_token'])) {
+            // Delete video
+            $em->remove($video);
+            $em->flush();
+            return new JsonResponse(['success' => true], 200);
         }
 
         return new JsonResponse(['error' => 'Token invalide'], 400);
