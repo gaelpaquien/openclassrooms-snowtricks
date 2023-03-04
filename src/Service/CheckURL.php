@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-class CheckURL 
+class CheckURL
 {
 
     public function isEmbedUrlValid($url) {
