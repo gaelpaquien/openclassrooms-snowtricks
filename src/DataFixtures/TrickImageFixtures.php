@@ -15,10 +15,10 @@ class TrickImageFixtures extends Fixture implements DependentFixtureInterface
         // Use of faker to generate data
         $faker = Faker\Factory::create('fr_FR');
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 45; $i++) {
             $image = new TrickImage;
 
-            $image->setName($faker->imageUrl(640, 480, null, true));
+            $image->setName('TrickFixture' . rand(1, 3) . '.jpg');
 
             $trick = $this->getReference('trick-' . $i);
             $image->setTrick($trick);

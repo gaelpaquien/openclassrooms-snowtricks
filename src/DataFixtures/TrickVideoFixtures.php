@@ -15,11 +15,11 @@ class TrickVideoFixtures extends Fixture implements DependentFixtureInterface
         // Use of faker to generate data
         $faker = Faker\Factory::create('fr_FR');
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 45; $i++) {
             $video = new TrickVideo;
 
-            $video->setUrl($faker->imageUrl(640, 480, null, true));
-            $trick = $this->getReference('trick-'.rand(1, 10));
+            $video->setUrl("https://www.youtube.com/embed/V9xuy-rVj9w");
+            $trick = $this->getReference('trick-'.$i);
 
             $video->setTrick($trick);
 
