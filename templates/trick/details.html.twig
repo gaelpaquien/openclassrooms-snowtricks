@@ -45,6 +45,7 @@
                 <div class="d-flex flex-column mb-4">
                     <div class="col">
                         <div class="card">
+                            <iframe height="250" class="card-img-top" src="{{ video.url }}" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
@@ -82,9 +83,9 @@
                     {% for video in trick.video %}
                         <div class="my-4">
                             <iframe height="250" class="card-img-top" src="{{ video.url }}" allowfullscreen></iframe>
-                        </div> 
+                        </div>
+                        test
                     {% endfor %}
-
                     <hr>
                 </div>
                 <div class="modal-footer">

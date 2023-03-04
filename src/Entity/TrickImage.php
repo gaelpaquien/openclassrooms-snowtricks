@@ -13,7 +13,7 @@ class TrickImage
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, unique: true)]
+    #[ORM\Column(length: 255)]
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'image')]
