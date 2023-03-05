@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Text;
 
-class TextService
+class SlugService
 {
 
   public static function slugify($text, string $divider = '-'): string

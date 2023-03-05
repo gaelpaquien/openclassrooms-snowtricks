@@ -11,9 +11,10 @@ use App\Form\TrickFormType;
 use App\Repository\CommentRepository;
 use App\Repository\TrickImageRepository;
 use App\Repository\TrickVideoRepository;
-use App\Service\CheckURL;
 use App\Service\ImageService;
-use App\Service\TextService;
+use App\Service\Text\SlugService;
+use App\Service\Text\URLService;
+use App\Service\TrickService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,12 +29,13 @@ class TrickController extends AbstractController
     public function create(
         Request $request,
         EntityManagerInterface $em,
-        TextService $text,
+        SlugService $text,
         ImageService $imageService,
-        CheckURL $checkUrl): Response
+        URLService $urlService,
+        TrickService $trickService): Response
     {
         // Check if user is logged
-        if (!$this->getUser()) {
+        if (!$trickService->userIsLogged()) {
             $this->addFlash('danger', 'Vous devez être connecté pour accéder à cette page');
             return $this->redirectToRoute('main');
         }
@@ -67,25 +69,15 @@ class TrickController extends AbstractController
             // Video
             $video = $form->get('video')->getData();
             if ($video) {
-                $urlInfos = $checkUrl->getUrlInfos($video);
-                switch ($urlInfos['platform']) {
-                    case 'youtube':
-                        $url = 'https://www.youtube.com/embed/' . $urlInfos['id'];
-                        break;
-                    case 'vimeo':
-                        $url = 'https://player.vimeo.com/video/' . $urlInfos['id'];
-                        break;
-                    case 'dailymotion':
-                        $url = 'https://www.dailymotion.com/embed/video/' . $urlInfos['id'];
-                        break;
-                    default:
-                        $this->addFlash('danger', 'L\'url de la vidéo n\'est pas valide');
-                        return $this->redirectToRoute('trick_create');
-                }
+                // Construct embed url
+                $url = $urlService->constructEmbedUrl($urlService->getUrlInfos($video));
 
-                if (!$checkUrl->isEmbedUrlValid($url)) {
+                // Check if embed url is valid
+                if (!$urlService->isEmbedUrlValid($url)) {
                     $this->addFlash('danger', 'L\'url de la vidéo n\'est pas valide');
-                    return $this->redirectToRoute('trick_create');
+                    return $this->redirectToRoute('trick_update', [
+                        'slug' => $trick->getSlug()
+                    ]);
                 }
 
                 $video = new TrickVideo();
@@ -107,7 +99,6 @@ class TrickController extends AbstractController
         }
 
         return $this->render('trick/create.html.twig', [
-            'controller_name' => 'TrickCreate',
             'createTrickForm' => $form->createView()
         ]);
     }
@@ -117,11 +108,9 @@ class TrickController extends AbstractController
         Trick $trick,
         CommentRepository $commentRepository,
         Request $request,
-        EntityManagerInterface $em): Response
+        EntityManagerInterface $em,
+        TrickService $trickService): Response
     {
-        // Check if user is admin
-        $isAdmin = $this->isGranted('ROLE_ADMIN');
-
         // Get the current page
         $page = $request->query->getInt('p', 1);
         if ($page < 1) {
@@ -148,7 +137,7 @@ class TrickController extends AbstractController
             $this->addFlash('success', 'Commentaire ajouté avec succès');
             return $this->redirectToRoute('trick_details', [
                 'slug' => $trick->getSlug(),
-                'isAdmin' => $isAdmin
+                'isAdmin' => $trickService->userIsAdmin()
             ]);
         }
 
@@ -156,7 +145,7 @@ class TrickController extends AbstractController
             'trick' => $trick,
             'comments' => $comments,
             'createCommentForm' => $form->createView(),
-            'isAdmin' => $isAdmin
+            'isAdmin' => $trickService->userIsAdmin()
         ]);
     }
 
@@ -166,12 +155,11 @@ class TrickController extends AbstractController
         Request $request,
         EntityManagerInterface $em,
         ImageService $imageService,
-        CheckURL $checkUrl): Response
+        URLService $urlService,
+        TrickService $trickService): Response
     {
-        $isAdmin = $this->isGranted('ROLE_ADMIN');
-
         // Check if user is author of the trick or if user is admin
-        if ($trick->getAuthor() !== $this->getUser() && !$isAdmin) {
+        if (!$trickService->userIsAuthor($trick) && !$trickService->userIsAdmin()) {
             $this->addFlash('danger', 'Vous ne pouvez pas accéder à cette page');
             return $this->redirectToRoute('main');
         }
@@ -185,10 +173,12 @@ class TrickController extends AbstractController
             $trickExist = $em->getRepository(Trick::class)->findOneBy(['title' => $trick->getTitle()]);
             if ($trickExist && $trickExist->getId() !== $trick->getId()) {
                 $this->addFlash('danger', "Le trick '{$trick->getTitle()}' existe déjà");
-                return $this->redirectToRoute('trick_update', ['slug' => $trick->getSlug()]);
+                return $this->redirectToRoute('trick_update', [
+                    'slug' => $trick->getSlug()
+                ]);
             }
 
-            // Get images
+            // Images
             $images = $form->get('image')->getData();
             foreach ($images as $image) {
                 // Destination folder
@@ -196,35 +186,27 @@ class TrickController extends AbstractController
                 // Save image in folder
                 $file = $imageService->add($image, $folder, 300, 300);
 
+                // Add image
                 $image = new TrickImage();
                 $image->setName($file);
                 $trick->addImage($image);
             }
 
-            // Video
+            // Videos
             $video = $form->get('video')->getData();
             if ($video) {
-                $urlInfos = $checkUrl->getUrlInfos($video);
-                switch ($urlInfos['platform']) {
-                    case 'youtube':
-                        $url = 'https://www.youtube.com/embed/' . $urlInfos['id'];
-                        break;
-                    case 'vimeo':
-                        $url = 'https://player.vimeo.com/video/' . $urlInfos['id'];
-                        break;
-                    case 'dailymotion':
-                        $url = 'https://www.dailymotion.com/embed/video/' . $urlInfos['id'];
-                        break;
-                    default:
-                        $this->addFlash('danger', 'L\'url de la vidéo n\'est pas valide');
-                        return $this->redirectToRoute('trick_update', ['slug' => $trick->getSlug()]);
-                }
+                // Construct embed url
+                $url = $urlService->constructEmbedUrl($urlService->getUrlInfos($video));
 
-                if (!$checkUrl->isEmbedUrlValid($url)) {
+                // Check if embed url is valid
+                if (!$urlService->isEmbedUrlValid($url)) {
                     $this->addFlash('danger', 'L\'url de la vidéo n\'est pas valide');
-                    return $this->redirectToRoute('trick_update', ['slug' => $trick->getSlug()]);
+                    return $this->redirectToRoute('trick_update', [
+                        'slug' => $trick->getSlug()
+                    ]);
                 }
 
+                // Add video
                 $video = new TrickVideo();
                 $video->setUrl($url);
                 $trick->addVideo($video);
@@ -239,14 +221,14 @@ class TrickController extends AbstractController
             $this->addFlash('success', "Le trick '{$trick->getTitle()}' a été modifié avec succès");
             return $this->redirectToRoute('trick_update', [
                 'slug' => $trick->getSlug(),
-                'isAdmin' => $isAdmin
+                'isAdmin' => $trickService->userIsAdmin()
             ]);
         }
 
         return $this->render('trick/update.html.twig', [
             'trick' => $trick,
             'trickForm' => $form->createView(),
-            'isAdmin' => $isAdmin
+            'isAdmin' => $trickService->userIsAdmin()
         ]);
     }
 
@@ -256,17 +238,16 @@ class TrickController extends AbstractController
         EntityManagerInterface $em,
         TrickVideoRepository $trickVideo,
         TrickImageRepository $trickImage,
-        ImageService $imageService): Response
+        ImageService $imageService,
+        TrickService $trickService): Response
     {
-        // Check if user is admin
-        $isAdmin = $this->isGranted('ROLE_ADMIN');
 
         // Check if user is author of the trick and if user is admin
-        if ($trick->getAuthor() !== $this->getUser() && !$isAdmin) {
+        if (!$trickService->userIsAuthor($trick) && !$trickService->userIsAdmin()) {
             $this->addFlash('danger', 'Vous ne pouvez pas supprimer ce trick');
             return $this->redirectToRoute('trick_details', [
                 'slug' => $trick->getSlug(),
-                'isAdmin' => $isAdmin
+                'isAdmin' => $trickService->userIsAdmin()
             ]);
         }
 
@@ -299,21 +280,23 @@ class TrickController extends AbstractController
         // Save and redirect
         $em->flush();
         $this->addFlash('success', "Le trick '{$trick->getTitle()}' a été supprimé avec succès");
-        return $this->redirectToRoute('main', ['isAdmin' => $isAdmin]);
+        return $this->redirectToRoute('main', [
+            'isAdmin' => $trickService->userIsAdmin()
+        ]);
     }
 
     #[Route('/{slug}/commentaire/{id}/suppression', name: 'delete_comment')]
-    public function deleteComment(Comment $comment, EntityManagerInterface $em): Response
+    public function deleteComment(
+        Comment $comment, 
+        EntityManagerInterface $em,
+        TrickService $trickService): Response
     {
-        // Check if user is admin
-        $isAdmin = $this->isGranted('ROLE_ADMIN');
-
         // Check if user is author of the comment and if user is admin
-        if ($comment->getAuthor() !== $this->getUser() && !$isAdmin) {
+        if (!$trickService->userIsAuthor($comment) && !$trickService->userIsAdmin()) {
             $this->addFlash('danger', 'Vous ne pouvez pas supprimer ce commentaire');
             return $this->redirectToRoute('trick_details', [
                 'slug' => $comment->getTrick()->getSlug(),
-                'isAdmin' => $isAdmin
+                'isAdmin' => $trickService->userIsAdmin()
             ]);
         }
 
@@ -325,7 +308,7 @@ class TrickController extends AbstractController
         $this->addFlash('success', 'Le commentaire a été supprimé avec succès');
         return $this->redirectToRoute('trick_details', [
             'slug' => $comment->getTrick()->getSlug(),
-            'isAdmin' => $isAdmin
+            'isAdmin' => $trickService->userIsAdmin()
         ]);
     }
 
@@ -334,17 +317,15 @@ class TrickController extends AbstractController
         TrickImage $image,
         EntityManagerInterface $em,
         Request $request,
-        ImageService $imageService): JsonResponse
+        ImageService $imageService,
+        TrickService $trickService): JsonResponse
     {
-        // Check if user is admin
-        $isAdmin = $this->isGranted('ROLE_ADMIN');
-
         // Check if user is author of the trick and if user is admin
-        if ($image->getTrick()->getAuthor() !== $this->getUser() && !$isAdmin) {
+        if ($image->getTrick()->getAuthor() !== $this->getUser() && !$trickService->userIsAdmin()) {
             $this->addFlash('danger', 'Vous ne pouvez pas supprimer cette image');
             return $this->redirectToRoute('trick_details', [
                 'slug' => $image->getTrick()->getSlug(),
-                'isAdmin' => $isAdmin
+                'isAdmin' => $trickService->userIsAdmin()
             ]);
         }
 
@@ -370,17 +351,15 @@ class TrickController extends AbstractController
     public function deleteVideo(
         TrickVideo $video,
         EntityManagerInterface $em,
-        Request $request): JsonResponse
+        Request $request,
+        TrickService $trickService): JsonResponse
     {
-        // Check if user is admin
-        $isAdmin = $this->isGranted('ROLE_ADMIN');
-
         // Check if user is author of the trick and if user is admin
-        if ($video->getTrick()->getAuthor() !== $this->getUser() && !$isAdmin) {
+        if ($video->getTrick()->getAuthor() !== $this->getUser() && !$trickService->userIsAdmin()) {
             $this->addFlash('danger', 'Vous ne pouvez pas supprimer cette vidéo');
             return $this->redirectToRoute('trick_details', [
                 'slug' => $video->getTrick()->getSlug(),
-                'isAdmin' => $isAdmin
+                'isAdmin' => $trickService->userIsAdmin()
             ]);
         }
 
