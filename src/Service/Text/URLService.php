@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Text;
 
-class CheckURL
+class URLService
 {
 
     public function isEmbedUrlValid($url) {
@@ -50,6 +50,27 @@ class CheckURL
         }
 
         return $videoInfo;
+    }
+
+    public function constructEmbedUrl($urlInfos) {
+
+        $url = null;
+
+        switch ($urlInfos['platform']) {
+            case 'youtube':
+                $url = 'https://www.youtube.com/embed/' . $urlInfos['id'];
+                break;
+            case 'vimeo':
+                $url = 'https://player.vimeo.com/video/' . $urlInfos['id'];
+                break;
+            case 'dailymotion':
+                $url = 'https://www.dailymotion.com/embed/video/' . $urlInfos['id'];
+                break;
+            default:
+                return null;
+        }
+
+        return $url;
     }
 
 }
