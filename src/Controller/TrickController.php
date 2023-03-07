@@ -287,7 +287,7 @@ class TrickController extends AbstractController
 
     #[Route('/{slug}/commentaire/{id}/suppression', name: 'delete_comment')]
     public function deleteComment(
-        Comment $comment, 
+        Comment $comment,
         EntityManagerInterface $em,
         TrickService $trickService): Response
     {

@@ -75,34 +75,34 @@
 
 .tricks {
     background-color: var(--beige);
-  }
-  
-  .tricks .col {
+}
+
+.tricks .col {
     padding-bottom: 24px;
-  }
-  
-  .tricks .card {
+}
+
+.tricks .card {
     border: solid 1px var(--teal);
-  }
-  
-  .tricks .card-img-top {
+}
+
+.tricks .card-img-top {
     height: 200px;
     object-fit: cover;
-  }
-  
-  .tricks .card-title {
+}
+
+.tricks .card-title {
     font-size: 1rem;
     width: 70%;
-  }
-  
-  .tricks .card-title a {
+}
+
+.tricks .card-title a {
     color: var(--grey);
-  }
-  
-  .tricks .card-title a:hover {
+}
+
+.tricks .card-title a:hover {
     color: var(--teal);
-  }
-  
+}
+
   @media (min-width: 992px) and (max-width: 1200px) {
     .tricks .card-title {
       font-size: 0.8rem;
