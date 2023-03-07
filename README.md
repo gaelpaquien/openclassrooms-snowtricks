@@ -16,35 +16,36 @@
 
 ### Setting up the website
 
-#### Required:
-
+#### Required
 1. [PHP](https://www.php.net/downloads.php)
 2. [Symfony CLI](https://symfony.com/download)
 3. [Composer](https://getcomposer.org/download/)
 4. [MySQL](https://www.mysql.com/fr/downloads/)
-5. SMTP configuration, for example you can use [maildev](https://github.com/maildev/maildev)
-6. Create an '.env.local' file and copy the content of the '.env' file and change the lines below.
+5. [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+6. SMTP configuration, for example you can use [maildev](https://github.com/maildev/maildev)
 
-##### Lines to be modified in the new file '.env.local':
+#### Installation
+1. Download the [GitHub repository](https://github.com/Galuss1/openclassrooms-snowtricks/) on the main branch.
+2. Create '.env.local' file in the root of the project, and copy the content of the '.env' file and change [the lines below](#lines-to-be-modified).
+3. Create a database called "snowtricks".
+4. Open a command terminal at the root of the project and use the following commands:\
+   4.1  **symfony console doctrine:schema:create** *(this command will import the database schema)*\
+   4.2  **symfony console doctrine:fixtures:load** *(this command allows generating data in the database)*\
+   4.3. **composer install** *(this command allows you to install the project's dependencies)*\
+   4.4. **composer dump-autoload** *(this command allows you to update your autoloader)*\
+   4.5. **npm install** in a terminal *(this command installs the npm packages)
+5. Launch your SMTP service.
+6. Launch your website. For this, there are several solutions:\
+   6.1. Use a web server (MAMP, XAMPP...).\
+   6.2. Launch a terminal from the root of the project and use the following command: **symfony serve -d**
+
+##### Lines to be modified
 > APP_ENV={dev or prod}\
 > APP_SECRET={secret token for app}\
 > DATABASE_URL="mysql://{username}:{password}@{host}:{port}/{db_name}?serverVersion=8&charset=utf8mb4"\
 > MAILER_DSN=smtp://{host}:{port}\
 > JWT_SECRET='{secret token for JWTService}'
 
-#### Installation:
-
-1. Download the [GitHub repository](https://github.com/Galuss1/openclassrooms-snowtricks/) on the main branch.
-2. Create your '.env.local' file in the root of the project, the information modified in this new file must be correct.
-3. Create your database and use the command "symfony console doctrine:schema:create" in a terminal, this command will import the database schema.
-4. Use the command "symfony console doctrine:fixtures:load" in a terminal, this command allows generating data in the database.
-5. Open a command terminal at the root of the project and use the following commands:\
-   5.1. **composer install** *(this command allows you to install the project's dependencies)*\
-   5.2. **composer dump-autoload** *(this command allows you to update your autoloader)*
-6. Launch your website. For this, there are several solutions:\
-   6.1. Use a web server (MAMP, XAMPP...).\
-   6.2. Launch a terminal from the root of the project and use the following command: **symfony serve -d**
-7. Launch your SMTP service.
 
  ---
 
