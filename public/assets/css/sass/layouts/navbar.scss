@@ -1,0 +1,13 @@
+.nav-btn {
+    background: none;
+    border: none;
+    color: var(--beige);
+  }
+
+.nav-btn:hover {
+    color: var(--teal);
+}
+
+.nav-btn:focus {
+    color: var(--beige);
+}

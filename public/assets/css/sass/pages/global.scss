@@ -1,0 +1,89 @@
+.register,
+.login,
+.create-tricks,
+.forgot-password,
+.reset-password {
+    background-color: var(--beige);
+    color: var(--grey) !important;
+    height: 100vh;
+}
+
+.register .row,
+.login .row,
+.create-tricks .row,
+.forgot-password .row,
+.reset-password .row {
+  margin-bottom: 35px;
+}
+
+.register form,
+.login form,
+.create-tricks form,
+.forgot-password form,
+.reset-password form {
+  width: 80%;
+  margin: auto;
+  border: 1px solid var(--grey);
+  padding: 10px 30px;
+}
+
+.register form div,
+.login form div,
+.create-tricks form div,
+.update-tricks form div,
+.forgot-password form div,
+.reset-password form div {
+  margin: 15px 0 15px 0;
+  margin-bottom: 0;
+}
+
+.register .form-control:focus,
+.login .form-control:focus,
+.create-tricks .form-control:focus,
+.update-tricks .form-control:focus,
+.forgot-password .form-control:focus,
+.reset-password .form-control:focus {
+  border-color: var(--teal);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(34, 163, 159, 0.6);
+}
+
+.register form button,
+.login form button,
+.create-tricks form button,
+.forgot-password form button,
+.reset-password form button {
+  background-color: var(--grey);
+  color: var(--beige);
+  border: none;
+  border-radius: 18px;
+  font-size: 1rem;
+  margin-top: 10px;
+  padding: 10px 20px;
+  width: 150px;
+}
+
+.register form button:hover,
+.login form button:hover,
+.create-tricks form button:hover,
+.forgot-password form button:hover,
+.reset-password form button:hover {
+  opacity: 0.8;
+  background-color: var(--teal);
+  color: var(--beige);
+}
+
+.register form a,
+.login form a,
+.create-tricks form a,
+.forgot-password form a,
+.reset-password form a {
+  color: var(--grey);
+}
+
+.register form a:hover,
+.login form a:hover,
+.create-tricks form a:hover,
+.forgot-password form a:hover,
+.reset-password form a:hover {
+  color: var(--teal);
+}
