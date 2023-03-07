@@ -22,7 +22,7 @@
 3. [Composer](https://getcomposer.org/download/)
 4. [MySQL](https://www.mysql.com/fr/downloads/)
 5. [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-6. SMTP configuration, for example you can use [maildev](https://github.com/maildev/maildev)
+6. SMTP service, for example [maildev](https://github.com/maildev/maildev)
 
 #### Installation
 1. Download the [GitHub repository](https://github.com/Galuss1/openclassrooms-snowtricks/) on the main branch.
