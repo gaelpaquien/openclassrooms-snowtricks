@@ -4,15 +4,13 @@
 
 {% block body %}
     <section class="create-tricks d-flex align-items-center py-4">
-        {{ form_start(createTrickForm) }}
-        {{ form_row(createTrickForm.title) }}
-        {{ form_row(createTrickForm.description) }}
-        {{ form_row(createTrickForm.category) }}
-        {{ form_row(createTrickForm.image) }}
-        {{ form_row(createTrickForm.video) }}
-        <div class="d-flex flex-column justify-content-center align-items-center">
-            <button type="submit" class="mb-3">Créer le Trick</button>
+        <!-- Form -->
+        <div class="tricks-content container mt-4">
+            {% include "trick/_form.html.twig" %}
         </div>
-        {{ form_end(createTrickForm) }}
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/videos.js') }}" defer></script>
 {% endblock %}
