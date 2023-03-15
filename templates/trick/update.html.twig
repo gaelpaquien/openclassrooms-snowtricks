@@ -12,17 +12,9 @@
                 <img class="card-img-top" src="{{ asset('assets/uploads/tricks/default.png') }}" alt="Image de {{ trick.title }}">
             {% endif %} 
             <span>{{ trick.title }}</span>
-{#             <div class="links">
-                <a href="#" class="update">
-                    <i class="fa-sharp fa-solid fa-pencil"></i>
-                </a>
-                <a href="#" class="delete">
-                    <i class="fa-regular fa-trash-can"></i>
-                </a>
-            </div> #}
         </div>
 
-        <!-- Content -->
+        <!-- Form -->
         <div class="tricks-content container mt-4">
             {% include "trick/_form.html.twig" %}
         </div>

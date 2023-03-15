@@ -1,5 +1,5 @@
 {{ form_start(trickForm) }}
-    {# editting page only #}
+    {# if is editting page #}
     {% if app.request.attributes.get('_route') == 'trick_update' %}
         {% include "trick/_form_media.html.twig" %}
     {% endif %}
@@ -10,12 +10,19 @@
     {{ form_row(trickForm.image) }}
     {{ form_row(trickForm.video) }}
 
-    <div class="tricks-content-btn d-flex justify-content-end mt-4">
-        <button type="submit" class="btn update">{{ button_label|default('Modifier') }}</button>
-        <a class="btn delete mx-3 delete-trick-modal"
-            data-url="{{ path('trick_delete', {slug: trick.slug}) }}" 
-            data-confirm-message="Êtes-vous sûr de vouloir supprimer le trick '{{ trick.title }}' ?">
-            Supprimer
-        </a>
-    </div>
+    {# if is editting page #}
+    {% if app.request.attributes.get('_route') == 'trick_update' %}
+        <div class="tricks-content-btn d-flex justify-content-end mt-4">
+            <button type="submit" class="btn update">{{ button_label|default('Modifier le trick') }}</button>
+            <a class="btn delete mx-3 delete-trick-modal"
+                data-url="{{ path('trick_delete', {slug: trick.slug}) }}" 
+                data-confirm-message="Êtes-vous sûr de vouloir supprimer le trick '{{ trick.title }}' ?">
+                Supprimer
+            </a>
+        </div>
+    {% else %}
+        <div class="tricks-content-btn d-flex justify-content-end mt-4">
+            <button type="submit" class="btn create">{{ button_label|default('Créer le trick') }}</button>
+        </div>
+    {% endif %}
 {{ form_end(trickForm) }}
