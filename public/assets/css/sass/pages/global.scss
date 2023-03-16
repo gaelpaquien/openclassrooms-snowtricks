@@ -5,7 +5,23 @@
 .reset-password {
     background-color: var(--beige);
     color: var(--grey) !important;
-    //height: 100vh;
+    padding-bottom: 125px;
+    padding-top: 125px;
+}
+
+.register {
+  padding-bottom: 160px !important;
+  padding-top: 160px !important;
+}
+
+.login {
+  padding-bottom: 225px !important;
+  padding-top: 225px !important;
+}
+
+.reset-password, .forgot-password {
+  padding-bottom: 300px !important;
+  padding-top: 300px !important;
 }
 
 .register .row,
@@ -51,7 +67,8 @@
 .login form button,
 .create-tricks form button,
 .forgot-password form button,
-.reset-password form button {
+.reset-password form button,
+.update-tricks form button {
   background-color: var(--grey);
   color: var(--beige);
   border: none;
@@ -66,7 +83,8 @@
 .login form button:hover,
 .create-tricks form button:hover,
 .forgot-password form button:hover,
-.reset-password form button:hover {
+.reset-password form button:hover,
+.update-tricks form button:hover {
   opacity: 0.8;
   background-color: var(--teal);
   color: var(--beige);
