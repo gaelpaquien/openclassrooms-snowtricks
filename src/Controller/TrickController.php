@@ -67,6 +67,8 @@ class TrickController extends AbstractController
             }
 
             // Video
+            $videos = $form->get('videos')->getData();
+            dd($videos);
             $video = $form->get('video')->getData();
             if ($video) {
                 // Construct embed url

@@ -6,6 +6,7 @@ use App\Entity\Trick;
 use App\Entity\TrickCategory;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -61,15 +62,23 @@ class TrickFormType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('video', TextType::class, [
-                'label' => 'Vidéo(s) (facultatif)',
-                'help' => "Lien de la vidéo (Youtube, Dailymotion, Vimeo)",
+            ->add('videos', CollectionType::class, [
+                'entry_type' => TextType::class,
+                'entry_options' => [
+                    'label' => 'Vidéo',
+                    'help' => 'Lien de la vidéo (Youtube, Dailymotion, Vimeo)',
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+                ],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'label' => 'Vidéos (facultatif)',
                 'mapped' => false,
                 'required' => false,
-                'attr' => [
-                    'class' => 'form-control'
-                ]
-            ])
+                'prototype' => true,
+                'by_reference' => false,
+            ]);
         ;
     }
 

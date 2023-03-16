@@ -8,7 +8,20 @@
     {{ form_row(trickForm.description) }}
     {{ form_row(trickForm.category) }}
     {{ form_row(trickForm.image) }}
-    {{ form_row(trickForm.video) }}
+    {{ form_label(trickForm.videos) }}
+    <div id="videos-container"
+         data-prototype="{{ form_widget(trickForm.videos.vars.prototype)|e }}"
+         data-index="{{ trickForm.videos|length }}">
+        {% for video in trickForm.videos %}
+            <div class="form-group">
+                {{ form_widget(video) }}
+                {{ form_errors(video) }}
+            </div>
+        {% endfor %}
+    </div>
+    <button type="button" class="add-video btn btn-secondary mb-3" data-target="#videos-container">
+        Ajouter une vidéo
+    </button>
 
     {# if is editting page #}
     {% if app.request.attributes.get('_route') == 'trick_update' %}
