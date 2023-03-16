@@ -8,33 +8,42 @@
     {{ form_row(trickForm.description) }}
     {{ form_row(trickForm.category) }}
     {{ form_row(trickForm.image) }}
-    {{ form_label(trickForm.videos) }}
-    <div id="videos-container"
-         data-prototype="{{ form_widget(trickForm.videos.vars.prototype)|e }}"
-         data-index="{{ trickForm.videos|length }}">
-        {% for video in trickForm.videos %}
-            <div class="form-group">
-                {{ form_widget(video) }}
-                {{ form_errors(video) }}
-            </div>
-        {% endfor %}
+
+    <div class="form-videos">
+        {{ form_label(trickForm.videos) }}
+        <div id="videos-container"
+            data-prototype="{{ form_row(trickForm.videos.vars.prototype)|e }}"
+            data-index="{{ trickForm.videos|length }}">
+            {% for video in trickForm.videos %}
+                <div class="video-item">
+                    <div class="form-group">
+                        {{ form_row(video) }}
+                        {{ form_errors(video) }}
+                    </div>
+                    <button type="button" class="btn remove-video">Supprimer</button>
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" class="add-video btn" data-target="#videos-container">
+            Ajouter une vidéo
+        </button>
     </div>
-    <button type="button" class="add-video btn btn-secondary mb-3" data-target="#videos-container">
-        Ajouter une vidéo
-    </button>
+    {{ form_errors(trickForm.videos) }}
+    {{ form_widget(trickForm.videos) }}
+    
 
     {# if is editting page #}
     {% if app.request.attributes.get('_route') == 'trick_update' %}
         <div class="tricks-content-btn d-flex justify-content-end mt-4">
             <button type="submit" class="btn update">{{ button_label|default('Modifier le trick') }}</button>
             <a class="btn delete mx-3 delete-trick-modal"
-                data-url="{{ path('trick_delete', {slug: trick.slug}) }}" 
+                data-url="{{ path('trick_delete', {slug: trick.slug}) }}"
                 data-confirm-message="Êtes-vous sûr de vouloir supprimer le trick '{{ trick.title }}' ?">
                 Supprimer
             </a>
         </div>
     {% else %}
-        <div class="tricks-content-btn d-flex justify-content-end mt-4">
+        <div class="tricks-content-btn d-flex justify-content-center mt-4 mb-4">
             <button type="submit" class="btn create">{{ button_label|default('Créer le trick') }}</button>
         </div>
     {% endif %}
