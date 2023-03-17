@@ -1,9 +1,11 @@
 $(document).ready(function () {
+    // Remove video field
     $(document).on('click', '.remove-video', function (event) {
         event.preventDefault();
         $(this).closest('.video-item').remove();
     });
 
+    // Add video field
     $('.add-video').on('click', function (event) {
         var $container = $($(this).data('target'));
         var index = $container.data('index');

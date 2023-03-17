@@ -3,7 +3,6 @@ let links = document.querySelectorAll("[data-delete]");
 
 for (let link of links) {
     link.addEventListener("click", function (e) {
-        // Prevent the default behavior
         e.preventDefault();
 
         // Get the closest image block

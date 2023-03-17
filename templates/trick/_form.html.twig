@@ -30,7 +30,6 @@
     </div>
     {{ form_errors(trickForm.videos) }}
     {{ form_widget(trickForm.videos) }}
-    
 
     {# if is editting page #}
     {% if app.request.attributes.get('_route') == 'trick_update' %}
