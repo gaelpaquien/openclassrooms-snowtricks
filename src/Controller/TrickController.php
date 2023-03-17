@@ -8,6 +8,7 @@ use App\Entity\TrickImage;
 use App\Entity\TrickVideo;
 use App\Form\CreateCommentFormType;
 use App\Form\TrickFormType;
+use App\Form\TrickImageFormType;
 use App\Repository\CommentRepository;
 use App\Repository\TrickImageRepository;
 use App\Repository\TrickVideoRepository;
@@ -170,6 +171,10 @@ class TrickController extends AbstractController
         $form = $this->createForm(TrickFormType::class, $trick);
         $form->handleRequest($request);
 
+        // Form to add a new image
+        $formNewImage = $this->createForm(TrickImageFormType::class);
+        $formNewImage->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             // Check if trick already exist with the new title
             $trickExist = $em->getRepository(Trick::class)->findOneBy(['title' => $trick->getTitle()]);
@@ -233,6 +238,7 @@ class TrickController extends AbstractController
         return $this->render('trick/update.html.twig', [
             'trick' => $trick,
             'trickForm' => $form->createView(),
+            'trickImageForm' => $formNewImage->createView(),
             'isAdmin' => $trickService->userIsAdmin()
         ]);
     }
