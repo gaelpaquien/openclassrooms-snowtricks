@@ -66,25 +66,25 @@ class TrickController extends AbstractController
                 $trick->addImage($image);
             }
 
-            // Video
+            // Videos
             $videos = $form->get('videos')->getData();
-            dd($videos);
-            $video = $form->get('video')->getData();
-            if ($video) {
-                // Construct embed url
-                $url = $urlService->constructEmbedUrl($urlService->getUrlInfos($video));
+            if ($videos) {
+                foreach ($videos as $video) {
+                    if ($video !== null && is_string($video)) {
+                        // Construct embed url
+                        $url = $urlService->constructEmbedUrl($urlService->getUrlInfos($video));
 
-                // Check if embed url is valid
-                if (!$urlService->isEmbedUrlValid($url)) {
-                    $this->addFlash('danger', 'L\'url de la vidéo n\'est pas valide');
-                    return $this->redirectToRoute('trick_update', [
-                        'slug' => $trick->getSlug()
-                    ]);
+                        // Check if embed url is valid
+                        if (!$urlService->isEmbedUrlValid($url)) {
+                            $this->addFlash('danger', "'{$video}' n'est pas une URL de vidéo valide");
+                            return $this->redirectToRoute('trick_create');
+                        }
+
+                        $video = new TrickVideo();
+                        $video->setUrl($url);
+                        $trick->addVideo($video);
+                    }
                 }
-
-                $video = new TrickVideo();
-                $video->setUrl($url);
-                $trick->addVideo($video);
             }
 
             // Add trick data
@@ -195,23 +195,26 @@ class TrickController extends AbstractController
             }
 
             // Videos
-            $video = $form->get('video')->getData();
-            if ($video) {
-                // Construct embed url
-                $url = $urlService->constructEmbedUrl($urlService->getUrlInfos($video));
+            $videos = $form->get('videos')->getData();
+            if ($videos) {
+                foreach ($videos as $video) {
+                    if ($video !== null && is_string($video)) {
+                        // Construct embed url
+                        $url = $urlService->constructEmbedUrl($urlService->getUrlInfos($video));
 
-                // Check if embed url is valid
-                if (!$urlService->isEmbedUrlValid($url)) {
-                    $this->addFlash('danger', 'L\'url de la vidéo n\'est pas valide');
-                    return $this->redirectToRoute('trick_update', [
-                        'slug' => $trick->getSlug()
-                    ]);
+                        // Check if embed url is valid
+                        if (!$urlService->isEmbedUrlValid($url)) {
+                            $this->addFlash('danger', "'{$video}' n'est pas une URL de vidéo valide");
+                            return $this->redirectToRoute('trick_update', [
+                                'slug' => $trick->getSlug()
+                            ]);
+                        }
+
+                        $video = new TrickVideo();
+                        $video->setUrl($url);
+                        $trick->addVideo($video);
+                    }
                 }
-
-                // Add video
-                $video = new TrickVideo();
-                $video->setUrl($url);
-                $trick->addVideo($video);
             }
 
             // Update trick data
