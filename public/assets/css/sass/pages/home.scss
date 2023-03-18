@@ -124,7 +124,8 @@
     color: var(--red);
 }
 
-#confirm-modal {
+#confirm-modal,
+#confirm-modal-update {
     position: fixed;
     display: none !important;
     z-index: 9999;
@@ -136,7 +137,8 @@
     justify-content: center;
 }
 
-#confirm-modal::before {
+#confirm-modal::before,
+#confirm-modal-update::before {
     content: "";
     display: none;
     position: absolute;
@@ -148,7 +150,8 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-#confirm-modal .modal-content {
+#confirm-modal .modal-content,
+#confirm-modal-update .modal-content {
     position: relative;
     z-index: 1;
     background-color: #fff;
@@ -161,6 +164,10 @@
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
+}
+
+#confirm-modal-update .modal-content {
+    text-align: left;
 }
 
 .modal .close {

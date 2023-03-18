@@ -171,10 +171,6 @@ class TrickController extends AbstractController
         $form = $this->createForm(TrickFormType::class, $trick);
         $form->handleRequest($request);
 
-        // Form to add a new image
-        $formNewImage = $this->createForm(TrickImageFormType::class);
-        $formNewImage->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             // Check if trick already exist with the new title
             $trickExist = $em->getRepository(Trick::class)->findOneBy(['title' => $trick->getTitle()]);
@@ -233,6 +229,32 @@ class TrickController extends AbstractController
                 'slug' => $trick->getSlug(),
                 'isAdmin' => $trickService->userIsAdmin()
             ]);
+        }
+
+        // Form to add a new image
+        $formNewImage = $this->createForm(TrickImageFormType::class);
+        $formNewImage->handleRequest($request);
+
+        if ($formNewImage->isSubmitted() && $formNewImage->isValid()) {
+            $currentImage = $formNewImage->get('currentImage')->getData();
+            $trickId = $formNewImage->get('trickId')->getData();
+
+            // Check if currentImage exist and is associated with the trick
+            $currentImageExist = $em->getRepository(TrickImage::class)->findOneBy([
+                'name' => $currentImage,
+                'trick' => $trickId
+            ]);
+            if (!$currentImageExist) {
+                $this->addFlash('danger', "L'image n'existe pas");
+                return $this->redirectToRoute('trick_update', [
+                    'slug' => $trick->getSlug()
+                ]);
+            }
+
+            // Delete current image
+            $imageService->delete($currentImage);
+
+            dd('wip');
         }
 
         return $this->render('trick/update.html.twig', [
