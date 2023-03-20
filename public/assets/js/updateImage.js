@@ -25,6 +25,5 @@ window.addEventListener('load', () => {
 
     confirmYesButton.addEventListener('click', () => {
         confirmModal.style.setProperty("display", "none", "important");
-        location.href = url;
     });
 });
