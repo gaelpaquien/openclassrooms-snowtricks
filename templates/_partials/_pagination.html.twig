@@ -20,11 +20,11 @@
 
             {% if currentPage < pages %}
                 <li class="page-item">
-                    <a href="{{ path(path, {slug: slug, p: currentPage + 1}) }}#{{ anchor }}" class="page-link">&gt; Suivant</a>
+                    <a href="{{ path(path, {slug: slug, p: currentPage + 1}) }}#{{ anchor }}" class="page-link">Suivant &gt;</a>
                 </li>
             {% else %}
                 <li class="page-item disabled">
-                    <a href="" class="page-link">&gt; Suivant</a>
+                    <a href="" class="page-link">Suivant &gt;</a>
                 </li>
             {% endif %}
         </ul>

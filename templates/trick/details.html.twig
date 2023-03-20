@@ -31,7 +31,7 @@
 
     <!-- Medias -->
     <div class="container medias pt-4">
-        <div class="row hidden-md-up row-cols-md-3 row-cols-lg-6">
+        <div class="row hidden-md-up row-cols-md-2 row-cols-lg-3">
             {% for image in trick.image %}
                 <div class="d-flex flex-column mb-4">
                     <div class="col">
@@ -66,7 +66,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="mobileMediasModalLabel">Gestion des médias</h5>
+                    <h5 class="modal-title" id="mobileMediasModalLabel">Visualisation des médias</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -84,7 +84,6 @@
                         <div class="my-4">
                             <iframe height="250" class="card-img-top" src="{{ video.url }}" allowfullscreen></iframe>
                         </div>
-                        test
                     {% endfor %}
                     <hr>
                 </div>
@@ -101,8 +100,8 @@
         <div class="infos d-flex flex-row justify-content-center mt-5">
             <span class="mx-4">Catégorie : {{ trick.category.name }}</span>
             <span class="mx-2">Créer le {{ trick.createdAt|date('d/m/Y') }} par {{ trick.author.username }}</span>
-            {% if trick.createdAt != trick.updatedAt %}
-                <span class="mx-2">Modifier le {{ trick.updatedAt|date('d/m/Y') }} par {{ trick.author.username }}</span>
+            {% if (trick.createdAt != trick.updatedAt) and trick.updatedBy != null %}
+                <span class="mx-2">Modifier le {{ trick.updatedAt|date('d/m/Y') }} par {{ trick.updatedBy.username }}</span>
             {% endif %}
         </div>
         {% if app.user %}
@@ -111,7 +110,7 @@
                 {{ form_start(createCommentForm) }}
                 <div class="d-flex flex-row justify-content-center ">
                     {{ form_row(createCommentForm.content) }}
-                    <button type="submit" class="btn create-comment-btn mx-1">Publier le commentaire</button>
+                    <button type="submit" class="btn create-comment-btn mx-2">Publier le commentaire</button>
                 </div>
                 {{ form_end(createCommentForm) }}
             </div>

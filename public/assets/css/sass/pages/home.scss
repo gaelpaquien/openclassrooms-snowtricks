@@ -175,13 +175,23 @@
 }
 
 .modal .close {
-    background-color: var(--beige);
-    color: var(--grey);
-    border: none;
+    background-color: var(--beige) !important;
+    color: var(--grey) !important;
+    border: none !important;
+    border-radius: 0px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    text-shadow: none !important;
 }
 
 .modal .close:hover {
-    color: var(--red);
+    color: var(--red) !important;
+    background-color: var(--beige) !important;
 }
 
 .modal-btn-cancel,
@@ -193,14 +203,13 @@
 
 .modal-btn-cancel:hover,
 .confirm-modal-cancel:hover {
-    background-color: var(--grey);
-    color: var(--beige);
-    opacity: 0.8;
+    background-color: var(--red) !important;
+    color: var(--beige) !important;
 }
 
 .modal-btn-confirm,
 .confirm-modal-validate {
-    background-color: var(--teal);
+    background-color: var(--grey);
     color: var(--beige);
     border: none;
 }
@@ -209,7 +218,6 @@
 .confirm-modal-validate:hover {
     background-color: var(--teal);
     color: var(--beige);
-    opacity: 0.8;
 }
 
 .btn-load-tricks {

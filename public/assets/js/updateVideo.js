@@ -7,20 +7,29 @@ window.addEventListener('load', () => {
     const confirmYesButton = document.getElementById('confirm-yes-update-video');
     const confirmNoButton = document.getElementById('confirm-no-update-video');
     const mobileMedia = document.getElementById('mobileMediasModal');
+    let url = null;
 
     updateButtons.forEach(button => {
         button.addEventListener('click', event => {
+            // Set URL to redirect to if user clicks "No"
+            url = button.getAttribute('data-url');
+            // Disable mobile media modal
             mobileMedia.style.setProperty("display", "none", "important");
-            const url = button.getAttribute('data-video-url');
-            modalVideo.src = url;
-            oldVideo.value = url;
+            // Get video URL
+            const videoURL = button.getAttribute('data-video-url');
+            // Set video source
+            modalVideo.src = videoURL;
+            // Set values for hidden fields
+            oldVideo.value = videoURL;
             trickId.value = button.getAttribute('data-trick-id');
+            // Display modal
             confirmModal.style.setProperty("display", "block", "important");
         });
     });
 
     confirmNoButton.addEventListener('click', () => {
         confirmModal.style.setProperty("display", "none", "important");
+        location.href = url;
     });
 
     confirmYesButton.addEventListener('click', () => {

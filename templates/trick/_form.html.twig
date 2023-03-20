@@ -11,9 +11,13 @@
 
     <div class="form-videos">
         {{ form_label(trickForm.videos) }}
+
         <div id="videos-container"
             data-prototype="{{ form_row(trickForm.videos.vars.prototype)|e }}"
             data-index="{{ trickForm.videos|length }}">
+            <button type="button" class="add-video btn" data-target="#videos-container">
+                Ajouter une vidéo
+            </button>
             {% for video in trickForm.videos %}
                 <div class="video-item">
                     <div class="form-group">
@@ -24,21 +28,18 @@
                 </div>
             {% endfor %}
         </div>
-        <button type="button" class="add-video btn" data-target="#videos-container">
-            Ajouter une vidéo
-        </button>
     </div>
     {{ form_errors(trickForm.videos) }}
     {{ form_widget(trickForm.videos) }}
 
     {# if is editting page #}
     {% if app.request.attributes.get('_route') == 'trick_update' %}
-        <div class="tricks-content-btn d-flex justify-content-end mt-4">
+        <div class="tricks-content-btn d-flex justify-content-end">
             <button type="submit" class="btn update">{{ button_label|default('Modifier le trick') }}</button>
             <a class="btn delete mx-3 delete-trick-modal"
                 data-url="{{ path('trick_delete', {slug: trick.slug}) }}"
                 data-confirm-message="Êtes-vous sûr de vouloir supprimer le trick '{{ trick.title }}' ?">
-                Supprimer
+                Supprimer le trick
             </a>
         </div>
     {% else %}

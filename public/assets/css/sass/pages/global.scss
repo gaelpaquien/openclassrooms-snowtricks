@@ -5,13 +5,11 @@
 .reset-password {
     background-color: var(--beige);
     color: var(--grey) !important;
-    padding-bottom: 125px;
-    padding-top: 125px;
 }
 
 .register {
-  padding-bottom: 160px !important;
-  padding-top: 160px !important;
+  padding-bottom: 150px !important;
+  padding-top: 150px !important;
 }
 
 .login {
@@ -19,10 +17,46 @@
   padding-top: 225px !important;
 }
 
-.reset-password,
+.create-tricks {
+  padding-bottom: 325px !important;
+  padding-top: 325px !important;
+}
+
 .forgot-password {
   padding-bottom: 300px !important;
   padding-top: 300px !important;
+}
+
+.reset-password {
+  padding-bottom: 300px !important;
+  padding-top: 300px !important;
+}
+
+@media (max-width: 578px) {
+  .register {
+    padding-bottom: 150px !important;
+    padding-top: 150px !important;
+  }
+
+  .login {
+    padding-bottom: 225px !important;
+    padding-top: 225px !important;
+  }
+
+  .create-tricks {
+    padding-bottom: 325px !important;
+    padding-top: 325px !important;
+  }
+
+  .forgot-password {
+    padding-bottom: 300px !important;
+    padding-top: 300px !important;
+  }
+
+  .reset-password {
+    padding-bottom: 300px !important;
+    padding-top: 300px !important;
+  }
 }
 
 .register .row,
@@ -69,7 +103,8 @@
 .create-tricks form button,
 .forgot-password form button,
 .reset-password form button,
-.update-tricks form button {
+.update-tricks form button,
+.update-tricks .tricks-content .delete {
   background-color: var(--grey);
   color: var(--beige);
   border: none;
@@ -105,4 +140,9 @@
 .forgot-password form a:hover,
 .reset-password form a:hover {
   color: var(--teal);
+}
+
+img .card-img-top {
+  width: 100% !important;
+  height: 500px !important;
 }

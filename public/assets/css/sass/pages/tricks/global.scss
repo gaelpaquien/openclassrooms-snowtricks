@@ -14,7 +14,7 @@
 .update-tricks .tricks-img-main img,
 .details-tricks .tricks-img-main img {
   width: 100%;
-  height: 400px;
+  height: 700px;
   object-fit: cover;
   opacity: 0.5;
 }
@@ -26,7 +26,15 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: var(--grey);
-  font-size: 3rem;
+  font-size: 5rem;
+  font-weight: bold;
+}
+
+@media (max-width: 578px) {
+  .update-tricks .tricks-img-main span,
+  .details-tricks .tricks-img-main span {
+    font-size: 3rem;
+  }
 }
 
 .update-tricks .tricks-img-main .links,
@@ -61,14 +69,15 @@
 
 .update-tricks .medias .card-img-top,
 .details-tricks .medias .card-img-top {
-  height: 100px;
-  border: 1px solid var(--grey);
+  height: 406px;
+  border: 1px solid black;
+  border-radius: 0px;
 }
 
 .update-tricks .medias .medias-links,
 .details-tricks .medias .medias-links {
     margin-top: 10px;
-    width: 50%;
+    width: 20%;
     margin-left: auto;
     background-color: var(--grey);
 }
@@ -157,14 +166,37 @@
 .update-tricks .medias-modal-btn:focus,
 .details-tricks .medias-modal-btn:hover,
 .details-tricks .medias-modal-btn:focus {
-    background-color: var(--teal);
+    background-color: var(--red);
 }
 
 .add-video {
-  width: 190px !important;
-  margin-top: 5px;
+  width: 160px !important;
+  height: 40px;
+  font-size: 15px !important;
+  margin-top: 5px !important;
+  margin-bottom: 10px !important;
+  border-radius: 0px !important;
+}
+
+.remove-video {
+  width: 160px !important;
+  height: 40px;
+  font-size: 15px !important;
+  margin-top: 5px !important;
+  margin-bottom: 15px !important;
+  border-radius: 0px !important;
+}
+
+.remove-video:hover {
+  background-color: var(--red) !important;
+}
+
+.form-videos #videos-container {
+  margin-top: 0px !important;
 }
 
 .form-videos input {
   margin-top: 10px !important;
 }
+
+

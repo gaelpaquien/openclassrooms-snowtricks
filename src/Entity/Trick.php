@@ -61,6 +61,10 @@ class Trick
     #[ORM\OneToMany(mappedBy: 'trick', targetEntity: TrickVideo::class, orphanRemoval: true, cascade: ['persist'])]
     private $video;
 
+    #[ORM\ManyToOne(inversedBy: 'trick')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?User $updated_by = null;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
@@ -131,6 +135,18 @@ class Trick
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getUpdatedBy(): ?User
+    {
+        return $this->updated_by;
+    }
+
+    public function setUpdatedBy(?User $updated_by): self
+    {
+        $this->updated_by = $updated_by;
 
         return $this;
     }

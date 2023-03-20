@@ -73,7 +73,7 @@ class TrickFormType extends AbstractType
                 ],
                 'allow_add' => true,
                 'allow_delete' => true,
-                'label' => 'Vidéos (facultatif)',
+                'label' => 'Vidéo(s) (facultatif)',
                 'help' => 'Lien de la vidéo (Youtube, Dailymotion, Vimeo)',
                 'mapped' => false,
                 'required' => false,
