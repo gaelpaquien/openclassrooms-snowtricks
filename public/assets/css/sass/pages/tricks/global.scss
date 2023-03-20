@@ -71,7 +71,7 @@
 .details-tricks .medias .card-img-top {
   height: 406px;
   border: 1px solid black;
-  border-radius: 0px;
+  border-radius: 0;
 }
 
 .update-tricks .medias .medias-links,
@@ -175,7 +175,7 @@
   font-size: 15px !important;
   margin-top: 5px !important;
   margin-bottom: 10px !important;
-  border-radius: 0px !important;
+  border-radius: 0 !important;
 }
 
 .remove-video {
@@ -184,7 +184,7 @@
   font-size: 15px !important;
   margin-top: 5px !important;
   margin-bottom: 15px !important;
-  border-radius: 0px !important;
+  border-radius: 0 !important;
 }
 
 .remove-video:hover {
@@ -192,11 +192,9 @@
 }
 
 .form-videos #videos-container {
-  margin-top: 0px !important;
+  margin-top: 0 !important;
 }
 
 .form-videos input {
   margin-top: 10px !important;
 }
-
-
