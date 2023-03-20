@@ -72,20 +72,21 @@ class TrickController extends AbstractController
             $videos = $form->get('videos')->getData();
             if ($videos) {
                 foreach ($videos as $video) {
-                    if ($video !== null && is_string($video)) {
+                    $url = $video;
+                    if (!$urlService->isEmbedUrlValid($video)) {
                         // Construct embed url
                         $url = $urlService->constructEmbedUrl($urlService->getUrlInfos($video));
 
                         // Check if embed url is valid
                         if (!$urlService->isEmbedUrlValid($url)) {
-                            $this->addFlash('danger', "'{$video}' n'est pas une URL de vidéo valide");
+                            $this->addFlash('danger', "Vous devez saisir une URL de vidéo valide");
                             return $this->redirectToRoute('trick_create');
                         }
-
-                        $video = new TrickVideo();
-                        $video->setUrl($url);
-                        $trick->addVideo($video);
                     }
+
+                    $video = new TrickVideo();
+                    $video->setUrl($url);
+                    $trick->addVideo($video);
                 }
             }
 
@@ -162,6 +163,7 @@ class TrickController extends AbstractController
         URLService $urlService,
         TrickService $trickService): Response
     {
+
         // Check if user is author of the trick or if user is admin
         if (!$trickService->userIsAuthor($trick) && !$trickService->userIsAdmin()) {
             $this->addFlash('danger', 'Vous ne pouvez pas accéder à cette page');
@@ -200,22 +202,23 @@ class TrickController extends AbstractController
             $videos = $form->get('videos')->getData();
             if ($videos) {
                 foreach ($videos as $video) {
-                    if ($video !== null && is_string($video)) {
+                    $url = $video;
+                    if (!$urlService->isEmbedUrlValid($video)) {
                         // Construct embed url
                         $url = $urlService->constructEmbedUrl($urlService->getUrlInfos($video));
 
                         // Check if embed url is valid
                         if (!$urlService->isEmbedUrlValid($url)) {
-                            $this->addFlash('danger', "'{$video}' n'est pas une URL de vidéo valide");
+                            $this->addFlash('danger', "Vous devez saisir une URL de vidéo valide");
                             return $this->redirectToRoute('trick_update', [
                                 'slug' => $trick->getSlug()
                             ]);
                         }
-
-                        $video = new TrickVideo();
-                        $video->setUrl($url);
-                        $trick->addVideo($video);
                     }
+
+                    $video = new TrickVideo();
+                    $video->setUrl($url);
+                    $trick->addVideo($video);
                 }
             }
 
@@ -299,7 +302,7 @@ class TrickController extends AbstractController
             $trickId = $formNewVideo->get('trickId')->getData();
 
             // Check if newVideo is valid video
-            if ($newVideo === null) {
+            if ($newVideo === null && is_string($newVideo)) {
                 $this->addFlash('danger', "Vous devez sélectionner une nouvelle vidéo");
                 return $this->redirectToRoute('trick_update', [
                     'slug' => $trick->getSlug()
@@ -319,15 +322,19 @@ class TrickController extends AbstractController
                 ]);
             }
 
-            // Construct embed url
-            $url = $urlService->constructEmbedUrl($urlService->getUrlInfos($newVideo));
+            // Check if newVideo is valid url
+            $url = $newVideo;
+            if (!$urlService->isEmbedUrlValid($newVideo)) {
+                // Construct embed url
+                $url = $urlService->constructEmbedUrl($urlService->getUrlInfos($newVideo));
 
-            // Check if embed url is valid
-            if (!$urlService->isEmbedUrlValid($url)) {
-                $this->addFlash('danger', "'{$newVideo}' n'est pas une URL de vidéo valide");
-                return $this->redirectToRoute('trick_update', [
-                    'slug' => $trick->getSlug()
-                ]);
+                // Check if embed url is valid
+                if (!$urlService->isEmbedUrlValid($url)) {
+                    $this->addFlash('danger', "Vous devez saisir une URL de vidéo valide");
+                    return $this->redirectToRoute('trick_update', [
+                        'slug' => $trick->getSlug()
+                    ]);
+                }
             }
 
             // Update video
