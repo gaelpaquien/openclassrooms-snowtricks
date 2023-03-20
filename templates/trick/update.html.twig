@@ -14,7 +14,7 @@
             <span>{{ trick.title }}</span>
         </div>
 
-        <!-- Form -->
+        <!-- Form to update trick -->
         <div class="tricks-content container mt-4">
             {% include "trick/_form.html.twig" %}
         </div>
@@ -22,14 +22,18 @@
         <!-- Modal to confirm trick deleted -->
         {% include "trick/_modal_delete.html.twig" %}
 
-        <!-- Modal to update trick -->
-        {% include "trick/_modal_update.html.twig" %}
+        <!-- Modal to update image -->
+        {% include "trick/_modal_update_image.html.twig" %}
+
+        <!-- Modal to update video -->
+        {% include "trick/_modal_update_video.html.twig" %}
     </section>
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/js/medias.js') }}" defer></script>
-    <script src="{{ asset('assets/js/modal.js') }}" defer></script>
-    <script src="{{ asset('assets/js/videos.js') }}" defer></script>
-    <script src="{{ asset('assets/js/newMedia.js') }}" defer></script>
+    <script src="{{ asset('assets/js/deleteMedias.js') }}" defer></script>
+    <script src="{{ asset('assets/js/deleteTrickConfirm.js') }}" defer></script>
+    <script src="{{ asset('assets/js/formVideos.js') }}" defer></script>
+    <script src="{{ asset('assets/js/updateImage.js') }}" defer></script>
+    <script src="{{ asset('assets/js/updateVideo.js') }}" defer></script>
 {% endblock %}

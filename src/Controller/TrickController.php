@@ -9,6 +9,7 @@ use App\Entity\TrickVideo;
 use App\Form\CreateCommentFormType;
 use App\Form\TrickFormType;
 use App\Form\TrickImageFormType;
+use App\Form\TrickVideoFormType;
 use App\Repository\CommentRepository;
 use App\Repository\TrickImageRepository;
 use App\Repository\TrickVideoRepository;
@@ -231,36 +232,121 @@ class TrickController extends AbstractController
             ]);
         }
 
-        // Form to add a new image
+        // Form to update image
         $formNewImage = $this->createForm(TrickImageFormType::class);
         $formNewImage->handleRequest($request);
 
         if ($formNewImage->isSubmitted() && $formNewImage->isValid()) {
-            $currentImage = $formNewImage->get('currentImage')->getData();
+            $newImage = $formNewImage->get('newImage')->getData();
+            $oldImage = $formNewImage->get('oldImage')->getData();
             $trickId = $formNewImage->get('trickId')->getData();
 
-            // Check if currentImage exist and is associated with the trick
-            $currentImageExist = $em->getRepository(TrickImage::class)->findOneBy([
-                'name' => $currentImage,
+            // Check if newImage is valid image
+            if ($newImage === null) {
+                $this->addFlash('danger', "Vous devez sélectionner une nouvelle image");
+                return $this->redirectToRoute('trick_update', [
+                    'slug' => $trick->getSlug()
+                ]);
+            }
+
+            $trickImage = $em->getRepository(TrickImage::class)->findOneBy([
+                'name' => $oldImage,
                 'trick' => $trickId
             ]);
-            if (!$currentImageExist) {
+
+            // Check if oldImage exist and is associated with the trick
+            if (!$trickImage) {
                 $this->addFlash('danger', "L'image n'existe pas");
                 return $this->redirectToRoute('trick_update', [
                     'slug' => $trick->getSlug()
                 ]);
             }
 
-            // Delete current image
-            $imageService->delete($currentImage);
+            // Check if oldImage is not the default image
+            if ($oldImage === 'default.png') {
+                $this->addFlash('danger', "L'image par défaut ne peut pas être supprimée");
+                return $this->redirectToRoute('trick_update', [
+                    'slug' => $trick->getSlug()
+                ]);
+            }
 
-            dd('wip');
+            // Delete old image
+            $imageService->delete($oldImage, 'tricks', 300, 300);
+            $em->remove($trickImage);
+
+            // Add new image
+            $file = $imageService->add($newImage, 'tricks', 300, 300);
+            $image = new TrickImage();
+            $image->setName($file);
+            $trick->addImage($image);
+            $em->persist($trick);
+
+            // Save changes and redirect
+            $em->flush();
+            $this->addFlash('success', "L'image a été modifiée avec succès");
+            return $this->redirectToRoute('trick_update', [
+                'slug' => $trick->getSlug()
+            ]);
+        }
+
+        // Form to update video
+        $formNewVideo = $this->createForm(TrickVideoFormType::class);
+        $formNewVideo->handleRequest($request);
+
+        if ($formNewVideo->isSubmitted() && $formNewVideo->isValid()) {
+            $newVideo = $formNewVideo->get('newVideo')->getData();
+            $oldVideo = $formNewVideo->get('oldVideo')->getData();
+            $trickId = $formNewVideo->get('trickId')->getData();
+
+            // Check if newVideo is valid video
+            if ($newVideo === null) {
+                $this->addFlash('danger', "Vous devez sélectionner une nouvelle vidéo");
+                return $this->redirectToRoute('trick_update', [
+                    'slug' => $trick->getSlug()
+                ]);
+            }
+
+            $trickVideo = $em->getRepository(TrickVideo::class)->findOneBy([
+                'url' => $oldVideo,
+                'trick' => $trickId
+            ]);
+
+            // Check if oldVideo exist and is associated with the trick
+            if (!$trickVideo) {
+                $this->addFlash('danger', "La vidéo n'existe pas");
+                return $this->redirectToRoute('trick_update', [
+                    'slug' => $trick->getSlug()
+                ]);
+            }
+
+            // Construct embed url
+            $url = $urlService->constructEmbedUrl($urlService->getUrlInfos($newVideo));
+
+            // Check if embed url is valid
+            if (!$urlService->isEmbedUrlValid($url)) {
+                $this->addFlash('danger', "'{$newVideo}' n'est pas une URL de vidéo valide");
+                return $this->redirectToRoute('trick_update', [
+                    'slug' => $trick->getSlug()
+                ]);
+            }
+
+            // Update video
+            $trickVideo->setUrl($url);
+            $em->persist($trickVideo);
+
+            // Save changes and redirect
+            $em->flush();
+            $this->addFlash('success', "La vidéo a été modifiée avec succès");
+            return $this->redirectToRoute('trick_update', [
+                'slug' => $trick->getSlug()
+            ]);
         }
 
         return $this->render('trick/update.html.twig', [
             'trick' => $trick,
             'trickForm' => $form->createView(),
             'trickImageForm' => $formNewImage->createView(),
+            'trickVideoForm' => $formNewVideo->createView(),
             'isAdmin' => $trickService->userIsAdmin()
         ]);
     }

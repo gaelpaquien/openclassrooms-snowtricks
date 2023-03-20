@@ -1,0 +1,1 @@
+console.log('updateVideo.js loaded');
