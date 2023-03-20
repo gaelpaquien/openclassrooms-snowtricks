@@ -161,7 +161,8 @@ class TrickController extends AbstractController
         EntityManagerInterface $em,
         ImageService $imageService,
         URLService $urlService,
-        TrickService $trickService): Response
+        TrickService $trickService,
+        SlugService $slugService): Response
     {
 
         // Check if user is author of the trick or if user is admin
@@ -224,6 +225,8 @@ class TrickController extends AbstractController
 
             // Update trick data
             $trick->setUpdatedAt(new \DateTimeImmutable());
+            $trick->setUpdatedBy($this->getUser());
+            $trick->setSlug($slugService->slugify($trick->getTitle()));
             $em->persist($trick);
 
             // Save and redirect

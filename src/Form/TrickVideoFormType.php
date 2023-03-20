@@ -15,7 +15,7 @@ class TrickVideoFormType extends AbstractType
     {
         $builder
             ->add('newVideo', TextType::class, [
-                'label' => 'Vidéo',
+                'label' => 'Nouvelle vidéo',
                 'help' => 'Lien de la vidéo (Youtube, Dailymotion, Vimeo)',
                 'required' => true,
                 'mapped' => false,

@@ -1,7 +1,18 @@
+.update-tricks .medias {
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+}
+
 .update-tricks .tricks-content .infos {
-    width: 60%;
     background-color: var(--grey);
     color: var(--beige);
+    margin-bottom: 20px !important;
+}
+
+.update-tricks form > div {
+    margin: 0 !important;
+    padding: 0 !important;
+    margin-bottom: 15px !important;
 }
 
 .update-tricks .tricks-content textarea {
@@ -9,11 +20,14 @@
     height: 200px;
 }
 
-.update-tricks .tricks-content .tricks-content-btn {
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: 0;
-    padding-right: 0;
+.update-tricks .tricks-content-btn {
+    margin-top: 50px !important;
+}
+
+.update-tricks .tricks-content .delete,
+.update-tricks .tricks-content .update {
+    font-size: 1.1rem;
+    width: 200px;
 }
 
 .update-tricks .tricks-content .delete:hover,
@@ -21,6 +35,21 @@
     background-color: var(--red);
 }
 
+.update-tricks .mobile-medias {
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+}
+
 .update-tricks .mobile-medias-links {
     background-color: var(--grey);
+}
+
+@media screen and (max-width: 768px) {
+    .update-tricks .tricks-content .infos {
+        width: 100%;
+    }
+
+    .update-tricks .tricks-content-btn {
+        justify-content: center !important;
+    }
 }

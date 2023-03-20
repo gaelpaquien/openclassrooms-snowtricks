@@ -9,4 +9,9 @@
 .pagination .active > .page-link {
     background-color: var(--teal) !important;
     border-color: var(--grey) !important;
+    color: var(--beige) !important;
+}
+
+.pagination .disabled {
+opacity: 0.5;
 }

@@ -1,18 +1,19 @@
 <!-- Medias -->
 <div class="container medias pt-4">
-    <div class="row hidden-md-up row-cols-md-3 row-cols-lg-6">
+    <div class="row hidden-md-up row-cols-md-2 row-cols-lg-3">
         {% for image in trick.image %}
             <!-- Images -->
             <div class="media-block d-flex flex-column mb-4">
                 <div class="col">
                     <div class="card">
-                        <img height="400" class="card-img-top" src="{{ asset('assets/uploads/tricks/mini/300x300-' ~ image.name) }}" alt="Image de {{ trick.title }}">
+                        <img class="card-img-top" src="{{ asset('assets/uploads/tricks/mini/300x300-' ~ image.name) }}" alt="Image de {{ trick.title }}">
                     </div>
                 </div>
                 <div class="medias-links d-flex flex-row justify-content-between align-items-center">
                     <a class="update-trick-image-modal"
                         data-image-name="{{ image.name }}"
-                        data-trick-id="{{ trick.id }}">
+                        data-trick-id="{{ trick.id }}"
+                        data-url="{{ path('trick_update', {slug: trick.slug}) }}">
                         <i class="fa-sharp fa-solid fa-pencil"></i>
                     </a>
                     <a href="{{ path('trick_image_delete', {slug: trick.slug, id: image.id}) }}" 
@@ -29,13 +30,14 @@
             <div class="media-block d-flex flex-column mb-4">
                 <div class="col">
                     <div class="card">
-                        <iframe height="250" class="card-img-top" src="{{ video.url }}"></iframe>
+                        <iframe class="card-img-top" src="{{ video.url }}"></iframe>
                     </div>
                 </div>
                 <div class="medias-links d-flex flex-row justify-content-between align-items-center">
                     <a class="update-trick-video-modal"
                         data-video-url="{{ video.url }}"
-                        data-trick-id="{{ trick.id }}">
+                        data-trick-id="{{ trick.id }}"
+                        data-url="{{ path('trick_update', {slug: trick.slug}) }}">
                         <i class="fa-sharp fa-solid fa-pencil"></i>
                     </a>
                     <a href="{{ path('trick_video_delete', {slug: trick.slug, id: video.id}) }}"
@@ -65,7 +67,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="mobileMediasModalLabel">Gestion des médias</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -74,12 +76,13 @@
                     {% for image in trick.image %}
                         <div class="media-block">
                             <div class="my-4">
-                                <img height="250" class="card-img-top" src="{{ asset('assets/uploads/tricks/mini/300x300-' ~ image.name) }}" alt="Image de {{ trick.title }}">
+                                <img class="card-img-top" src="{{ asset('assets/uploads/tricks/mini/300x300-' ~ image.name) }}" alt="Image de {{ trick.title }}">
                             </div>
                             <div class="mobile-medias-links d-flex flex-row justify-content-between align-items-center">
                                 <a class="update-trick-image-modal"
                                     data-image-name="{{ image.name }}"
-                                    data-trick-id="{{ trick.id }}">
+                                    data-trick-id="{{ trick.id }}"
+                                    data-url="{{ path('trick_update', {slug: trick.slug}) }}">
                                     <i class="fa-sharp fa-solid fa-pencil"></i>
                                 </a>
                                 <a href="{{ path('trick_image_delete', {slug: trick.slug, id: image.id}) }}"
@@ -96,12 +99,13 @@
                     {% for video in trick.video %}
                         <div class="media-block">
                             <div class="my-4">
-                                <iframe height="250" class="card-img-top" src="{{ video.url }}"></iframe>
+                                <iframe height="406" class="card-img-top" src="{{ video.url }}"></iframe>
                             </div>
                             <div class="mobile-medias-links d-flex flex-row justify-content-between align-items-center">
                                 <a class="update-trick-video-modal"
                                     data-video-url="{{ video.url }}"
-                                    data-trick-id="{{ trick.id }}">
+                                    data-trick-id="{{ trick.id }}"
+                                    data-url="{{ path('trick_update', {slug: trick.slug}) }}">
                                     <i class="fa-sharp fa-solid fa-pencil"></i>
                                 </a>
                                 <a href="{{ path('trick_video_delete', {slug: trick.slug, id: video.id}) }}"
@@ -128,8 +132,8 @@
 <div class="infos d-flex flex-row justify-content-center mb-4">
     <span>Créer le {{ trick.createdAt|date('d/m/Y') }} par {{ trick.author.username }}</span>
     <span class="vertical-line"></span>
-    {% if trick.createdAt != trick.updatedAt %}
-        <span >Modifier le {{ trick.updatedAt|date('d/m/Y') }} par {{ trick.author.username }}</span>
+    {% if (trick.createdAt != trick.updatedAt) and trick.updatedBy.username != null %}
+        <span >Modifier le {{ trick.updatedAt|date('d/m/Y') }} par {{ trick.updatedBy.username }}</span>
     {% else %}
         <span >Ce trick n'a jamais été modifié</span>
     {% endif %}

@@ -14,8 +14,7 @@ class CreateCommentFormType extends AbstractType
         $builder
             ->add('content', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control',
-                    'class' => 'create-comment-input',
+                    'class' => 'form-control'
                 ],
                 'label' => false,
             ])
