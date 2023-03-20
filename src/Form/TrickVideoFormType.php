@@ -2,39 +2,28 @@
 
 namespace App\Form;
 
-use App\Entity\TrickImage;
+use App\Entity\TrickVideo;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Image;
 
-class TrickImageFormType extends AbstractType
+class TrickVideoFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('newImage', FileType::class, [
-                'label' => 'Nouvelle image',
-                'help' => "Formats acceptés : jpg, jpeg, png, webp. Taille max : 1Mo",
+            ->add('newVideo', TextType::class, [
+                'label' => 'Vidéo',
+                'help' => 'Lien de la vidéo (Youtube, Dailymotion, Vimeo)',
                 'required' => true,
                 'mapped' => false,
-                'constraints' => [
-                    new Image([
-                        'maxSize' => '1024k',
-                        'maxSizeMessage' => 'Le fichier ne doit pas dépasser {{ limit }} {{ suffix }}.',
-                        'mimeTypes' => [
-                            'image/*',
-                        ],
-                        'mimeTypesMessage' => 'Format de fichier invalide',
-                    ])
-                ],
                 'attr' => [
                     'class' => 'form-control'
                 ]
             ])
-            ->add('oldImage', HiddenType::class, [
+            ->add('oldVideo', HiddenType::class, [
                 'mapped' => false,
                 'attr' => [
                     'readonly' => true
@@ -52,7 +41,7 @@ class TrickImageFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => TrickImage::class,
+            'data_class' => TrickVideo::class,
         ]);
     }
 }

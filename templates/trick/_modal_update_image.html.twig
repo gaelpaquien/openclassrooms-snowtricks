@@ -1,0 +1,16 @@
+<div id="confirm-modal-update-image">
+    <div class="modal-content">
+        <h5 class="modal-title">Modifier une image</h5>
+        <div class="mt-2">
+            <img id="modal-image" height="250" class="card-img-top" src="">
+        </div>
+        <p id="confirm-message-update"></p>
+        {{ form_start(trickImageForm) }}
+            {{ form_row(trickImageForm.newImage) }}
+            <div class="d-flex flex-row justify-content-center">
+                <button id="confirm-yes-update-image" type="submit" class="confirm-modal-validate mx-2">Modifier</button>
+                <button id="confirm-no-update-image" type="button" class="btn confirm-modal-cancel mx-2">Annuler</button>
+            </div>
+        {{ form_end(trickImageForm) }}
+    </div>
+</div>
