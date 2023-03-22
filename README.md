@@ -33,7 +33,7 @@
    4.2  **symfony console doctrine:fixtures:load** *(this command allows generating data in the database)*\
    4.3. **composer install** *(this command allows you to install the project's dependencies)*\
    4.4. **composer dump-autoload** *(this command allows you to update your autoloader)*\
-   4.5. **npm install** in a terminal *(this command installs the npm packages)
+   4.5. **npm install** *(this command installs the npm packages)*
 5. Launch your SMTP service.
 6. Launch your website. For this, there are several solutions:\
    6.1. Use a web server (MAMP, XAMPP...).\
