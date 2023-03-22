@@ -8,29 +8,44 @@ for (let link of links) {
         // Get the closest image block
         let mediaBlock = link.closest(".media-block");
 
-        // Confirm the deletion
-        if (confirm(`${link.getAttribute("data-confirm-message")} ?`)) {
+        // Show the confirmation modal
+        let confirmModal = document.getElementById("confirm-modal");
+        let confirmMessage = document.getElementById("confirm-message");
+        let confirmYes = document.getElementById("confirm-yes");
+        let confirmNo = document.getElementById("confirm-no");
+
+        confirmMessage.innerText = link.getAttribute("data-confirm-message");
+        confirmModal.style.setProperty("display", "block", "important");
+
+        // Listen to confirmation modal events
+        confirmYes.addEventListener("click", function (e) {
+            e.preventDefault();
+            confirmModal.style.setProperty("display", "none", "important");
+
             // Send an AJAX request
-            fetch(this.getAttribute("href"), {
+            fetch(link.getAttribute("data-url"), {
                 method: "DELETE",
                 headers: {
                     "X-Requested-With": "XMLHttpRequest",
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ "_token": this.dataset.token })
-            }).then(
-                // If the request is successful
-                response => response.json().then(data => {
-                    if (data.success) {
-                        mediaBlock.remove();
-                        location.reload();
-                    }
+                body: JSON.stringify({ "_token": link.dataset.token })
+            }).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                if (data.success) {
+                    location.href = link.getAttribute("data-redirect");
+                } else {
+                    alert(data.error);
+                }
+            }).catch(function (error) {
+                alert(error);
+            });
+        });
 
-                    else 
-                        alert(data.error);
-                })
-            ).catch(e => alert(e));
-        }
+        confirmNo.addEventListener("click", function (e) {
+            e.preventDefault();
+            confirmModal.style.setProperty("display", "none", "important");
+        });
     });
 }
-

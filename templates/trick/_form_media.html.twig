@@ -16,8 +16,10 @@
                         data-url="{{ path('trick_update', {slug: trick.slug}) }}">
                         <i class="fa-sharp fa-solid fa-pencil"></i>
                     </a>
-                    <a href="{{ path('trick_image_delete', {slug: trick.slug, id: image.id}) }}" 
+                    <a class="delete-medias-modal" href="#"
                         data-delete
+                        data-url="{{ path('trick_image_delete', {slug: trick.slug, id: image.id}) }}"
+                        data-redirect="{{ path('trick_update', {slug: trick.slug}) }}"
                         data-confirm-message="Êtes-vous sûr de vouloir supprimer cette image ?"
                         data-token="{{ csrf_token('delete' ~ image.id) }}">
                         <i class="fa-regular fa-trash-can"></i>
@@ -40,8 +42,10 @@
                         data-url="{{ path('trick_update', {slug: trick.slug}) }}">
                         <i class="fa-sharp fa-solid fa-pencil"></i>
                     </a>
-                    <a href="{{ path('trick_video_delete', {slug: trick.slug, id: video.id}) }}"
+                    <a class="delete-medias-modal" href="#"
                     data-delete
+                    data-url="{{ path('trick_video_delete', {slug: trick.slug, id: video.id}) }}"
+                    data-redirect="{{ path('trick_update', {slug: trick.slug}) }}"
                     data-confirm-message="Êtes-vous sûr de vouloir supprimer cette vidéo ?"
                     data-token="{{ csrf_token('delete' ~ video.id) }}">
                         <i class="fa-regular fa-trash-can"></i>
@@ -49,7 +53,6 @@
                 </div>
             </div>
         {% endfor %}
-
     </div>
 </div>
 
@@ -85,12 +88,14 @@
                                     data-url="{{ path('trick_update', {slug: trick.slug}) }}">
                                     <i class="fa-sharp fa-solid fa-pencil"></i>
                                 </a>
-                                <a href="{{ path('trick_image_delete', {slug: trick.slug, id: image.id}) }}"
+                                <a class="delete-medias-modal" href="#"
                                     data-delete
-                                    data-confirm-message="Êtes-vous sûr de vouloir supprimer cette vidéo ?"
+                                    data-url="{{ path('trick_image_delete', {slug: trick.slug, id: image.id}) }}"
+                                    data-redirect="{{ path('trick_update', {slug: trick.slug}) }}"
+                                    data-confirm-message="Êtes-vous sûr de vouloir supprimer cette image ?"
                                     data-token="{{ csrf_token('delete' ~ image.id) }}">
-                                    <i class="fa-regular fa-trash-can"></i>
-                                </a>
+                                <i class="fa-regular fa-trash-can"></i>
+                            </a>
                             </div>
                         </div>
                         <hr>
@@ -108,10 +113,12 @@
                                     data-url="{{ path('trick_update', {slug: trick.slug}) }}">
                                     <i class="fa-sharp fa-solid fa-pencil"></i>
                                 </a>
-                                <a href="{{ path('trick_video_delete', {slug: trick.slug, id: video.id}) }}"
-                                data-delete
-                                data-confirm-message="Êtes-vous sûr de vouloir supprimer cette vidéo ?"
-                                data-token="{{ csrf_token('delete' ~ video.id) }}">
+                                <a class="delete-medias-modal" href="#"
+                                    data-delete
+                                    data-url="{{ path('trick_video_delete', {slug: trick.slug, id: video.id}) }}"
+                                    data-redirect="{{ path('trick_update', {slug: trick.slug}) }}"
+                                    data-confirm-message="Êtes-vous sûr de vouloir supprimer cette vidéo ?"
+                                    data-token="{{ csrf_token('delete' ~ video.id) }}">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </a>
                             </div>

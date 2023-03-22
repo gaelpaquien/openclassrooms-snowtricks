@@ -468,6 +468,7 @@ class TrickController extends AbstractController
                 // Delete image
                 $em->remove($image);
                 $em->flush();
+                $this->addFlash('success', 'L\'image a été supprimée avec succès');
                 return new JsonResponse(['success' => true], 200);
             }
             return new JsonResponse(['error' => 'Erreur lors de la suppression'], 400);
@@ -500,6 +501,7 @@ class TrickController extends AbstractController
             // Delete video
             $em->remove($video);
             $em->flush();
+            $this->addFlash('success', 'La vidéo a été supprimée avec succès');
             return new JsonResponse(['success' => true], 200);
         }
 
