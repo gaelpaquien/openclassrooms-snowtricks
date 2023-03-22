@@ -37,7 +37,7 @@
 5. Launch your SMTP service.
 6. Launch your website. For this, there are several solutions:\
    6.1. Use a web server (MAMP, XAMPP...).\
-   6.2. Launch a terminal from the root of the project and use the following command: **symfony serve -d**
+   6.2. Launch a terminal from the root of the project and use the following command: **symfony serve -d** or **symfony server:start**
 
 ##### Lines to be modified
 > APP_ENV={dev or prod}\
