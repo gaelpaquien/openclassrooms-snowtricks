@@ -9,7 +9,7 @@
         {% if trick.image.first() %}
             <img class="card-img-top" src="{{ asset('assets/uploads/tricks/' ~ trick.image[0].name) }}" alt="Image de {{ trick.title }}">
         {% else %}
-            <img class="card-img-top" src="{{ asset('assets/uploads/tricks/default.png') }}" alt="Image de {{ trick.title }}">
+            <img class="card-img-top" src="{{ asset('assets/uploads/tricks/default.webp') }}" alt="Image de {{ trick.title }}">
         {% endif %} 
         <span>{{ trick.title }}</span>
         {% if (app.user and app.user.id == trick.author.id) or (app.user and isAdmin == true) %}
@@ -120,8 +120,8 @@
             <hr>
                 {% for comment in comments.data %}
                     <div class="d-flex flex-row justify-content-start mt-4">
-                        {% if comment.author.profilePicture == 'default.jpg' %}
-                            <img src="{{ asset('assets/uploads/users/default.jpg') }}" alt="Photo de profil de {{ comment.author.username }}" class="img-circle">
+                        {% if comment.author.profilePicture == 'default.webp' %}
+                            <img src="{{ asset('assets/uploads/users/default.webp') }}" alt="Photo de profil de {{ comment.author.username }}" class="img-circle">
                         {% else %}
                             <img src="{{ asset('assets/uploads/users/mini/90x90-' ~ comment.author.profilePicture) }}" alt="Photo de profil de {{ comment.author.username }}" class="img-circle">
                         {% endif %}

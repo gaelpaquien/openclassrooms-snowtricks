@@ -9,7 +9,7 @@
             {% if trick.image.first() %}
                 <img class="card-img-top" src="{{ asset('assets/uploads/tricks/' ~ trick.image[0].name) }}" alt="Image de {{ trick.title }}">
             {% else %}
-                <img class="card-img-top" src="{{ asset('assets/uploads/tricks/default.png') }}" alt="Image de {{ trick.title }}">
+                <img class="card-img-top" src="{{ asset('assets/uploads/tricks/default.webp') }}" alt="Image de {{ trick.title }}">
             {% endif %} 
             <span>{{ trick.title }}</span>
         </div>

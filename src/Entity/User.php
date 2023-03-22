@@ -45,8 +45,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email(message: 'L\'adresse email n\'est pas valide')]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255, options: ['default' => 'default.jpg'])]
-    private ?string $profile_picture = 'default.jpg';
+    #[ORM\Column(length: 255, options: ['default' => 'default.webp'])]
+    private ?string $profile_picture = 'default.webp';
 
     #[ORM\Column(type: 'boolean')]
     private ?bool $is_verified = false;

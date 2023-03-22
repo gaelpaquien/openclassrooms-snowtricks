@@ -269,7 +269,7 @@ class TrickController extends AbstractController
             }
 
             // Check if oldImage is not the default image
-            if ($oldImage === 'default.png') {
+            if ($oldImage === 'default.webp') {
                 $this->addFlash('danger', "L'image par défaut ne peut pas être supprimée");
                 return $this->redirectToRoute('trick_update', [
                     'slug' => $trick->getSlug()
