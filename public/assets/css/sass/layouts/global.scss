@@ -1,0 +1,37 @@
+header,
+footer {
+  background-color: var(--grey) !important;
+  color: var(--beige) !important;
+}
+
+header,
+footer,
+nav,
+.hero {
+  font-family: 'Open Sans', sans-serif !important;
+}
+
+@media (max-width: 767px) {
+  header,
+  .copyright {
+    display: none !important;
+  }
+
+  .mobile-nav {
+    display: block !important;
+  }
+
+  .mobile-nav svg {
+    color: var(--beige) !important;
+  }
+
+  .mobile-nav svg:hover {
+    color: var(--teal) !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-nav {
+    display: none !important;
+  }
+}

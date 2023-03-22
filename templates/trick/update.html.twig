@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Édition de {{ trick.title }} / SnowTricks{% endblock %}
+
+{% block body %}
+    <section class="update-tricks pb-5">
+        <!-- Main image -->
+        <div class="tricks-img-main">
+            {% if trick.image.first() %}
+                <img class="card-img-top" src="{{ asset('assets/uploads/tricks/' ~ trick.image[0].name) }}" alt="Image de {{ trick.title }}">
+            {% else %}
+                <img class="card-img-top" src="{{ asset('assets/uploads/tricks/default.png') }}" alt="Image de {{ trick.title }}">
+            {% endif %} 
+            <span>{{ trick.title }}</span>
+        </div>
+
+        <!-- Form to update trick -->
+        <div class="tricks-content container mt-4">
+            {% include "trick/_form.html.twig" %}
+        </div>
+
+        <!-- Modal to confirm trick and media deleted -->
+        {% include "trick/_modal_delete.html.twig" %}
+
+        <!-- Modal to update image (include form) -->
+        {% include "trick/_modal_update_image.html.twig" %}
+
+        <!-- Modal to update video (include form) -->
+        {% include "trick/_modal_update_video.html.twig" %}
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/deleteMedias.js') }}" defer></script>
+    <script src="{{ asset('assets/js/deleteTrickConfirm.js') }}" defer></script>
+    <script src="{{ asset('assets/js/formVideos.js') }}" defer></script>
+    <script src="{{ asset('assets/js/updateImage.js') }}" defer></script>
+    <script src="{{ asset('assets/js/updateVideo.js') }}" defer></script>
+{% endblock %}

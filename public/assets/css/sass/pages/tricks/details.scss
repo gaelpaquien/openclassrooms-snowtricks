@@ -1,0 +1,81 @@
+.delete-comment {
+    color: var(--grey);
+    font-weight: 500;
+}
+
+.delete-comment:hover {
+    color: var(--teal);
+}
+
+.details-tricks .tricks-content .description {
+    color: var(--grey);
+}
+
+.details-tricks .tricks-content .infos span,
+.details-tricks .tricks-content .create-comment-btn {
+    background-color: var(--grey);
+    color: var(--beige);
+    border: none;
+    font-size: 1rem;
+    padding: 5px;
+    border-radius: 8px;
+    height: auto;
+}
+
+.details-tricks .tricks-content .infos span {
+    height: auto;
+}
+
+.details-tricks .tricks-content .post-comment {
+    margin-top: 35px !important;
+    margin-bottom: 35px !important;
+}
+
+.details-tricks .tricks-content .create-comment-btn:hover,
+.details-tricks .tricks-content .create-comment-btn:focus {
+    background-color: var(--teal);
+}
+
+.details-tricks .post-comment input {
+    border: solid 1px var(--grey) !important;
+    border-radius: 8px !important;
+    height: 35px !important;
+    width: 500px !important;
+}
+
+@media (max-width: 767px) {
+    .details-tricks .post-comment input {
+        width: 100% !important;
+    }
+}
+
+.details-tricks .post-comment input:focus-visible {
+    border: solid 2px var(--teal) !important;
+    border-color: var(--teal) !important;
+    box-shadow: none;
+}
+
+@media (max-width: 767px) {
+    .create-comment-btn {
+        font-size: 0.7rem !important;
+    }
+}
+
+.details-tricks .tricks-content .comments img {
+    height: 50px;
+    width: 50px;
+}
+
+.img-circle {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.img-circle img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}

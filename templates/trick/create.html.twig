@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un Trick / SnowTricks{% endblock %}
+
+{% block body %}
+    <section class="create-tricks d-flex align-items-center">
+        <!-- Form -->
+        <div class="tricks-content container mt-4">
+            {% include "trick/_form.html.twig" %}
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/formVideos.js') }}" defer></script>
+{% endblock %}

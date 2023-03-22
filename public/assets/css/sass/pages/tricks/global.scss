@@ -1,0 +1,211 @@
+.update-tricks,
+.details-tricks {
+  background-color: var(--beige);
+  color: var(--grey) !important;
+}
+
+.update-tricks .tricks-img-main,
+.details-tricks .tricks-img-main {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.update-tricks .tricks-img-main img,
+.details-tricks .tricks-img-main img {
+  width: 100%;
+  height: 700px;
+  object-fit: cover;
+  opacity: 0.5;
+}
+
+.update-tricks .tricks-img-main span,
+.details-tricks .tricks-img-main span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--grey);
+  font-size: 5rem;
+  font-weight: bold;
+}
+
+@media (max-width: 578px) {
+  .update-tricks .tricks-img-main span,
+  .details-tricks .tricks-img-main span {
+    font-size: 3rem;
+  }
+}
+
+.update-tricks .tricks-img-main .links,
+.details-tricks .tricks-img-main .links {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: var(--grey);
+}
+
+.update-tricks .tricks-img-main .links a,
+.details-tricks .tricks-img-main .links a {
+  color: var(--beige);
+  padding: 8px;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.update-tricks .tricks-img-main .links a > .fa-pencil:hover,
+.details-tricks .tricks-img-main .links a > .fa-pencil:hover,
+.update-tricks .medias-links a > .fa-pencil:hover,
+.update-tricks .mobile-medias-links a > .fa-pencil:hover {
+  color: var(--teal);
+}
+
+.update-tricks .tricks-img-main .links a > .fa-trash-can:hover,
+.details-tricks .tricks-img-main .links a > .fa-trash-can:hover,
+.update-tricks .medias-links a > .fa-trash-can:hover,
+.update-tricks .mobile-medias-links a > .fa-trash-can:hover {
+  color: var(--red);
+}
+
+.update-tricks .medias .card-img-top,
+.details-tricks .medias .card-img-top {
+  height: 406px;
+  border: 1px solid black;
+  border-radius: 0;
+}
+
+.details-tricks .medias,
+.update-tricks .medias {
+  margin-top: 50px !important;
+  margin-bottom: 50px !important;
+}
+
+.details-tricks .card {
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
+}
+
+.update-tricks .medias .medias-links,
+.details-tricks .medias .medias-links {
+    margin-top: 10px;
+    width: 20%;
+    margin-left: auto;
+    background-color: var(--grey);
+}
+
+.update-tricks .mobile-medias-links,
+.details-tricks .mobile-medias-links {
+    width: 20%;
+    margin-left: auto;
+    background-color: var(--grey);
+}
+
+.update-tricks .medias-links a,
+.update-tricks .mobile-medias-links a,
+.details-tricks .medias-links a,
+.details-tricks .mobile-medias-links a {
+    color: var(--beige);
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0 10px 0 10px;
+}
+
+.update-tricks .tricks-content .delete,
+.update-tricks .tricks-content .update,
+.update-tricks .mobile-medias .btn,
+.details-tricks .mobile-medias .btn {
+    background-color: var(--grey);
+    color: var(--beige);
+    border: none;
+    font-size: 1rem;
+    padding: 5px;
+    margin-right: 0 !important;
+}
+
+.update-tricks .tricks-content .update:hover,
+.update-tricks .tricks-content .update:focus,
+.update-tricks .mobile-medias .btn:hover,
+.update-tricks .mobile-medias .btn:focus,
+.details-tricks .mobile-medias .btn:hover,
+.details-tricks .mobile-medias .btn:focus {
+    background-color: var(--teal);
+}
+
+@media (max-width: 992px) {
+    .update-tricks .tricks-content .infos,
+    .details-tricks .tricks-content .infos span {
+      width: 100%;
+      font-size: 0.8rem !important;
+      text-align: center;
+    }
+  }
+
+@media (min-width: 768px) {
+    .update-tricks .mobile-medias,
+    .details-tricks .mobile-medias {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .update-tricks .medias,
+    .details-tricks .medias {
+        display: none !important;
+    }
+
+    .update-tricks .tricks-content .btn {
+        justify-content: center !important;
+    }
+
+    .update-tricks .tricks-content .infos,
+    .details-tricks .tricks-content .infos span {
+        font-size: 0.7rem !important;
+        text-align: center;
+    }
+}
+
+.update-tricks .medias-modal-btn,
+.details-tricks .medias-modal-btn {
+    background-color: var(--grey);
+    color: var(--beige);
+    border: none;
+    font-size: 1rem;
+    padding: 5px;
+}
+
+.update-tricks .medias-modal-btn:hover,
+.update-tricks .medias-modal-btn:focus,
+.details-tricks .medias-modal-btn:hover,
+.details-tricks .medias-modal-btn:focus {
+    background-color: var(--red);
+}
+
+.add-video {
+  width: 160px !important;
+  height: 40px;
+  font-size: 15px !important;
+  margin-top: 5px !important;
+  margin-bottom: 10px !important;
+  border-radius: 0 !important;
+}
+
+.remove-video {
+  width: 160px !important;
+  height: 40px;
+  font-size: 15px !important;
+  margin-top: 5px !important;
+  margin-bottom: 15px !important;
+  border-radius: 0 !important;
+}
+
+.remove-video:hover {
+  background-color: var(--red) !important;
+}
+
+.form-videos #videos-container {
+  margin-top: 0 !important;
+}
+
+.form-videos input {
+  margin-top: 10px !important;
+}

@@ -1,0 +1,25 @@
+<header>
+    <nav class="d-flex navbar navbar-light px-3">
+        <a class="navbar-brand" href="{{ path('main') }}">
+            <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" 
+            width="32" height="32" class="d-inline-block align-text-top">
+        </a>
+        <div class="flex-row navbar-nav">
+            <a class="nav-link" href="{{ path('main') }}">Accueil</a>
+
+            {% if not app.user %}
+            <span class="d-flex align-items-center px-2 pb-1">|</span>
+                <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+                <span class="d-flex align-items-center px-2 pb-1">|</span>
+                <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+            {% endif %}
+
+            {% if app.user %}
+                <span class="d-flex align-items-center px-2 pb-1">|</span>
+                <a class="nav-link" href="{{ path('trick_create') }}">Nouveau Trick</a>
+                <span class="d-flex align-items-center px-2 pb-1">|</span>
+                <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+            {% endif %}
+        </div>
+      </nav>
+</header>

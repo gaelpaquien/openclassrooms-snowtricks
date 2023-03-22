@@ -1,0 +1,16 @@
+<div id="confirm-modal-update-video">
+    <div class="modal-content">
+        <h5 class="modal-title">Modifier une vidéo</h5>
+        <div class="mt-2">
+            <iframe id="modal-video" height="250" class="card-img-top" src=""></iframe>
+        </div>
+        <p id="confirm-message-update"></p>
+        {{ form_start(trickVideoForm) }}
+            {{ form_row(trickVideoForm.newVideo) }}
+            <div class="d-flex flex-row justify-content-center">
+                <button id="confirm-yes-update-video" type="submit" class="confirm-modal-validate mx-2">Modifier</button>
+                <button id="confirm-no-update-video" type="button" class="btn confirm-modal-cancel mx-2">Annuler</button>
+            </div>
+        {{ form_end(trickVideoForm) }}
+    </div>
+</div>

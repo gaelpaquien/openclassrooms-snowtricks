@@ -1,0 +1,27 @@
+<footer>
+    <div class="copyright">
+        <div class="px-5 py-4">
+            Copyright 2022 © SnowTricks
+        </div>
+    </div>
+    <nav class="mobile-nav py-3">
+        <div class="d-flex flex-row justify-content-center">
+            <a href="{{ path('main') }}">
+                <i class="fa-solid fa-house-chimney fa-xl mx-5"></i>
+            </a>
+            {% if app.user %}
+            <a href="{{ path('trick_create') }}">
+                <i class="fa-solid fa-bookmark fa-xl mx-5"></i>
+            </a>
+            <a href="{{ path('app_logout') }}">
+                <i class="fa-solid fa-arrow-right-from-bracket fa-xl mx-5"></i>
+            </a>
+            {% endif %}
+            {% if not app.user %}
+                <a href="{{ path('app_login') }}">
+                    <i class="fa-solid fa-arrow-right-to-bracket fa-xl mx-5"></i>
+                </a> 
+            {% endif %}
+        </div>
+    </nav>
+</footer>

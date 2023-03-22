@@ -1,0 +1,43 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+section {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+form ul {
+  margin: 0;
+  padding: 0;
+  color: var(--red);
+}
+
+form .help-text {
+  margin-top: 2px !important;
+  font-size: 0.8rem;
+  color: var(--grey);
+}
+
+.alert,
+.alert-danger,
+.alert-success,
+.alert-warning {
+  border-radius: 0;
+  margin: 0;
+}
+
+.vertical-line {
+  display: inline-block;
+  border-left: 1px solid #ccc;
+  margin: 0 10px;
+}

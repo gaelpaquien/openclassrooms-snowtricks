@@ -1,0 +1,26 @@
+{
+  "name": "snowtricks",
+  "version": "1.0.0",
+  "description": "1. Get to know the Symfony framework\r 2. Develop an application with the features expected by the customer\r 3. Manage a MySQL or NoSQL database with Doctrine\r 4. Organize your code to ensure readability and maintainability\r 5. Learn how to use the Twig templating engine\r 6. To respect the good development practices in force\r 7. Select the appropriate programming languages for the development of the application",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch public/assets/css/sass/main.scss:public/assets/css/style.css --style compressed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Galusss/SnowTricks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Galusss/SnowTricks/issues"
+  },
+  "homepage": "https://github.com/Galusss/SnowTricks#readme",
+  "dependencies": {
+    "sass": "^1.58.3"
+  }
+}
