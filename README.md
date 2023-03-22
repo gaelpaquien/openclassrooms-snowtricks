@@ -27,7 +27,7 @@
 #### Installation
 1. Download the [GitHub repository](https://github.com/Galuss1/openclassrooms-snowtricks/) on the main branch.
 2. Create '.env.local' file in the root of the project, and copy the content of the '.env' file and change [the lines below](#lines-to-be-modified).
-3. Create a database called "snowtricks".
+3. Create a database.
 4. Open a command terminal at the root of the project and use the following commands:\
    4.1  **symfony console doctrine:schema:create** *(this command will import the database schema)*\
    4.2  **symfony console doctrine:fixtures:load** *(this command allows generating data in the database)*\
