@@ -49,7 +49,7 @@
 
  ---
 
-### Links :
+### Links
 
 [Link to the website](https://snowtricks.gael-paquien.fr/)\
 [Codacy Review](https://app.codacy.com/gh/Galuss1/openclassrooms-snowtricks/dashboard?branch=main)
