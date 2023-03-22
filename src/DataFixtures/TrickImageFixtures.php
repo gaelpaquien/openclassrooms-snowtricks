@@ -14,7 +14,7 @@ class TrickImageFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 1; $i <= 45; $i++) {
             $image = new TrickImage;
 
-            $image->setName('TrickFixture' . rand(1, 3) . '.jpg');
+            $image->setName('TrickFixture.jpg');
 
             $trick = $this->getReference('trick-' . $i);
             $image->setTrick($trick);
