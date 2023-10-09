@@ -1,9 +1,8 @@
-# PHP/Symfony application developer training - OpenclassRooms (P6)
+# PHP/Symfony application developer - OpenClassrooms (Project 6)
 
-## Exercise: Develop the SnowTricks community website
+## Develop the SnowTricks community website
 
 ### Skills assessed
-
 1. Get to know the Symfony framework
 2. Develop an application with the features expected by the customer
 3. Manage a MySQL or NoSQL database with Doctrine
@@ -11,8 +10,6 @@
 5. Learn how to use the Twig templating engine
 6. To respect the good development practices in force
 7. Select the appropriate programming languages for the development of the application
-
----
 
 ### Setting up the website
 
@@ -46,10 +43,9 @@
 > MAILER_DSN=smtp://{host}:{port}\
 > JWT_SECRET='{secret token for JWTService}'
 
-
- ---
+--- --- ---
 
 ### Links
-
-[Link to the website](https://snowtricks.gael-paquien.fr/)\
+[Website](https://formation.snowtricks.gaelpaquien.com/)\
+[Repository archive containing all deliverables](https://github.com/Galuss1/openclassrooms-archive/tree/main/php-symfony-application-developer/project-6)\
 [Codacy Review](https://app.codacy.com/gh/Galuss1/openclassrooms-snowtricks/dashboard)
