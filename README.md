@@ -1,4 +1,4 @@
-# PHP/Symfony application developer - OpenClassrooms (Project 6)
+# PHP/Symfony Application Developer - OpenClassrooms (Project 6)
 
 ## Develop the SnowTricks community website
 
