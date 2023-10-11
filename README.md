@@ -1,51 +1,98 @@
-# PHP/Symfony Application Developer - OpenClassrooms (Project 6)
+# OpenClassrooms - Develop the SnowTricks community website
 
-## Develop the SnowTricks community website
+## Repository containing the context and deliverables of the project
+https://github.com/Galuss1/openclassrooms-archive/tree/main/php-symfony-application-developer/project-6
 
-### Skills assessed
-1. Get to know the Symfony framework
-2. Develop an application with the features expected by the customer
-3. Manage a MySQL or NoSQL database with Doctrine
-4. Organize your code to ensure readability and maintainability
-5. Learn how to use the Twig templating engine
-6. To respect the good development practices in force
-7. Select the appropriate programming languages for the development of the application
+## Setting up
 
-### Setting up the website
-
-#### Required
+### Required
 1. [PHP 8.1](https://www.php.net/downloads.php)
-2. [Symfony CLI](https://symfony.com/download)
-3. [Composer](https://getcomposer.org/download/)
-4. [MySQL](https://www.mysql.com/fr/downloads/)
-5. [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-6. SMTP service, for example [maildev](https://github.com/maildev/maildev)
+2. [Composer](https://getcomposer.org/download/)
+3. [MySQL](https://www.mysql.com/fr/downloads/)
+4. [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-#### Installation
-1. Download the [GitHub repository](https://github.com/Galuss1/openclassrooms-snowtricks/) on the main branch.
-2. Create '.env.local' file in the root of the project, and copy the content of the '.env' file and change [the lines below](#lines-to-be-modified).
-3. Create a database.
-4. Open a command terminal at the root of the project and use the following commands:\
-   4.1. **composer install** *(this command allows you to install the project's dependencies)*\
-   4.2. **composer dump-autoload** *(this command allows you to update your autoloader)*\
-   4.3  **symfony console doctrine:schema:create --env=dev** *(this command will import the database schema)*\
-   4.4  **symfony console doctrine:fixtures:load --env=dev** *(this command allows generating data in the database)*\
-   4.5. **npm install** *(this command installs the npm packages)*
-5. Launch your SMTP service.
-6. Launch your website. For this, there are several solutions:\
-   6.1. Use a web server (MAMP, XAMPP...).\
-   6.2. Launch a terminal from the root of the project and use the following command: **symfony serve -d** or **symfony server:start**
+### Optional
+1. [Docker](https://www.docker.com/)
+2. SMTP (*example: [maildev](https://github.com/maildev/maildev)*) (*SMTP is already included if you are using docker*)
+3. [Symfony CLI](https://symfony.com/download)
 
-##### Lines to be modified
-> APP_ENV={dev or prod}\
-> APP_SECRET={secret token for app}\
-> DATABASE_URL="mysql://{username}:{password}@{host}:{port}/{db_name}?serverVersion=8&charset=utf8mb4"\
-> MAILER_DSN=smtp://{host}:{port}\
-> JWT_SECRET='{secret token for JWTService}'
+### Installation
+1. **Clone the repository on the main branch**
+<br>
+
+2. **Create the .env.local file and replace the values of the .env origin file**
+```bash
+###> symfony/framework-bundle ###
+APP_ENV=#env|prod|test#
+APP_SECRET=#secret#
+###< symfony/framework-bundle ###
+
+###> doctrine/doctrine-bundle ###
+DATABASE_URL=#"mysql://user:password@host:port/database?serverVersion=15&charset=utf8"#
+###< doctrine/doctrine-bundle ###
+
+###> symfony/webapp-pack ###
+# MESSENGER_TRANSPORT_DSN=amqp://guest:guest@localhost:5672/%2f/messages
+# MESSENGER_TRANSPORT_DSN=redis://localhost:6379/messages
+MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0
+###< symfony/webapp-pack ###
+
+###> symfony/mailer ###
+MAILER_DSN=#smtp://host:port#
+###< symfony/mailer ###
+
+###> app/JWTService ###
+JWT_SECRET=#secret#
+###< app/JWTService ###
+
+###> docker/database ###
+DATABASE_HOST=#database_host#
+MYSQL_DATABASE=#database_name#
+MYSQL_ROOT_PASSWORD=#database_root_password#
+MYSQL_USER=#database_user#
+MYSQL_PASSWORD=#database_user_password#
+MYSQL_DATABASE_TEST=#database_test_name#
+###< docker/database ###
+```
+<br>
+
+3. **If you are using docker, install your environment**
+```bash
+docker-compose up --build -d
+```
+<br>
+
+4. **Installing dependencies**
+```bash
+composer install
+```
+<br>
+
+5. **Setting up the database**<br />
+*If you are using docker, the first command is not necessary*
+```bash
+php bin/console doctrine:database:create
+```
+```bash
+php bin/console doctrine:schema:create
+```
+```bash
+php bin/console doctrine:fixtures:load
+```
+<br>
+
+6. **Start the project**<br>
+*If you are using docker, the project is already accessible at http://localhost:8080*
+```bash
+php -S 127.0.0.1:8080 -t public
+```
+```bash
+symfony server:start
+```
+<br>
 
 --- --- ---
 
 ### Links
 [Website](https://formation.snowtricks.gaelpaquien.com/)\
-[Repository archive containing all deliverables](https://github.com/Galuss1/openclassrooms-archive/tree/main/php-symfony-application-developer/project-6)\
 [Codacy Review](https://app.codacy.com/gh/Galuss1/openclassrooms-snowtricks/dashboard)
