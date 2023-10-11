@@ -14,7 +14,7 @@
 ### Setting up the website
 
 #### Required
-1. [PHP](https://www.php.net/downloads.php)
+1. [PHP 8.1](https://www.php.net/downloads.php)
 2. [Symfony CLI](https://symfony.com/download)
 3. [Composer](https://getcomposer.org/download/)
 4. [MySQL](https://www.mysql.com/fr/downloads/)

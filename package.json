@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Galusss/SnowTricks.git"
+    "url": "git+https://github.com/Galuss1/openclassrooms-snowtricks.git"
   },
-  "author": "",
+  "author": "Gaël PAQUIEN",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Galusss/SnowTricks/issues"
+    "url": "https://github.com/Galuss1/openclassrooms-snowtricks/issues"
   },
-  "homepage": "https://github.com/Galusss/SnowTricks#readme",
+  "homepage": "https://github.com/Galuss1/openclassrooms-snowtricks#readme",
   "dependencies": {
     "sass": "^1.58.3"
   }
