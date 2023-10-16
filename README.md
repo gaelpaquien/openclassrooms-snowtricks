@@ -56,7 +56,7 @@ MYSQL_DATABASE_TEST=#database_test_name#
 ```
 <br>
 
-3. **If you are using docker, install your environment**
+3. **If you are using docker, install your environment and start the project**
 ```bash
 docker-compose up --build -d
 ```
@@ -69,7 +69,7 @@ composer install
 <br>
 
 5. **Setting up the database**<br />
-*If you are using docker, the first command is not necessary*
+*If you are using docker, the first command is not necessary and the database "training_snowtricks" is already created without the data at localhost:3310*
 ```bash
 php bin/console doctrine:database:create
 ```
