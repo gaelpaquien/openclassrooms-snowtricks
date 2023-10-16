@@ -66,6 +66,9 @@ docker-compose up --build -d
 ```bash
 composer install
 ```
+```bash
+npm install
+```
 <br>
 
 5. **Setting up the database**<br />
