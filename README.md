@@ -1,4 +1,4 @@
-# OpenClassrooms - Develop the SnowTricks community website
+# OpenClassrooms - SnowTricks
 
 ## Repository containing the context and deliverables of the project
 https://github.com/Galuss1/openclassrooms-archive/tree/main/php-symfony-application-developer/project-6
