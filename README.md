@@ -38,7 +38,7 @@ composer install
 npm install
 ```
 
-5. **Setting up the database**<br />
+5. **Setting up the database**
 ```bash
 php bin/console doctrine:database:create
 ```
@@ -49,7 +49,7 @@ php bin/console doctrine:schema:create
 php bin/console doctrine:fixtures:load
 ```
 
-6. **Start the project**<br>
+6. **Start the project**
 ```bash
 php -S 127.0.0.1:8080 -t public
 ```
@@ -60,5 +60,5 @@ symfony server:start
 --- --- ---
 
 ### Links
-[Website](https://formation.snowtricks.gaelpaquien.com/)\
+[Website](https://formation.snowtricks.gaelpaquien.com/) \
 [Codacy Review](https://app.codacy.com/gh/Galuss1/openclassrooms-snowtricks/dashboard)
