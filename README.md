@@ -6,7 +6,7 @@ https://github.com/Galuss1/openclassrooms-archive/tree/main/php-symfony-applicat
 ## Setting up
 
 ### Required
-1. [PHP 8.1](https://www.php.net/downloads.php)
+1. [PHP ⩾8.1](https://www.php.net/downloads.php)
 2. [Composer](https://getcomposer.org/download/)
 3. [MySQL](https://www.mysql.com/fr/downloads/)
 4. [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
