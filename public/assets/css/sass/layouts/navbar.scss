@@ -11,3 +11,9 @@
 .nav-btn:focus {
     color: var(--beige);
 }
+
+.navigation-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}

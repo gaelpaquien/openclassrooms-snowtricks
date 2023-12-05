@@ -1,3 +1,11 @@
 footer {
     height: 75px;
 }
+
+.copyright a {
+    color: var(--beige);
+}
+
+.copyright a:hover {
+    color: var(--teal);
+}

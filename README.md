@@ -1,8 +1,5 @@
 # OpenClassrooms - SnowTricks
 
-## Repository containing the context and deliverables of the project
-https://github.com/Galuss1/openclassrooms-archive/tree/main/php-symfony-application-developer/project-6
-
 ## Setting up
 
 ### Required
@@ -61,4 +58,5 @@ symfony server:start
 
 ### Links
 [Website](https://formation.snowtricks.gaelpaquien.com/) \
-[Codacy Review](https://app.codacy.com/gh/Galuss1/openclassrooms-snowtricks/dashboard)
+[Codacy Review](https://app.codacy.com/gh/Galuss1/openclassrooms-snowtricks/dashboard) \
+[Old repository containing training deliverables](https://github.com/Galuss1/openclassrooms-archive/tree/main/php-symfony-application-developer/project-6)

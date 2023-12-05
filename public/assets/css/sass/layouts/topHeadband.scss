@@ -1,0 +1,26 @@
+.top-headband {
+    background-color: var(--grey);
+    color: var(--beige) !important;
+    font-size: 0.8rem;
+    border-bottom: solid 1px var(--beige);
+    padding: 8px;
+}
+
+.top-headband p {
+    margin-bottom: 0;
+}
+
+.top-headband a {
+    color: var(--beige) !important;
+    text-decoration: none;
+}
+
+.top-headband a:hover {
+    color: var(--teal) !important;
+}
+
+@media (max-width: 470px) {
+    .top-headband {
+        font-size: 0.6rem;
+    }
+}

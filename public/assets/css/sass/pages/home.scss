@@ -28,6 +28,7 @@
 .home-btn-goToTricks {
     bottom: 12px;
     right: 12px;
+    z-index: 888;
 }
 
 .hero-btn-goToTricks,
@@ -114,6 +115,10 @@
     height: 15px;
     width: 15px;
     color: var(--grey);
+}
+
+.card-body {
+    border-top: solid 1px var(--grey);
 }
 
 .card-btn-update svg:hover {

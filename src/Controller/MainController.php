@@ -28,4 +28,10 @@ class MainController extends AbstractController
             'isAdmin' => $isAdmin
         ]);
     }
+
+    #[Route('/mentions-legales', name: 'legal_notice')]
+    public function legalNotice(): Response
+    {
+        return $this->render('main/legal_notice.html.twig');
+    }
 }

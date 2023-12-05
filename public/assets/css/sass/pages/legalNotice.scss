@@ -1,0 +1,50 @@
+.legal-section {
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.legal-section ul {
+    list-style: initial;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-content {
+    background-color: var(--beige) !important;
+    border: 1px solid var(--grey) !important;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.section-content h3 {
+    margin-bottom: 10px;
+}
+
+.section-content p {
+    margin: 5px 0px;
+}
+
+.section-content a {
+    text-decoration: none;
+}
+
+.section-content a:hover {
+    text-decoration: underline;
+}
+
+.section-content ul {
+    margin: 0;
+    margin-bottom: 10px;
+    padding-left: 20px;
+}
