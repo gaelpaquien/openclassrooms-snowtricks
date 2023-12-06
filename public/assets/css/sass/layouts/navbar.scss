@@ -17,3 +17,17 @@
     top: 0;
     z-index: 999;
 }
+
+.navbar-brand {
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.navbar-brand span {
+    color: var(--beige);
+}
+
+.navbar-brand img:hover {
+    filter: invert(51%) sepia(60%) saturate(538%) hue-rotate(129deg) brightness(93%) contrast(87%);
+    transform: scale(1.1);
+}

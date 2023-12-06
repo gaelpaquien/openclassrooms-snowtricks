@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}SnowTricks{% endblock %}</title>
-        {# <link rel="icon" href="{{ asset('assets/img/logo.png') }}"> #}
+        <link rel="icon" href="{{ asset('assets/img/favicon.ico') }}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="robots" content="noindex, nofollow">
 
@@ -64,6 +64,6 @@
         {% include "_partials/_footer.html.twig" %}
 
         <!-- Custom JS -->
-        <script src="{{ 'assets/js/popup.js' }}" async></script>
+        <script src="{{ 'assets/js/popup.min.js' }}" async></script>
     </body>
 </html>

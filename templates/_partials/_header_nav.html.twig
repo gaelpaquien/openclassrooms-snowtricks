@@ -1,10 +1,17 @@
 <header>
-    <nav class="d-flex navbar navbar-light px-3">
-        <a class="navbar-brand" href="{{ path('main') }}">
-            {# <img src="{{ asset('assets/img/logo.png') }}" alt="Logo" 
-            width="32" height="32" class="d-inline-block align-text-top"> #}
-            SnowTricks
+    <nav class="d-flex flex-row align-items-center navbar navbar-light px-3">
+    <div class="navbar-brand">
+        <a href="{{ path('main') }}">
+            SnowTricks 
         </a>
+        <span>
+            by 
+        </span>
+        <a href="https://www.gaelpaquien.com" target="_blank">
+            <img src="{{ asset('assets/img/logo.svg') }}" alt="Logo" width="48" height="48">
+        </a>
+    </div>
+
         <div class="flex-row navbar-nav">
             <a class="nav-link" href="{{ path('main') }}">Accueil</a>
 
