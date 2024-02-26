@@ -1,5 +1,9 @@
 # OpenClassrooms - SnowTricks
 
+## Description
+Creation of a collaborative website, allowing users to share snowboard tricks.\
+This project was carried out as part of a training course. Below you will find the link to the initial repository containing all the training deliverables.
+
 ## Setting up
 
 ### Required
