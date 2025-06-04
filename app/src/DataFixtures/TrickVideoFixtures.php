@@ -14,7 +14,7 @@ class TrickVideoFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 1; $i <= 45; $i++) {
             $video = new TrickVideo;
 
-            $video->setUrl("https://www.youtube.com/embed/-3WwucApckA");
+            $video->setUrl("https://www.youtube.com/embed/aINlzgrOovI");
             $trick = $this->getReference('trick-'.$i);
 
             $video->setTrick($trick);
