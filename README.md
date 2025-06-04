@@ -62,5 +62,5 @@ symfony server:start
 
 ### Links
 [Website](https://formation.snowtricks.gaelpaquien.com/) \
-[Codacy Review](https://app.codacy.com/gh/Galuss1/openclassrooms-snowtricks/dashboard) \
-[Old repository containing training deliverables](https://github.com/Galuss1/openclassrooms-archive/tree/main/php-symfony-application-developer/project-6)
+[Codacy Review](https://app.codacy.com/gh/gaelpaquien/openclassrooms-snowtricks/dashboard) \
+[Old repository containing training deliverables](https://github.com/gaelpaquien/openclassrooms-archive/tree/main/php-symfony-application-developer/project-6)
