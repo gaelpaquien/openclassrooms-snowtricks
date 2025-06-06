@@ -69,9 +69,9 @@ class RegistrationController extends AbstractController
 
             // Send mail
             $mail->send(
-                'no-reply@snowtricks.com',
+                'contact@gaelpaquien.com',
                 $user->getEmail(),
-                'Activation de votre compte Snowtricks',
+                'SnowTricks - Activation de votre compte Snowtricks',
                 'register',
                 [
                     'user' => $user,
@@ -141,9 +141,9 @@ class RegistrationController extends AbstractController
 
         // Send mail
         $mail->send(
-            'no-reply@snowtricks.com',
+            'contact@gaelpaquien.com',
             $user->getEmail(),
-            'Activation de votre compte Snowtricks',
+            'SnowTricks - Activation de votre compte Snowtricks',
             'register',
             [
                 'user' => $user,
