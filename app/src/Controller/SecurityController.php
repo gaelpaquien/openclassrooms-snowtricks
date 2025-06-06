@@ -81,9 +81,9 @@ class SecurityController extends AbstractController
                     'user' => $user
                 ];
                 $mail->send(
-                    'no-reply@snowtricks.com',
+                    'contact@gaelpaquien.com',
                     $user->getEmail(),
-                    'Réinitialisation de votre mot de passe',
+                    'SnowTricks - Réinitialisation de votre mot de passe',
                     'reset_password',
                     $context
                 );
